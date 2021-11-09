@@ -1,0 +1,22 @@
+[
+    {
+        "name": "fortisoar-soc-simulator",
+        "label": "FortiSOAR SOC Simulator",
+        "category": "information",
+        "description": "FortiSOAR SOC Simulator",
+        "publisher": null,
+        "version": "1.0.7",
+        "operation_roles": {
+            "bad_ip": [],
+            "bad_url": [],
+            "bad_filehash": [],
+            "bad_domain": [],
+            "replace_variables": []
+        },
+        "configurations": [],
+        "dataImports": [],
+        "rpm_name": "cyops-connector-fortisoar-soc-simulator-1.0.7",
+        "install_mode": "rpm",
+        "installer_path": "cyops-connector-fortisoar-soc-simulator-1.0.7"
+    }
+]
