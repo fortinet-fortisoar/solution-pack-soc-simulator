@@ -1,8 +1,8 @@
 # solution-pack-soc-simulator
 
-Pre-Requsite
+Pre-Requisite
 =============
-1. User need to import soultion-pack-incident-response zip to FortiSOAR instance.
+1. User needs to import solution-pack-incident-response zip to FortiSOAR instance.
 
 Steps to Install solution-pack-incident-response
 ==================================================
