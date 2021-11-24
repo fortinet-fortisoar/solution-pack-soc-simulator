@@ -6,7 +6,7 @@
     "name": "Security Administrator",
     "modulePermissions": [
         {
-            "@id": "\/api\/3\/module_permissions\/d7f3d2b2-4d0d-40e5-b2ac-e5ef0a1f60f0",
+            "@id": "\/api\/3\/module_permissions\/9f1ca761-bb09-4811-8b41-10290084aaf5",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -15,10 +15,10 @@
             "canDelete": true,
             "fieldPermissions": [],
             "module": "security",
-            "uuid": "d7f3d2b2-4d0d-40e5-b2ac-e5ef0a1f60f0"
+            "uuid": "9f1ca761-bb09-4811-8b41-10290084aaf5"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/fe1129d9-52b4-4cc1-a6a9-a72768d3308e",
+            "@id": "\/api\/3\/module_permissions\/47a9dc27-b35b-4251-8414-0f9bc8e551ee",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": null,
@@ -27,10 +27,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "application",
-            "uuid": "fe1129d9-52b4-4cc1-a6a9-a72768d3308e"
+            "uuid": "47a9dc27-b35b-4251-8414-0f9bc8e551ee"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/4b84c78d-a9dd-488f-8c34-a9b8acd575fe",
+            "@id": "\/api\/3\/module_permissions\/955f5ddb-7f72-41d2-87bd-619056693880",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -39,10 +39,10 @@
             "canDelete": true,
             "fieldPermissions": [],
             "module": "routers",
-            "uuid": "4b84c78d-a9dd-488f-8c34-a9b8acd575fe"
+            "uuid": "955f5ddb-7f72-41d2-87bd-619056693880"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/b52cf0ca-d5ca-4403-b285-4631ff0086e2",
+            "@id": "\/api\/3\/module_permissions\/fa204e93-1151-4497-92a0-efd4390c7c8b",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -51,10 +51,10 @@
             "canDelete": true,
             "fieldPermissions": [],
             "module": "tenants",
-            "uuid": "b52cf0ca-d5ca-4403-b285-4631ff0086e2"
+            "uuid": "fa204e93-1151-4497-92a0-efd4390c7c8b"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/c2543be0-66cf-46f3-9acd-c731662c9659",
+            "@id": "\/api\/3\/module_permissions\/2bfe30d6-bcab-4653-af4e-960ab5773c3c",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -63,7 +63,7 @@
             "canDelete": true,
             "fieldPermissions": [],
             "module": "agents",
-            "uuid": "c2543be0-66cf-46f3-9acd-c731662c9659"
+            "uuid": "2bfe30d6-bcab-4653-af4e-960ab5773c3c"
         }
     ],
     "uuid": "17562d60-b841-4ed7-912b-1ebaf063c8c9"

@@ -6,7 +6,7 @@
     "name": "T2 Analyst",
     "modulePermissions": [
         {
-            "@id": "\/api\/3\/module_permissions\/b2d5bfe8-acf9-4a74-bd02-d1098d51fbff",
+            "@id": "\/api\/3\/module_permissions\/f0723ceb-f1cb-429a-bc33-c6ef660bad4c",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": null,
@@ -15,10 +15,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "application",
-            "uuid": "b2d5bfe8-acf9-4a74-bd02-d1098d51fbff"
+            "uuid": "f0723ceb-f1cb-429a-bc33-c6ef660bad4c"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/21ba6cf6-a8c1-4cd9-a31a-03ee07377110",
+            "@id": "\/api\/3\/module_permissions\/398575ac-f9b1-4371-a0b7-d8d10830cf8c",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -27,10 +27,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "files",
-            "uuid": "21ba6cf6-a8c1-4cd9-a31a-03ee07377110"
+            "uuid": "398575ac-f9b1-4371-a0b7-d8d10830cf8c"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/58f12ca6-155e-4c6d-8bbe-bde37158e720",
+            "@id": "\/api\/3\/module_permissions\/25d3844a-d5f9-4d9b-9a0e-b23a8128dd8e",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": null,
@@ -39,10 +39,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "reporting",
-            "uuid": "58f12ca6-155e-4c6d-8bbe-bde37158e720"
+            "uuid": "25d3844a-d5f9-4d9b-9a0e-b23a8128dd8e"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/a0f33d01-edde-4487-b032-6d2a023eded8",
+            "@id": "\/api\/3\/module_permissions\/2750939c-da6c-4f05-9566-7a6b229dc63e",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -51,10 +51,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "dashboard",
-            "uuid": "a0f33d01-edde-4487-b032-6d2a023eded8"
+            "uuid": "2750939c-da6c-4f05-9566-7a6b229dc63e"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/7c3b1111-9966-4011-8f7c-6c33fb3a1f40",
+            "@id": "\/api\/3\/module_permissions\/f78bb7d1-db6a-4619-a39b-49267d4bcd29",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -63,10 +63,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "alerts",
-            "uuid": "7c3b1111-9966-4011-8f7c-6c33fb3a1f40"
+            "uuid": "f78bb7d1-db6a-4619-a39b-49267d4bcd29"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/742d7195-d499-4aeb-8711-a55bbed6fd61",
+            "@id": "\/api\/3\/module_permissions\/6fff60df-3d3a-406a-aaa0-8c017fd25ed3",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -75,10 +75,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "attachments",
-            "uuid": "742d7195-d499-4aeb-8711-a55bbed6fd61"
+            "uuid": "6fff60df-3d3a-406a-aaa0-8c017fd25ed3"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/009a6050-457a-483a-bce8-0f0d835b31bb",
+            "@id": "\/api\/3\/module_permissions\/b02d6de4-9e7a-4ee6-aeec-c4d4a56335f8",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -87,10 +87,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "comments",
-            "uuid": "009a6050-457a-483a-bce8-0f0d835b31bb"
+            "uuid": "b02d6de4-9e7a-4ee6-aeec-c4d4a56335f8"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/9dac9d20-7e51-48d6-9707-71c3da62dba3",
+            "@id": "\/api\/3\/module_permissions\/d528d790-a6a4-40c4-bd3b-80e3014e3881",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -99,10 +99,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "incidents",
-            "uuid": "9dac9d20-7e51-48d6-9707-71c3da62dba3"
+            "uuid": "d528d790-a6a4-40c4-bd3b-80e3014e3881"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/7ae26827-881d-4026-9bbd-473277c58367",
+            "@id": "\/api\/3\/module_permissions\/eff7e4e0-fa52-4c9c-b853-c4918e41161c",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -111,10 +111,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "indicators",
-            "uuid": "7ae26827-881d-4026-9bbd-473277c58367"
+            "uuid": "eff7e4e0-fa52-4c9c-b853-c4918e41161c"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/0f06497b-bec6-44eb-bb92-911056293720",
+            "@id": "\/api\/3\/module_permissions\/00378aee-610d-4d3c-bdcd-b041bbae9f53",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": null,
@@ -123,10 +123,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "people",
-            "uuid": "0f06497b-bec6-44eb-bb92-911056293720"
+            "uuid": "00378aee-610d-4d3c-bdcd-b041bbae9f53"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/f240805a-5dab-4745-95fa-d55c305641cd",
+            "@id": "\/api\/3\/module_permissions\/9a233b49-9af5-4cd0-9a0e-751c30b1612e",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -135,10 +135,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "tasks",
-            "uuid": "f240805a-5dab-4745-95fa-d55c305641cd"
+            "uuid": "9a233b49-9af5-4cd0-9a0e-751c30b1612e"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/02878c4d-b757-495f-99fa-9367d14fa861",
+            "@id": "\/api\/3\/module_permissions\/f93df2db-a25f-4bc6-bc47-ff138101bcba",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -147,10 +147,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "schedules",
-            "uuid": "02878c4d-b757-495f-99fa-9367d14fa861"
+            "uuid": "f93df2db-a25f-4bc6-bc47-ff138101bcba"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/215210f9-6a74-45f9-9664-e517b7848b6b",
+            "@id": "\/api\/3\/module_permissions\/717dbbb4-15c7-46eb-b935-f27144bf96a5",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": null,
@@ -159,10 +159,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "saved_reports",
-            "uuid": "215210f9-6a74-45f9-9664-e517b7848b6b"
+            "uuid": "717dbbb4-15c7-46eb-b935-f27144bf96a5"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/b57b144e-3749-4e8e-b6e3-25554f6b1cec",
+            "@id": "\/api\/3\/module_permissions\/21d49176-de94-4dd1-bb2b-7f9907d76466",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": true,
@@ -171,10 +171,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "workflows",
-            "uuid": "b57b144e-3749-4e8e-b6e3-25554f6b1cec"
+            "uuid": "21d49176-de94-4dd1-bb2b-7f9907d76466"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/ddc646ac-1e6e-4f2b-9fda-5418d2493883",
+            "@id": "\/api\/3\/module_permissions\/4ab48758-2434-49e9-9707-6cf41107f57a",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": true,
@@ -183,10 +183,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "connectors",
-            "uuid": "ddc646ac-1e6e-4f2b-9fda-5418d2493883"
+            "uuid": "4ab48758-2434-49e9-9707-6cf41107f57a"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/268f5a5e-41c7-4741-b08a-23c9471f6d47",
+            "@id": "\/api\/3\/module_permissions\/1a6ecf37-7f68-48f6-b0ba-61db891e84d6",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": true,
@@ -195,10 +195,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "widgets",
-            "uuid": "268f5a5e-41c7-4741-b08a-23c9471f6d47"
+            "uuid": "1a6ecf37-7f68-48f6-b0ba-61db891e84d6"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/419623ad-5201-43d7-af93-6f1ec38aff00",
+            "@id": "\/api\/3\/module_permissions\/d89fa2ba-0689-4511-9b49-054def30d3d6",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -207,10 +207,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "announcements",
-            "uuid": "419623ad-5201-43d7-af93-6f1ec38aff00"
+            "uuid": "d89fa2ba-0689-4511-9b49-054def30d3d6"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/230142de-7274-48c5-8879-02d41096469b",
+            "@id": "\/api\/3\/module_permissions\/3e361e24-c304-4327-b4c7-042456633c33",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": true,
@@ -219,7 +219,7 @@
             "canDelete": true,
             "fieldPermissions": [],
             "module": "warrooms",
-            "uuid": "230142de-7274-48c5-8879-02d41096469b"
+            "uuid": "3e361e24-c304-4327-b4c7-042456633c33"
         }
     ],
     "uuid": "aada6692-fbf4-4a02-a580-f8a200962365"

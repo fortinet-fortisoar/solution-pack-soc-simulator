@@ -6,7 +6,7 @@
     "name": "Playbook Administrator",
     "modulePermissions": [
         {
-            "@id": "\/api\/3\/module_permissions\/1c3b0212-035d-4311-b65b-a48f239b5676",
+            "@id": "\/api\/3\/module_permissions\/29dea247-d434-41ab-b521-b3a646bafb20",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": null,
@@ -15,10 +15,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "security",
-            "uuid": "1c3b0212-035d-4311-b65b-a48f239b5676"
+            "uuid": "29dea247-d434-41ab-b521-b3a646bafb20"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/7fbeda66-4b1a-4edf-869a-06f1d5671e5b",
+            "@id": "\/api\/3\/module_permissions\/c87e5c6e-15b3-45eb-9d2b-8d4e7272c52e",
             "@type": "ModulePermission",
             "canCreate": null,
             "canExecute": null,
@@ -27,10 +27,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "application",
-            "uuid": "7fbeda66-4b1a-4edf-869a-06f1d5671e5b"
+            "uuid": "c87e5c6e-15b3-45eb-9d2b-8d4e7272c52e"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/5553831c-011b-4461-befe-c0441e26899a",
+            "@id": "\/api\/3\/module_permissions\/fd5d1054-401f-41f8-b9c5-f4228331240d",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": true,
@@ -39,10 +39,10 @@
             "canDelete": true,
             "fieldPermissions": [],
             "module": "workflows",
-            "uuid": "5553831c-011b-4461-befe-c0441e26899a"
+            "uuid": "fd5d1054-401f-41f8-b9c5-f4228331240d"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/2e05727c-0da5-413c-9876-f3f8b2cd7cbc",
+            "@id": "\/api\/3\/module_permissions\/76ff239c-3ac7-45d2-8952-09792de9b595",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": true,
@@ -51,10 +51,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "connectors",
-            "uuid": "2e05727c-0da5-413c-9876-f3f8b2cd7cbc"
+            "uuid": "76ff239c-3ac7-45d2-8952-09792de9b595"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/3f0cda3a-bf48-4c3d-987f-71255a756dfb",
+            "@id": "\/api\/3\/module_permissions\/05de6c40-c9a6-466d-95d5-827f9b4dd3f1",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -63,10 +63,10 @@
             "canDelete": true,
             "fieldPermissions": [],
             "module": "schedules",
-            "uuid": "3f0cda3a-bf48-4c3d-987f-71255a756dfb"
+            "uuid": "05de6c40-c9a6-466d-95d5-827f9b4dd3f1"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/ab739acf-8897-410a-94d0-7c7fa2d1c124",
+            "@id": "\/api\/3\/module_permissions\/8ade2fc4-3afe-49c7-9534-888379dfc157",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -75,10 +75,10 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "approvals",
-            "uuid": "ab739acf-8897-410a-94d0-7c7fa2d1c124"
+            "uuid": "8ade2fc4-3afe-49c7-9534-888379dfc157"
         },
         {
-            "@id": "\/api\/3\/module_permissions\/c50a3959-843a-4841-8673-8457c150fed5",
+            "@id": "\/api\/3\/module_permissions\/54319152-e596-464d-9670-8ba57bf8bcbb",
             "@type": "ModulePermission",
             "canCreate": true,
             "canExecute": null,
@@ -87,7 +87,7 @@
             "canDelete": null,
             "fieldPermissions": [],
             "module": "email_templates",
-            "uuid": "c50a3959-843a-4841-8673-8457c150fed5"
+            "uuid": "54319152-e596-464d-9670-8ba57bf8bcbb"
         }
     ],
     "uuid": "a501c11e-15af-49a6-a3a4-88605f32f016"
