@@ -13,15 +13,14 @@ FortiSOAR™ is built using modular architecture and the FortiSOAR™ Incident R
 Use the following procedure as a *root* user to deploy the solution pack:
 
 1. Log onto the Solution Pack GIT repo (https://github.com/fortinet-fortisoar/solution-pack-soc-simulator](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator)) using your credentials.
-2. Click the **Code** button and select the **Download ZIP** option.
+2. Click the **Code** button and select the **Download ZIP** option.  
    ![Fortinet-FortiSOAR GIT branch > Code >Download the solution pack zip](media/socSimulatorZip.png)
-3. Log into your FortiSOAR instance, and on the left-navigation, click **Import Wizard**.
+3. Log into your FortiSOAR instance, and on the left-navigation, click **Import Wizard**.  
    ![Import Wizard](media/importWizard.png)
-4. On the `Import Wizard` page, click **Import From File** and selected the solution pack zip that you have downloaded, and navigate through the Import Wizard.
-   ![Importing the IR Solution Pack zip file](media/importIRCP.png)
-   **Note**: It is recommended not the change any configurations or options of the imported solution pack zip file.
-
-Once the import is successfully completed, you must configure the FortiSOAR SOC Simulator connector and then you can use the SOC Simulator Solution Pack.
+4. On the `Import Wizard` page, click **Import From File** and selected the solution pack zip that you have downloaded, and navigate through the Import Wizard.  
+   ![Importing the IR Solution Pack zip file](media/importIRCP.png)  
+   **Note**: It is recommended not the change any configurations or options of the imported solution pack zip file.  
+   Once the import is successfully completed, you must configure the FortiSOAR SOC Simulator connector and then you can use the SOC Simulator Solution Pack.
 
 ## Configuring the FortiSOAR SOC Simulator Connector
 
