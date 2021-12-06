@@ -8,11 +8,11 @@ FortiSOAR™ is built using modular architecture and the FortiSOAR™ Incident R
 
 ## Deploying SOC Simulator Solution Pack
 
-**Important**: Before you deploy the solution pack, ensure that you have deployed the FortiSOAR™ Incident Response Solution Pack (solution-pack-incident-response).
+**Important**: Before you deploy the solution pack, ensure that you have deployed the FortiSOAR™ Incident Response Solution Pack ([solution-pack-incident-response](https://github.com/fortinet-fortisoar/solution-pack-incident-response)).
 
 Use the following procedure as a *root* user to deploy the solution pack:
 
-1. Log onto the Solution Pack GIT repo (https://github.com/fortinet-fortisoar/solution-pack-soc-simulator](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator)) using your credentials.
+1. Log onto the Solution Pack GIT repo [https://github.com/fortinet-fortisoar/solution-pack-soc-simulator](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator) using your credentials.
 2. Click the **Code** button and select the **Download ZIP** option.  
    ![Fortinet-FortiSOAR GIT branch > Code >Download the solution pack zip](media/socSimulatorZip.png)
 3. Log into your FortiSOAR instance, and on the left-navigation, click **Import Wizard**.  
