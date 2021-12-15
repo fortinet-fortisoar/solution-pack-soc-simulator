@@ -2,15 +2,11 @@
 
 ## Overview
 
-This article describes the FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator). This solution pack enables users to experience the power and capability of FortiSOAR™ incident response for SOC Simulator scenarios. 
-
-FortiSOAR™ is built using modular architecture and the FortiSOAR™ Incident Response Solution Pack is the implementation of the best practices to configure and use FortiSOAR™ in an optimal manner. The FortiSOAR™ Incident Response Solution Pack also contains a lot of sample/simulation/training data that enables you to experience FortiSOAR™ without having all the devices.
+This article describes the FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator). This solution pack enables users to experience the power and capability of FortiSOAR™ incident response for SOC Simulator scenarios. This pack contains simulation data and utilities for demonstrating FortiSOAR capabilities around a variety of important SOC use-cases without having to integrate with actual device endpoints.
 
 ## Deploying SOC Simulator Solution Pack
 
 **Important**: Before you deploy the solution pack, ensure that you have deployed the FortiSOAR™ Incident Response Solution Pack ([solution-pack-incident-response](https://github.com/fortinet-fortisoar/solution-pack-incident-response)).
-
-Use the following procedure as a *root* user to deploy the solution pack:
 
 1. Log onto the Solution Pack GIT repo [https://github.com/fortinet-fortisoar/solution-pack-soc-simulator](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator) using your credentials.
 2. Click the **Code** button and select the **Download ZIP** option.  
