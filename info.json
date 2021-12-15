@@ -1,0 +1,16 @@
+{
+    "name": "socSimulator",
+    "version": "1.0.0",
+    "display": "SOC simulator",
+    "description": "SOC simulator solution pack",
+    "category": [],
+    "dependencies": [],
+    "publisher": "Fortinet",
+    "certified": "true",
+    "type": "solutionpack",
+    "supportInfo": "",
+    "tags": [],
+    "fsrCompatibility": [
+        "7.0.2"
+    ]
+}
