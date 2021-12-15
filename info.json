@@ -1,7 +1,7 @@
 {
     "name": "socSimulator",
     "version": "1.0.0",
-    "display": "SOC simulator",
+    "display": "SOC Simulator",
     "description": "SOC simulator solution pack",
     "category": [],
     "dependencies": [],
@@ -9,6 +9,7 @@
     "certified": "true",
     "type": "solutionpack",
     "supportInfo": "",
+    "help":"https://github.com/cs-akash-jarad/solution-pack-soc-simulator/blob/develop/README.md"
     "tags": [],
     "fsrCompatibility": [
         "7.0.2"
