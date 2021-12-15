@@ -9,7 +9,7 @@
     "certified": "true",
     "type": "solutionpack",
     "supportInfo": "",
-    "help":"https://github.com/cs-akash-jarad/solution-pack-soc-simulator/blob/develop/README.md"
+    "help":"https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/README.md"
     "tags": [],
     "fsrCompatibility": [
         "7.0.2"
