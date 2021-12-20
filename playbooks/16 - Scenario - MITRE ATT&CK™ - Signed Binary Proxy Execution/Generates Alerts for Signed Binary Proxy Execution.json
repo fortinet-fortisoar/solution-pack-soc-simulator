@@ -1,0 +1,333 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Generates Alerts for Signed Binary Proxy Execution",
+    "aliasName": null,
+    "tag": null,
+    "description": "Create alert for MITRE technique Signed Binary Proxy Execution [T1218]",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "lastModifyDate": 1640007260,
+    "collection": "\/api\/3\/workflow_collections\/c926f317-8aba-41c5-8f71-2f0f23d992fb",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/88257360-7530-4117-9a5e-553a57e6a006",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "88257360-7530-4117-9a5e-553a57e6a006",
+            "id": 5661
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "scenarioTitle": "{{vars.input.records[0].title}}",
+                "useMockOutput": "true"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "0c399bba-fa7d-4b41-8aaa-cafe31ada027",
+            "id": 5662
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Alert from SIEM",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "huntEnd": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntEndDate).int_timestamp}}",
+                    "huntStart": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntStartDate).int_timestamp}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/2f92c737-3836-4b06-bef9-86aee19f2f59"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "b0695801-c542-4144-9b06-9f0871de7674",
+            "id": 5663
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Created Alert Data",
+            "description": null,
+            "arguments": {
+                "@id": "{{(vars.steps.Create_and_Link_Alert | json_query('[].alert_data.\"@id\"')) | union([vars.steps.Create_Hunt_Record['@id']])}}"
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "90aedc34-729f-4df9-b3a4-e6f79bcd46c3",
+            "id": 5664
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Hunt Time Range",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Enter Hunt Time Range",
+                        "description": "Hunt Time Range",
+                        "inputVariables": [
+                            {
+                                "name": "huntStartDate",
+                                "type": "integer",
+                                "label": "Hunt Start Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "months",
+                                    "differenceValue": -1
+                                },
+                                "_previousName": "untStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "huntEndDate",
+                                "type": "integer",
+                                "label": "Hunt End Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "mins",
+                                    "differenceValue": 1
+                                },
+                                "_previousName": "huntStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{vars.input.records[0]['@id']}}",
+                "resources": "scenario",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/c0632556-1aae-4bbd-8373-3c0a2d9c914c"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "uuid": "5ecbfa9b-9295-4091-bcb3-bdf4a08e5335",
+            "id": 5665
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create and Link Alert",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Get_Alert_from_SIEM.step_output}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "MD5": "{{ (vars.item._source.event_data.Hashes.split(\"MD5=\")[1].split(',')[0])}}",
+                    "url": "",
+                    "source": "{{vars.item._source.source_name}}",
+                    "comment": "{% if 'cmstp' in vars.item._index %}SIEM query identified CMSTP.exe spawning potentially non-standard child process {{vars.item._source.image_path.split(\"\\\\\")[-1] }}  on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'compiledhtml' in vars.item._index %}SIEM query identified a Compiled HTML file spawning child process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'controlpanelitems' in vars.item._index %}SIEM query identified control.exe spawning potentially non-standard child process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'mshta' in vars.item._index and 'mshta' in vars.item._source.image_path %}SIEM query identified MSHTA.exe was invoked on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'mshta' in vars.item._index and 'cmd' in vars.item._source.image_path %}SIEM query identified MSHTA.exe spawned child process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'rundll32' in vars.item._index %}SIEM query identified rundll32.exe spawned child process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} from a nonstandard directory on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'regsvcregasm' in vars.item._index %}SIEM query identified regsvcs.exe or regasm.exe spawned child process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'installutil' in vars.item._index %}SIEM query identified InstallUtil.exe was executed via command line on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% endif %}",
+                    "huntIRI": "{{vars.steps.Create_Hunt_Record['@id']}}",
+                    "service": "",
+                    "filePath": "{{vars.item._source.image_path}}",
+                    "hostName": "{{vars.item._source.beat.hostname}}",
+                    "sourceIP": "",
+                    "userName": "{{vars.item._source.username}}",
+                    "alertName": "{% if 'cmstp' in vars.item._index %}ATT&CK-CMSTP-{{vars.item._source.image_path.split(\"\\\\\")[-1]}} spawned{% elif 'compiledhtml' in vars.item._index %}ATT&CK-Compiled HTML-{{vars.item._source.image_path.split(\"\\\\\")[-1]}} spawned{% elif 'controlpanelitems' in vars.item._index %}ATT&CK-Control Panel Items-{{vars.item._source.image_path.split(\"\\\\\")[-1]}} spawned by control.exe{% elif 'mshta' in vars.item._index and 'mshta' in vars.item._source.image_path %}ATT&CK-Mshta-{{vars.item._source.image_path.split(\"\\\\\")[-1] }} executed{% elif 'mshta' in vars.item._index and 'cmd' in vars.item._source.image_path %}ATT&CK-Mshta-{{vars.item._source.image_path.split(\"\\\\\")[-1] }} spawned{% elif 'rundll32' in vars.item._index %}ATT&CK-Rundll32-{{vars.item._source.image_path.split(\"\\\\\")[-1] }} executed by Rundll32.exe{% elif 'regsvcregasm' in vars.item._index %}ATT&CK-Regsvcs\/Regasm-{{vars.item._source.image_path.split(\"\\\\\")[-1] }} spawned{% elif 'installutil' in vars.item._index %}ATT&CK-InstallUtil-Command line with InstallUtil detected{% endif %}",
+                    "alertType": "{{\"AlertType\" | picklist(\"Signed Binary Proxy Execution\", \"@id\")}}",
+                    "epochTime": "{{ arrow.get(vars.item._source.event_data.UtcTime).timestamp }}",
+                    "eventName": "",
+                    "eventTime": "{{ vars.item._source.event_data.UtcTime}}",
+                    "processID": "{{vars.item._source.event_data.ProcessId}}",
+                    "technique": "{% if 'cmstp' in vars.item._index %}CMSTP{% elif 'compiledhtml' in vars.item._index %}Compiled HTML{% elif 'controlpanelitems' in vars.item._index %}Control Panel Items{% elif 'mshta' in vars.item._index and 'mshta' in vars.item._source.image_path %}MSHTA{% elif 'mshta' in vars.item._index and 'cmd' in vars.item._source.image_path %}MSHTA-Child{% elif 'rundll32' in vars.item._index %}Rundll32{% elif 'regsvcregasm' in vars.item._index %}Regsvcs\/Regasm{% elif 'installutil' in vars.item._index %}InstallUtil-Commandline{% endif %}",
+                    "sourceData": "{{vars.item}}",
+                    "sourceTool": "{{vars.item._source.source_name}}",
+                    "commandline": "{{vars.item._source.event_data.CommandLine}}",
+                    "description": "{% if 'cmstp' in vars.item._index %}An attempt to invoke cmstp.exe was observed. CMSTP has been used to load malicious .inf files, enabling an attacker to force a host to download and execute DLLs or SCT files from a remote server. In many networks, an instance of a host executing cmstp.exe is uncommon and should investigated for additional signs of compromise.{% elif 'compiledhtml' in vars.item._index %}An attempt by hh.exe to spawn a process was observed. Hh.exe can be used to execute compiled HTML (.chm) files. An adversary could craft a custom malicious .chm file and trick a user into executing it, potentially infecting the host. Any process spawned by hh.exe should be analyzed for malicious activity.{% elif 'controlpanelitems' in vars.item._index %}An attempt to invoke control.exe was observed. Control.exe is used to execute Control Panel Items. Control Panel Items are either executables (.exe files) or Control Panel files (.cpl files, which are just DLLs that use the .cpl extension instead of \".dll\"). In most organizations, it is unusual for these files to be manually executed, so the file executed and this host should be investigated for further suspicious activity.{% elif 'mshta' in vars.item._index and 'mshta' in vars.item._source.image_path %}An attempt to invoke mshta.exe was observed. MSHTA can be used as an alternate method of executing local and remotely hosted executables. In most networks execution of MSHTA.exe is an uncommon occurrence and should be investigated as a potential sign of compromise.{% elif 'mshta' in vars.item._index and 'cmd' in vars.item._source.image_path %}SIEM query identified MSHTA.exe spawned child process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'rundll32' in vars.item._index %}An attempt to invoke Rundll32.exe was observed. Rundll32 can be used to load arbitrary DLL files. Use of this technique may bypass application whitelisting and allow an attacker to bypass other defenses. Attention should be paid to the commands passed to Rundll32 as well as processes spawned.{% elif 'regsvcregasm' in vars.item._index %}An instance of Regsvcs.exe or Regasm.exe spawning a child process was observed. Regsvcs.exe and Regasm.exe are signed by Microsoft and can be used to execute arbitrary code.  As such, they may be used by an adversary to execute malicious code. Command line arguments and child processes spawned by Regsvcs.exe or Regasm.exe should be examined for malicious content.{% elif 'installutil' in vars.item._index %}An attempt to invoke installutil.exe via command line was observed. InstallUtil.exe is digitally signed by Microsoft and can be used to execute a malicious binary on a host while bypassing processes whitelisting. Special attention should be paid to command line arguments passed with the InstallUtil.exe command and any child processes of InstallUtil.exe.{% endif %}",
+                    "processGUID": "{{vars.item._source.event_data.ProcessGuid}}",
+                    "processName": "{{vars.item._source.image_path.split(\"\\\\\")[-1] }}",
+                    "registryKey": "",
+                    "sourceImage": "{{ vars.item._source.event_data.SourceImage | replace( \"\\\\\", \"\\\\\\\\\" )}}",
+                    "targetImage": "{{ vars.item._source.event_data.TargetImage | replace( \"\\\\\", \"\\\\\\\\\" )}}",
+                    "computerName": "{{vars.item._source.computer_name}}",
+                    "destinationIP": "",
+                    "mitre_tech_id": "{% if 'cmstp' in vars.item._index %}T1218.003{% elif 'compiledhtml' in vars.item._index %}T1218.001{% elif 'controlpanelitems' in vars.item._index %}T1218.002{% elif 'mshta' in vars.item._index and 'mshta' in vars.item._source.image_path %}T1218.005{% elif 'mshta' in vars.item._index and 'cmd' in vars.item._source.image_path %}T1218.005{% elif 'regsvcregasm' in vars.item._index %}T1218.009{% elif 'rundll32' in vars.item._index %}T1218.011{% elif 'installutil' in vars.item._index %}T1218.004{% endif %}",
+                    "parentProcess": "{{vars.item._source.parent_image_path}}",
+                    "scheduledTask": "",
+                    "bitstransferid": "",
+                    "parentProcessID": "{{vars.item._source.event_data.ParentProcessId}}",
+                    "bytestransferred": "",
+                    "registryKeyValue": "",
+                    "parentCommandLine": "{{vars.item._source.event_data.ParentCommandLine}}",
+                    "decodedCommandLine": ""
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/119f4363-6f8a-4276-b3ff-76cf8ed2e2fe"
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "fc376d3f-d3b9-40e3-bf08-b39cc871d89b",
+            "id": 5666
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Hunt Record",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Demo Hunt - {{vars.scenarioTitle}}",
+                    "huntEnd": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntEndDate).int_timestamp}}",
+                    "__replace": "",
+                    "huntStart": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntStartDate).int_timestamp}}",
+                    "timeCreated": "{{arrow.utcnow().int_timestamp}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/hunt",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "uuid": "c0632556-1aae-4bbd-8373-3c0a2d9c914c",
+            "id": 5898
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/0c399bba-fa7d-4b41-8aaa-cafe31ada027",
+            "sourceStep": "\/api\/3\/workflow_steps\/88257360-7530-4117-9a5e-553a57e6a006",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "af1598d0-9a6f-4386-a9f3-b4a2c8441a40"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Hunt Time Range",
+            "targetStep": "\/api\/3\/workflow_steps\/5ecbfa9b-9295-4091-bcb3-bdf4a08e5335",
+            "sourceStep": "\/api\/3\/workflow_steps\/0c399bba-fa7d-4b41-8aaa-cafe31ada027",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "1e3f1a6d-4f0a-4e0a-9773-b9ab98409eed"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alerts from Elastic -> Get Created Alert Data",
+            "targetStep": "\/api\/3\/workflow_steps\/90aedc34-729f-4df9-b3a4-e6f79bcd46c3",
+            "sourceStep": "\/api\/3\/workflow_steps\/fc376d3f-d3b9-40e3-bf08-b39cc871d89b",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "10badc10-11ba-469f-8db2-75c8e1226727"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Alert from SIEM -> Create and Link Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/fc376d3f-d3b9-40e3-bf08-b39cc871d89b",
+            "sourceStep": "\/api\/3\/workflow_steps\/b0695801-c542-4144-9b06-9f0871de7674",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "bc8de5de-1e56-4207-a89e-088d681d0d3e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Hunt Time Range -> Create Hunt Record",
+            "targetStep": "\/api\/3\/workflow_steps\/c0632556-1aae-4bbd-8373-3c0a2d9c914c",
+            "sourceStep": "\/api\/3\/workflow_steps\/5ecbfa9b-9295-4091-bcb3-bdf4a08e5335",
+            "label": "Submit",
+            "isExecuted": false,
+            "uuid": "81608862-3b32-4cab-b8be-c695d9ca2553"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Hunt Record -> Get Alert from SIEM",
+            "targetStep": "\/api\/3\/workflow_steps\/b0695801-c542-4144-9b06-9f0871de7674",
+            "sourceStep": "\/api\/3\/workflow_steps\/c0632556-1aae-4bbd-8373-3c0a2d9c914c",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "9cb6bdb0-e1be-4a6e-9c37-c170ef2d9ae6"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "520a4b39-8ebd-41c0-a0fe-ffe9c898ce4d",
+    "recordTags": [],
+    "id": 1366,
+    "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "createDate": 1639040823,
+    "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "modifyDate": 1640012946,
+    "owners": [],
+    "isPrivate": false
+}

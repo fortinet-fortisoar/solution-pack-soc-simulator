@@ -1,0 +1,333 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Generates Alerts for Defense Evasion",
+    "aliasName": null,
+    "tag": null,
+    "description": "Create alert for non-Windows processes accessing the lsass.exe process, which can be indicative of credential dumping",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "lastModifyDate": 1639987471,
+    "collection": "\/api\/3\/workflow_collections\/234e09da-6930-4fd2-ada5-43bfc65f59f5",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/ab8d69e4-d026-44c5-a9da-09145c2d117f",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "ab8d69e4-d026-44c5-a9da-09145c2d117f",
+            "id": 5581
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "scenarioTitle": "{{vars.input.records[0].title}}",
+                "useMockOutput": "true"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "aed69b3c-dfc3-42ac-a841-a82491fd6040",
+            "id": 5582
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Alert from SIEM",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "huntEnd": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntEndDate).int_timestamp}}",
+                    "huntStart": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntStartDate).int_timestamp}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/e8c851d3-a1a2-4f66-b022-24adb86ba717"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "4f15f9cc-3443-4916-907f-97528e5bf783",
+            "id": 5583
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Created Alert Data",
+            "description": null,
+            "arguments": {
+                "@id": "{{(vars.steps.Create_and_Link_Alert | json_query('[].alert_data.\"@id\"')) | union([vars.steps.Create_Hunt_Record['@id']])}}"
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "37a5b64a-a3a0-4498-a087-2722a15b646a",
+            "id": 5584
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Hunt Time Range",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Enter Hunt Time Range",
+                        "description": "Hunt Time Range",
+                        "inputVariables": [
+                            {
+                                "name": "huntStartDate",
+                                "type": "integer",
+                                "label": "Hunt Start Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "months",
+                                    "differenceValue": -1
+                                },
+                                "_previousName": "untStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "huntEndDate",
+                                "type": "integer",
+                                "label": "Hunt End Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "mins",
+                                    "differenceValue": 1
+                                },
+                                "_previousName": "huntStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{vars.input.records[0]['@id']}}",
+                "resources": "scenario",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/282e05f3-710c-4bdb-b51e-f652de1871e6"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "uuid": "4da71cef-238e-4997-ba96-1b255c6b441c",
+            "id": 5585
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create and Link Alert",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Get_Alert_from_SIEM.step_output}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "MD5": "{{ (vars.item._source.event_data.Hashes.split(\"MD5=\")[1].split(',')[0])}}",
+                    "url": "",
+                    "source": "{{vars.item._source.source_name}}",
+                    "comment": "{% if 'certutil' in vars.item._source.image_path %}SIEM query identified a possible attempt to use {{vars.item._source.image_path.split(\"\\\\\")[-1]}} to Deobfuscate\/Decode Files or Information on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'cmd' in vars.item._source.image_path %}SIEM query identified a potential attempt to use the command \"copy \/b\" to deobfuscate\/decode files or information through {{vars.item._source.image_path.split(\"\\\\\")[-1]}} to Deobfuscate\/Decode Files or Information on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% else %}SIEM query identified Mimikatz module DCShadow execution from {{vars.item._source.image_path.split(\"\\\\\")[-1]}} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% endif %}",
+                    "huntIRI": "{{vars.steps.Create_Hunt_Record['@id']}}",
+                    "service": "",
+                    "filePath": "{{vars.item._source.image_path}}",
+                    "hostName": "{{vars.item._source.beat.hostname}}",
+                    "sourceIP": "",
+                    "userName": "{{vars.item._source.username}}",
+                    "alertName": "{% if 'certutil' in vars.item._source.image_path %}ATT&CK-Deobfuscate\/Decode-Certutil executed{% elif 'cmd' in vars.item._source.image_path %}ATT&CK-Deobfuscate\/Decode-cmd executed with \"copy \/b\" argument{% else %}ATT&CK-DCShadow-{{vars.item._source.image_path.split(\"\\\\\")[-1]}} executed with DCShadow commandline arguments{% endif %}",
+                    "alertType": "{% if 'certutil' in vars.item._source.image_path %}{{\"AlertType\" | picklist(\"Deobfuscate\/Decode Files or Information\", \"@id\")}}{% elif 'cmd' in vars.item._source.image_path %}{{\"AlertType\" | picklist(\"Deobfuscate\/Decode Files or Information\", \"@id\")}}{% else %}{{\"AlertType\" | picklist(\"Rogue Domain Controller\", \"@id\")}}{% endif %}",
+                    "epochTime": "{{ arrow.get(vars.item._source.event_data.UtcTime).timestamp }}",
+                    "eventName": "",
+                    "eventTime": "{{ vars.item._source.event_data.UtcTime}}",
+                    "processID": "{{vars.item._source.event_data.ProcessId}}",
+                    "technique": "{% if 'certutil' in vars.item._source.image_path %}Deobfuscate\/Decode Files or Information- Certutil{% elif 'cmd' in vars.item._source.image_path %}Deobfuscate\/Decode Files or Information- Copy \/b{% else %}DCShadow{% endif %}",
+                    "sourceData": "{{vars.item}}",
+                    "sourceTool": "{{vars.item._source.source_name}}",
+                    "commandline": "{{vars.item._source.event_data.CommandLine}}",
+                    "description": "{% if 'certutil' in vars.item._source.image_path %}An attempt to utilize Certutil.exe to decode data was observed. An attacker could use Certutil to deobfuscate data and then interact with\/utilize the data elsewhere.{% elif 'cmd' in vars.item._source.image_path %}An attempt to utilize Copy \/b to was observed. An attacker could use the command Copy \/b to read data as binary and then interact with\/utilize the data elsewhere. This attack has been observed being conducted by nation-state actors and other malicious entities to join together binary fragments to assemble and run executables.{% else %}A command line argument was passed containing \"lsadump::dcshadow\". This is indicative of attempted execution of Mimikatz module DCShadow, which is used to cause a host to masquerade as a Domain Controller. This host should be investigated for further signs of compromise.{% endif %}",
+                    "processGUID": "{{vars.item._source.event_data.ProcessGuid}}",
+                    "processName": "{{vars.item._source.image_path.split(\"\\\\\")[-1] }}",
+                    "registryKey": "",
+                    "sourceImage": "{{ vars.item._source.event_data.SourceImage | replace( \"\\\\\", \"\\\\\\\\\" )}}",
+                    "targetImage": "{{ vars.item._source.event_data.TargetImage | replace( \"\\\\\", \"\\\\\\\\\" )}}",
+                    "computerName": "{{vars.item._source.computer_name}}",
+                    "destinationIP": "",
+                    "mitre_tech_id": "{% if 'certutil' in vars.item._source.image_path %}T1140{% elif 'cmd' in vars.item._source.image_path %}T1140{% else %}T1207{% endif %}",
+                    "parentProcess": "{{vars.item._source.parent_image_path}}",
+                    "scheduledTask": "",
+                    "bitstransferid": "",
+                    "parentProcessID": "{{vars.item._source.event_data.ParentProcessId}}",
+                    "bytestransferred": "",
+                    "registryKeyValue": "",
+                    "parentCommandLine": "{{vars.item._source.event_data.ParentCommandLine}}",
+                    "decodedCommandLine": ""
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/262cfb8f-948c-4d2f-b630-bcdb8739a737"
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "8b965e7f-1313-41e9-9fa7-c2196df52346",
+            "id": 5586
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Hunt Record",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Demo Hunt - {{vars.scenarioTitle}}",
+                    "huntEnd": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntEndDate).int_timestamp}}",
+                    "__replace": "",
+                    "huntStart": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntStartDate).int_timestamp}}",
+                    "timeCreated": "{{arrow.utcnow().int_timestamp}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/hunt",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "uuid": "282e05f3-710c-4bdb-b51e-f652de1871e6",
+            "id": 5902
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/aed69b3c-dfc3-42ac-a841-a82491fd6040",
+            "sourceStep": "\/api\/3\/workflow_steps\/ab8d69e4-d026-44c5-a9da-09145c2d117f",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "5d37b0f0-c17d-4b56-8361-c6444295d0b3"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Hunt Time Range",
+            "targetStep": "\/api\/3\/workflow_steps\/4da71cef-238e-4997-ba96-1b255c6b441c",
+            "sourceStep": "\/api\/3\/workflow_steps\/aed69b3c-dfc3-42ac-a841-a82491fd6040",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "f6ed320c-8489-437d-80ce-c111532e4b46"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alerts from Elastic -> Get Created Alert Data",
+            "targetStep": "\/api\/3\/workflow_steps\/37a5b64a-a3a0-4498-a087-2722a15b646a",
+            "sourceStep": "\/api\/3\/workflow_steps\/8b965e7f-1313-41e9-9fa7-c2196df52346",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "265d55b3-0296-4587-8265-6cf523c1abe0"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Alert from SIEM -> Create and Link Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/8b965e7f-1313-41e9-9fa7-c2196df52346",
+            "sourceStep": "\/api\/3\/workflow_steps\/4f15f9cc-3443-4916-907f-97528e5bf783",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "31950a7f-14c4-4007-bf2a-8b5869ef3aea"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Hunt Time Range -> Create Hunt Record",
+            "targetStep": "\/api\/3\/workflow_steps\/282e05f3-710c-4bdb-b51e-f652de1871e6",
+            "sourceStep": "\/api\/3\/workflow_steps\/4da71cef-238e-4997-ba96-1b255c6b441c",
+            "label": "Submit",
+            "isExecuted": false,
+            "uuid": "e1944221-cd44-47e9-ab7e-5fbec5879eb5"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Hunt Record -> Get Alert from SIEM",
+            "targetStep": "\/api\/3\/workflow_steps\/4f15f9cc-3443-4916-907f-97528e5bf783",
+            "sourceStep": "\/api\/3\/workflow_steps\/282e05f3-710c-4bdb-b51e-f652de1871e6",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "bc4a6295-ea7e-4471-b0c6-91dc1addc420"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "42fcd125-90b5-492d-a6be-ac7b3e1cec49",
+    "recordTags": [],
+    "id": 1351,
+    "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "createDate": 1638960149,
+    "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "modifyDate": 1640012920,
+    "owners": [],
+    "isPrivate": false
+}

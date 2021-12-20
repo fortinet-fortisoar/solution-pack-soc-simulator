@@ -1,0 +1,333 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Generates Alerts for Process Execution",
+    "aliasName": null,
+    "tag": null,
+    "description": "Create alert for non-Windows processes accessing the lsass.exe process, which can be indicative of credential dumping",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "lastModifyDate": 1640005260,
+    "collection": "\/api\/3\/workflow_collections\/897f9d35-4fcb-4933-92d4-d2ef8c1f7478",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/606a4cc4-4a30-4716-a666-b98113f4fc9e",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "606a4cc4-4a30-4716-a666-b98113f4fc9e",
+            "id": 5627
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "scenarioTitle": "{{vars.input.records[0].title}}",
+                "useMockOutput": "true"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "1af38492-319c-4414-b0c7-753e2b0db7bc",
+            "id": 5628
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Alert from SIEM",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "huntEnd": "{{vars.steps.Get_Hunt_Time_Range.input.huntEndDate}}",
+                    "huntStart": "{{vars.steps.Get_Hunt_Time_Range.input.huntStartDate}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/bc55a2ca-3274-4363-94a0-528394e32c2a"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "70066fba-79e1-4bbb-a448-8e13d026a2c0",
+            "id": 5629
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Created Alert Data",
+            "description": null,
+            "arguments": {
+                "@id": "{{(vars.steps.Create_and_Link_Alert | json_query('[].alert_data.\"@id\"')) | union([vars.steps.Create_Hunt_Record['@id']])}}"
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "1e63855c-c12a-47fd-ad3b-3c5748c3180e",
+            "id": 5630
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Hunt Time Range",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Enter Hunt Time Range",
+                        "description": "Hunt Time Range",
+                        "inputVariables": [
+                            {
+                                "name": "huntStartDate",
+                                "type": "integer",
+                                "label": "Hunt Start Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "months",
+                                    "differenceValue": -1
+                                },
+                                "_previousName": "untStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "huntEndDate",
+                                "type": "integer",
+                                "label": "Hunt End Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "mins",
+                                    "differenceValue": 1
+                                },
+                                "_previousName": "huntStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{vars.input.records[0]['@id']}}",
+                "resources": "scenario",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/3f2e83e0-fd2b-4d51-af1f-d7264922b053"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "uuid": "c9e4ed3d-73a8-480a-a9f8-0623c259fcc8",
+            "id": 5631
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create and Link Alert",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Get_Alert_from_SIEM.step_output}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "MD5": "{{ (vars.item._source.event_data.Hashes.split(\"MD5=\")[1].split(',')[0])}}",
+                    "url": "",
+                    "source": "{{vars.item._source.source_name}}",
+                    "comment": "{% if 'dynamicdataexchange' in vars.item._index %}SIEM query identified a Microsoft Office product using Dynamic Data Exchange to spawn non-standard process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} on {{vars.item._source.computer_name}} at {{vars.item._source.event_data.UtcTime}}.{% elif 'msxsl' in vars.item._source.image_path %}SIEM query identified XSL script execution via process {{vars.item._source.image_path.split(\"\\\\\")[-1] }} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% else %}SIEM query identified an XSL script in the command line, leading to spawning of child process {{vars.item._source.image_path.split(\"\\\\\")[-1]}} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% endif %}",
+                    "huntIRI": "{{vars.steps.Create_Hunt_Record['@id']}}",
+                    "service": "",
+                    "filePath": "{{vars.item._source.image_path}}",
+                    "hostName": "{{vars.item._source.beat.hostname}}",
+                    "sourceIP": "",
+                    "userName": "{{vars.item._source.username}}",
+                    "alertName": "{% if 'dynamicdataexchange' in vars.item._index %}ATT&CK-Dynamic Data Exchange-{{vars.item._source.image_path.split(\"\\\\\")[-1] }} spawned{% elif 'msxsl' in vars.item._source.image_path %}ATT&CK-XSL Script Processing-MSXSL{% else %}ATT&CK-XSL Script Processing-Child Process-{{vars.item._source.image_path.split(\"\\\\\")[-1] }}{% endif %}",
+                    "alertType": "{% if 'dynamicdataexchange' in vars.item._index %}{{\"AlertType\" | picklist(\"Inter-Process Communication\", \"@id\")}}{% elif 'msxsl' in vars.item._source.image_path %}{{\"AlertType\" | picklist(\"XSL Script Processing\", \"@id\")}}{% else %}{{\"AlertType\" | picklist(\"XSL Script Processing\", \"@id\")}}{% endif %}",
+                    "epochTime": "{{ arrow.get(vars.item._source.event_data.UtcTime).timestamp }}",
+                    "eventName": "",
+                    "eventTime": "{{ vars.item._source.event_data.UtcTime}}",
+                    "processID": "{{vars.item._source.event_data.ProcessId}}",
+                    "technique": "{% if 'dynamicdataexchange' in vars.item._index %}Dynamic Data Exchange{% elif 'msxsl' in vars.item._source.image_path %}XSL Script Processing (MSXSL or similar){% else %}XSL Script Processing (Process Spawned){% endif %}",
+                    "sourceData": "{{vars.item}}",
+                    "sourceTool": "{{vars.item._source.source_name}}",
+                    "commandline": "{{vars.item._source.event_data.CommandLine}}",
+                    "description": "{% if 'dynamicdataexchange' in vars.item._index %}A non-standard process was spawned by a Microsoft Office product. Macros, dynamic data exchange, and other techniques may be used to cause Office products to execute other processes. In many networks, an instance of a host's instance of Microsoft Office spawning other processes is uncommon and should investigated for additional signs of compromise.{% elif 'msxsl' in vars.item._source.image_path %}An attempt to invoke an XSL script from the command line was observed. XSL can be used to execute arbitrary code via trusted binary execution. Use of this technique may bypass application whitelisting and allow an attacker to bypass other defenses. Attention should be paid to the commands passed  as well as processes spawned.{% else %}An attempt to invoke an XSL script from the command line resulting in the spawning of a child process was observed. XSL scripts can be used to execute arbitrary code via trusted binary execution. Use of this technique may bypass application whitelisting and allow an attacker to bypass other defenses. Attention should be paid to the commands passed as well as processes spawned.{% endif %}",
+                    "processGUID": "{{vars.item._source.event_data.ProcessGuid}}",
+                    "processName": "{{vars.item._source.image_path.split(\"\\\\\")[-1] }}",
+                    "registryKey": "",
+                    "sourceImage": "{{ vars.item._source.event_data.SourceImage | replace( \"\\\\\", \"\\\\\\\\\" )}}",
+                    "targetImage": "{{ vars.item._source.event_data.TargetImage | replace( \"\\\\\", \"\\\\\\\\\" )}}",
+                    "computerName": "{{vars.item._source.computer_name}}",
+                    "destinationIP": "",
+                    "mitre_tech_id": "{% if 'dynamicdataexchange' in vars.item._index %}T1559.002{% elif 'msxsl' in vars.item._source.image_path %}T1220{% else %}T1220{% endif %}",
+                    "parentProcess": "{{vars.item._source.parent_image_path}}",
+                    "scheduledTask": "",
+                    "bitstransferid": "",
+                    "parentProcessID": "{{vars.item._source.event_data.ParentProcessId}}",
+                    "bytestransferred": "",
+                    "registryKeyValue": "",
+                    "parentCommandLine": "{{vars.item._source.event_data.ParentCommandLine}}",
+                    "decodedCommandLine": ""
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/bd4a31c4-69e7-42f9-bd95-f3a29dcd4494"
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "34a41df1-1df6-4737-aaa0-cbb360cbae34",
+            "id": 5632
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Hunt Record",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Demo Hunt - {{vars.scenarioTitle}}",
+                    "huntEnd": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntEndDate).int_timestamp}}",
+                    "__replace": "",
+                    "huntStart": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntStartDate).int_timestamp}}",
+                    "timeCreated": "{{arrow.utcnow().int_timestamp}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/hunt",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "uuid": "3f2e83e0-fd2b-4d51-af1f-d7264922b053",
+            "id": 5904
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/1af38492-319c-4414-b0c7-753e2b0db7bc",
+            "sourceStep": "\/api\/3\/workflow_steps\/606a4cc4-4a30-4716-a666-b98113f4fc9e",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "7032a6bf-d011-4763-856e-3d9ed355ae14"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Hunt Time Range",
+            "targetStep": "\/api\/3\/workflow_steps\/c9e4ed3d-73a8-480a-a9f8-0623c259fcc8",
+            "sourceStep": "\/api\/3\/workflow_steps\/1af38492-319c-4414-b0c7-753e2b0db7bc",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "51052e22-a8d6-4162-87c8-01234c429b67"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alerts from Elastic -> Get Created Alert Data",
+            "targetStep": "\/api\/3\/workflow_steps\/1e63855c-c12a-47fd-ad3b-3c5748c3180e",
+            "sourceStep": "\/api\/3\/workflow_steps\/34a41df1-1df6-4737-aaa0-cbb360cbae34",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "dc72df37-aa4e-4cdb-8f87-322b17b026fc"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Alert from SIEM -> Create and Link Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/34a41df1-1df6-4737-aaa0-cbb360cbae34",
+            "sourceStep": "\/api\/3\/workflow_steps\/70066fba-79e1-4bbb-a448-8e13d026a2c0",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "6796ff63-9869-491f-8713-42f8df88e997"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Hunt Time Range -> Create Hunt Record",
+            "targetStep": "\/api\/3\/workflow_steps\/3f2e83e0-fd2b-4d51-af1f-d7264922b053",
+            "sourceStep": "\/api\/3\/workflow_steps\/c9e4ed3d-73a8-480a-a9f8-0623c259fcc8",
+            "label": "Submit",
+            "isExecuted": false,
+            "uuid": "d7818641-8b93-4b34-8504-723787c88840"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Hunt Record -> Get Alert from SIEM",
+            "targetStep": "\/api\/3\/workflow_steps\/70066fba-79e1-4bbb-a448-8e13d026a2c0",
+            "sourceStep": "\/api\/3\/workflow_steps\/3f2e83e0-fd2b-4d51-af1f-d7264922b053",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c862a2d6-474d-426b-9a39-cc704cfcb03d"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "d60e6432-c181-4e54-8a74-3a034001c2f7",
+    "recordTags": [],
+    "id": 1358,
+    "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "createDate": 1639031344,
+    "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "modifyDate": 1640012937,
+    "owners": [],
+    "isPrivate": false
+}

@@ -1,0 +1,333 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Generates Alerts for Boot or Logon Autostart Execution",
+    "aliasName": null,
+    "tag": null,
+    "description": "Hunts for abnormal DLL loads and processes spawned by Winlogon. Creates alert for Winlogon Helper DLL (T1547.004)",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "lastModifyDate": 1640004525,
+    "collection": "\/api\/3\/workflow_collections\/11dc1218-970f-4eaf-ad2f-0e9d353445e5",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/f30662ab-97d2-450c-ae82-d290b84a96c0",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "f30662ab-97d2-450c-ae82-d290b84a96c0",
+            "id": 5544
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "scenarioTitle": "{{vars.input.records[0].title}}",
+                "useMockOutput": "true"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "478947f4-5dbc-431b-938f-6f26c372b55f",
+            "id": 5545
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Alert from SIEM",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "huntEnd": "{{vars.steps.Get_Hunt_Time_Range.input.huntEndDate}}",
+                    "huntStart": "{{vars.steps.Get_Hunt_Time_Range.input.huntStartDate}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/8d77966a-d3f6-4c1a-a050-934065c23368"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "38169c65-2c8f-4aac-b07a-6bf184bba49f",
+            "id": 5546
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Created Alert Data",
+            "description": null,
+            "arguments": {
+                "@id": "{{(vars.steps.Create_and_Link_Alert | json_query('[].alert_data.\"@id\"')) | union([vars.steps.Create_Hunt_Record['@id']])}}"
+            },
+            "status": null,
+            "top": "840",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "5b40200d-651c-4883-ae21-7e79950464b1",
+            "id": 5548
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Hunt Time Range",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Enter Hunt Time Range",
+                        "description": "Hunt Time Range",
+                        "inputVariables": [
+                            {
+                                "name": "huntStartDate",
+                                "type": "integer",
+                                "label": "Hunt Start Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "months",
+                                    "differenceValue": -1
+                                },
+                                "_previousName": "untStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            },
+                            {
+                                "name": "huntEndDate",
+                                "type": "integer",
+                                "label": "Hunt End Date",
+                                "title": "Date\/Time Field",
+                                "usable": true,
+                                "tooltip": "",
+                                "dataType": "datetime",
+                                "formType": "datetime",
+                                "required": true,
+                                "_expanded": true,
+                                "mmdUpdate": true,
+                                "collection": false,
+                                "searchable": true,
+                                "templateUrl": "app\/components\/form\/fields\/datetime.html",
+                                "defaultValue": {
+                                    "differenceType": "mins",
+                                    "differenceValue": 1
+                                },
+                                "_previousName": "huntStartDate",
+                                "lengthConstraint": false,
+                                "allowedEncryption": false,
+                                "allowedGridColumn": true,
+                                "useRecordFieldDefault": false
+                            }
+                        ]
+                    }
+                },
+                "record": "{{vars.input.records[0]['@id']}}",
+                "resources": "scenario",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Submit",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/b512c473-8b78-4bd7-abfd-cc1173d466fc"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                }
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "uuid": "6b69ee7d-6b03-407a-b254-36b26ddfe31e",
+            "id": 5549
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create and Link Alert",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Get_Alert_from_SIEM.step_output}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "MD5": "",
+                    "url": "",
+                    "source": "{{vars.item._source.source_name}}",
+                    "comment": "{% if 'lsassdriver' in vars.item._index %}SIEM query indicated that a file named LSASS.exe was executed from a nonstandard directory and attempted to load a DLL from a non-standard directory on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% else %}SIEM query indicated Winlogon helper DLL key value {{vars.item._source.event_data.Details}} was added to key {{vars.item._source.event_data.TargetObject}} on {{vars.item._source.beat.hostname}} at {{vars.item._source.event_data.UtcTime}}.{% endif %}",
+                    "huntIRI": "{{vars.steps.Create_Hunt_Record['@id']}}",
+                    "service": "",
+                    "filePath": "{{vars.item._source.image_path}}",
+                    "hostName": "{{vars.item._source.beat.hostname}}",
+                    "sourceIP": "",
+                    "userName": "{{vars.item._source.username}}",
+                    "alertName": "{% if 'lsassdriver' in vars.item._index %}ATT&CK-LSASS Driver-{{vars.item._source.event_data.Image}} loaded as illegitimate Lsass{% else %} ATT&CK-Winlogon Helper DLL-Winlogon Registry Key value modified to {{vars.item._source.event_data.Details}}{% endif %}",
+                    "alertType": "{{\"AlertType\" | picklist(\"Boot or Logon Autostart Execution\", \"@id\")}}",
+                    "epochTime": "{{ arrow.get(vars.item._source.event_data.UtcTime).timestamp }}",
+                    "eventName": "",
+                    "eventTime": "{{vars.item._source.event_data.UtcTime}}",
+                    "processID": "{{vars.item._source.event_data.ProcessId}}",
+                    "technique": "{% if 'lsassdriver' in vars.item._index %}LSASS Driver-DLL Loaded by Illegitimate LSASS{% else %}Winlogon Helper DLL (Key Add\/Mod){% endif %}",
+                    "sourceData": "{{vars.item}}",
+                    "sourceTool": "{{vars.item._source.source_name}}",
+                    "commandline": "{{vars.item._source.event_data.CommandLine}}",
+                    "description": "{% if 'lsassdriver' in vars.item._index %}A process named LSASS.exe was invoked from a nonstandard directory and attempted to load a DLL file. This may be an attempt by an adversary to execute their own code while masquerading as a legitimate process. The suspicious LSASS.exe process and the DLL file it attempted to execute should be investigated.{% else %} A Winlogon DLL helper registry key was modified\/added. This is potentially unusual behavior in most networks and could be used by an adversary to achieve persistence. The added\/modified registry key value should be evaluated to determine its legitimacy.{% endif %}",
+                    "processGUID": "{{vars.item._source.event_data.ProcessGuid}}",
+                    "processName": "{{vars.item._source.image_path.split(\"\\\\\")[-1] }}",
+                    "registryKey": "{{vars.item._source.event_data.TargetObject}}",
+                    "sourceImage": "",
+                    "targetImage": "",
+                    "computerName": "{{vars.item._source.computer_name}}",
+                    "destinationIP": "",
+                    "mitre_tech_id": "{% if 'lsassdriver' in vars.item._index %}T1547.008{% else %}T1547.004{% endif %}",
+                    "parentProcess": "{{vars.item._source.parent_image_path}}",
+                    "scheduledTask": "",
+                    "bitstransferid": "",
+                    "parentProcessID": "{{vars.item._source.event_data.ParentProcessId}}",
+                    "bytestransferred": "",
+                    "registryKeyValue": "{{vars.item._source.event_data.Details}}",
+                    "parentCommandLine": "{{vars.item._source.event_data.ParentCommandLine}}",
+                    "decodedCommandLine": ""
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/32867ece-5e95-4986-be8a-e757576a43fd"
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "6c1d4f95-1e72-45ec-a8c6-d36d424080a0",
+            "id": 5550
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Hunt Record",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Demo Hunt - {{vars.scenarioTitle}}",
+                    "huntEnd": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntEndDate).int_timestamp}}",
+                    "__replace": "",
+                    "huntStart": "{{arrow.get(vars.steps.Get_Hunt_Time_Range.input.huntStartDate).int_timestamp}}",
+                    "timeCreated": "{{arrow.utcnow().int_timestamp}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/hunt",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "uuid": "b512c473-8b78-4bd7-abfd-cc1173d466fc",
+            "id": 5900
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/478947f4-5dbc-431b-938f-6f26c372b55f",
+            "sourceStep": "\/api\/3\/workflow_steps\/f30662ab-97d2-450c-ae82-d290b84a96c0",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "286bf438-1e44-4e29-8d4e-7457825c3a3f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Hunt Time Range",
+            "targetStep": "\/api\/3\/workflow_steps\/6b69ee7d-6b03-407a-b254-36b26ddfe31e",
+            "sourceStep": "\/api\/3\/workflow_steps\/478947f4-5dbc-431b-938f-6f26c372b55f",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "12647c61-c9da-4d3a-85ec-3a79b92ab71e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Alert from SIEM -> Elastic1 Create and Link Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/6c1d4f95-1e72-45ec-a8c6-d36d424080a0",
+            "sourceStep": "\/api\/3\/workflow_steps\/38169c65-2c8f-4aac-b07a-6bf184bba49f",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "1d1d5422-93fc-4d90-bb66-c98cd20587f5"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Elastic1 Create and Link Alert -> Get Created Alert Data",
+            "targetStep": "\/api\/3\/workflow_steps\/5b40200d-651c-4883-ae21-7e79950464b1",
+            "sourceStep": "\/api\/3\/workflow_steps\/6c1d4f95-1e72-45ec-a8c6-d36d424080a0",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "047ac64d-3b19-4814-aa55-6fcc50f4d3f0"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Hunt Time Range -> Create Hunt Record",
+            "targetStep": "\/api\/3\/workflow_steps\/b512c473-8b78-4bd7-abfd-cc1173d466fc",
+            "sourceStep": "\/api\/3\/workflow_steps\/6b69ee7d-6b03-407a-b254-36b26ddfe31e",
+            "label": "Submit",
+            "isExecuted": false,
+            "uuid": "43d0f7e9-0484-4ac4-ac56-f31b8273dd1e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Hunt Record -> Get Alert from SIEM",
+            "targetStep": "\/api\/3\/workflow_steps\/38169c65-2c8f-4aac-b07a-6bf184bba49f",
+            "sourceStep": "\/api\/3\/workflow_steps\/b512c473-8b78-4bd7-abfd-cc1173d466fc",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "aef48581-01bf-4659-a8db-142cb83df5a9"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "631eba5d-adc3-4915-a34e-04398e4784eb",
+    "recordTags": [],
+    "id": 1346,
+    "createUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "createDate": 1638868490,
+    "modifyUser": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+    "modifyDate": 1640012900,
+    "owners": [],
+    "isPrivate": false
+}
