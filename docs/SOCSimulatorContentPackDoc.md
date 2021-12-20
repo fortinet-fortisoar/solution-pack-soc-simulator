@@ -1,4 +1,4 @@
-# SOC Simulator Solution Pack 7.0.2
+# SOC Simulator Solution Pack v1.0.0
 
 ## Overview
 
