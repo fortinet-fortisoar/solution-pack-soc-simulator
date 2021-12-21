@@ -1,15 +1,11 @@
 # solution-pack-soc-simulator
 
-Pre-Requisite
-=============
-1. User needs to import solution-pack-incident-response zip to FortiSOAR instance.
+The FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator). This solution pack enables users to experience the power and capability of FortiSOAR™ incident response for SOC Simulator scenarios. This pack contains simulation data and utilities for demonstrating FortiSOAR capabilities around a variety of important SOC use-cases without having to integrate with actual device endpoints.
 
-Steps to Install solution-pack-incident-response
-==================================================
-1. Take the zip by downloading it from git itself
-![image](https://user-images.githubusercontent.com/46986647/141118994-303d391e-cc54-4eab-83d0-53fb75d80a78.png)
-2. Navigate to Import Wizard on FSR Instance
-![image](https://user-images.githubusercontent.com/46986647/141119387-2644051c-e962-4864-87a0-4ec9502007fa.png)
-3. Click on Import From File button
-![image](https://user-images.githubusercontent.com/46986647/141119524-69fdcc6f-6979-4f26-82f3-78e645ace12b.png)
-4. Once Import is completed solution-pack-soc-simulator is ready to use. 
+## Deploying SOC Simulator Solution Pack
+
+**Important**: Before you deploy the solution pack, ensure that you have deployed the FortiSOAR™ Incident Response Solution Pack ([solution-pack-incident-response](https://github.com/fortinet-fortisoar/solution-pack-incident-response)).
+
+The steps for deploying a solution pack are mentioned in the [Deploying a Solution Pack](https://github.com/fortinet-fortisoar/how-tos/blob/main/DeployingASolutionPack.md) article.
+
+More information about the SOC Simulator Solution Pack can be found [here](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/SOCSimulatorContentPackDoc.md).
