@@ -8,7 +8,7 @@ This article describes the FortiSOAR™ SOC Simulator Solution Pack (solution-pa
 
 **Important**: Before you deploy the solution pack, ensure that you have deployed the FortiSOAR™ Incident Response Solution Pack ([solution-pack-incident-response](https://github.com/fortinet-fortisoar/solution-pack-incident-response)).
 
-The steps for deploying a solution pack are mentioned in the [Deploying a Solution Pack](https://github.com/fortinet-fortisoar/how-tos/blob/main/DeployingASolutionPack.md) article.
+The steps for deploying a solution pack are mentioned in the [Deploying a Solution Pack](https://github.com/fortinet-fortisoar/how-tos/blob/main/deploying/deployingASolutionPack.md) article.
 
 ## Configuring the FortiSOAR SOC Simulator Connector
 
