@@ -4,6 +4,15 @@
 
 This article describes the FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator). This solution pack enables users to experience the power and capability of FortiSOAR™ incident response for SOC Simulator scenarios. This pack contains simulation data and utilities for demonstrating FortiSOAR capabilities around a variety of important SOC use-cases without having to integrate with actual device endpoints.
 
+## Prerequisites
+
+- Deploy the SOC Simulator Solution Pack. However, before you deploy the SOC Simulator Solution Pack, ensure that you have deployed the FortiSOAR™ Incident Response Solution Pack ([solution-pack-incident-response](https://github.com/fortinet-fortisoar/solution-pack-incident-response)). The steps for deploying a solution pack are mentioned in the [Deploying a Solution Pack](https://github.com/fortinet-fortisoar/how-tos/blob/main/DeployingASolutionPack.md) article. 
+- Ensure that the following URLs are unblocked in your environment: 
+    - [https://malsilo.gitlab.io/feeds/dumps/ip_list.txt](https://malsilo.gitlab.io/feeds/dumps/ip_list.txt)
+    - [https://cybercrime-tracker.net/ccamlist.php](https://cybercrime-tracker.net/ccamlist.php)
+    - [https://malsilo.gitlab.io/feeds/dumps/domain_list.txt](https://malsilo.gitlab.io/feeds/dumps/domain_list.txt)
+    - [https://openphish.com/feed.txt](https://openphish.com/feed.txt) 
+
 ## Configuring the FortiSOAR SOC Simulator Connector
 
 The FortiSOAR SOC Simulator connector is used to create various scenarios. To configure this connector, open the FortiSOAR SOC Simulator Connector and in its "Configuration Page" enter the following values for the configuration parameters: 
@@ -12,13 +21,13 @@ The FortiSOAR SOC Simulator connector is used to create various scenarios. To co
 - **Import Scenarios**: Select this checkbox to import various scenarios. 
 - **Load Threat Intelligence**: Whenever records are recreated for a scenario, they include known malicious indicators, such as IP addresses, file hash, etc. Selecting this checkbox randomly assigns the malicious indicators to records every time a record is created. Therefore, the records get created with new indicators each time.
 
-Once you have configured the FortiSOAR SOC Simulator connector, sample scenarios get created in **Help** > **Scenario** and now, you are all set to start using the solution pack and creating demo records. 
+Once you have configured the FortiSOAR SOC Simulator connector, sample scenarios get created in **Simulations** > **Scenario** and now, you are all set to start using the solution pack and creating demo records. 
 
 ![Sample Scenarios](media/SampleScenarios.png)
 
 ## Scenarios
 
-Users can use various scenarios to understand how FortiSOAR™ handles various scenarios. To view scenarios, click **Help** > **Scenario**. The Scenario page displays various scenarios, such as Data Leakage, Phishing Emails, etc. 
+Users can use various scenarios to understand how FortiSOAR™ handles various scenarios. Click **Simulations** to view the **Scenario** page. The Scenario page displays various scenarios, such as Data Leakage, Phishing Emails, etc. 
 
 Some scenarios demonstrate particular features of FortiSOAR™, such as FortiSOAR™ recommendation engine which lists alerts containing similar hosts etc, providing you with a complete picture of the incident. Some scenarios demonstrate an investigation process and therefore contain associated investigation playbooks, etc.  
 
@@ -30,7 +39,7 @@ To run this scenario, select Stolen credential leading to data exfiltration and 
 
 ![Alert created for the Stolen Credentials scenario](media/StolenCredsScenarioAlerts.png)
 
-To view the source for the Stolen credential leading to data exfiltration scenario, click **Help** > **Scenario** > **Stolen credential leading to data exfiltration**. Then click on the **Source** tab, the “Steps” section, contains data used by playbooks to create the demo records. Once the alerts are created their IDs are listed in the “Created Alerts” section:
+To view the source for the Stolen credential leading to data exfiltration scenario, click **Simulations** > **Scenario** > **Stolen credential leading to data exfiltration**. Then click on the **Source** tab, the “Steps” section, contains data used by playbooks to create the demo records. Once the alerts are created their IDs are listed in the “Created Alerts” section:
 
 ![Viewing source of the Stolen Credentials data](media/StolenCredsSource.png)
 
