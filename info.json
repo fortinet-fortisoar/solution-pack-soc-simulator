@@ -11,5 +11,60 @@
     "supportInfo": "support@fortinet.com",
     "help":"https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/README.md",
     "tags": [],
-    "fsrMinCompatibility": "7.0.2"
+    "fsrMinCompatibility": "7.0.2",
+    "contents": {
+        "picklist": [
+            {
+                "name": "Comment Type"
+            }
+        ],
+        "module": {
+            "comments": [],
+            "scenario": []
+        },
+        "views": {
+            "comments": [
+                "detail",
+                "list",
+                "form"
+            ],
+            "scenario": [
+                "detail",
+                "list",
+                "form"
+            ]
+        },
+        "connectors": [
+            {
+                "name": "fortisoar-soc-simulator",
+                "version": "1.0.8"
+            }
+        ],
+        "roles": [
+            {
+                "name": "Application Administrator"
+            },
+            {
+                "name": "FortiSOAR Agent"
+            },
+            {
+                "name": "Full App Permissions"
+            },
+            {
+                "name": "Playbook Administrator"
+            },
+            {
+                "name": "Security Administrator"
+            },
+            {
+                "name": "T1 Analyst"
+            },
+            {
+                "name": "T2 Analyst"
+            },
+            {
+                "name": "Threat Intelligence"
+            }
+        ]
+    }
 }
