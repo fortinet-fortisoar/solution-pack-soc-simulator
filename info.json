@@ -1,24 +1,35 @@
 {
     "name": "socSimulator",
     "version": "1.0.0",
+    "type": "solutionpack",
+    "local": false,
     "label": "SOC Simulator",
-    "description": "SOC Simulator Solution Pack",
+    "dependencies": [
+        {
+            "name": "fortiSOAREssentials",
+            "type": "solutionpack",
+            "label": "FortiSOAR Essentials"
+        }
+    ],
+    "prerequisite": [],
     "category": [],
-    "dependencies": [],
+    "tags": [],
     "publisher": "Fortinet",
     "certified": "true",
-    "type": "multiContent",
     "supportInfo": "support@fortinet.com",
-    "help":"https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/README.md",
-    "tags": [],
-    "fsrMinCompatibility": "7.0.2",
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/README.md",
+    "description": "SOC Simulator Solution Pack",
+    "fsrMinCompatibility": "7.2.0",
+    "date": "2022-02-11T17:21:35+00:00",
+    "exported_from": "master.fortisoar.com",
+    "exported_by": "CS Admin",
     "contents": {
-        "picklist": [
+        "picklistNames": [
             {
                 "name": "Comment Type"
             }
         ],
-        "module": {
+        "modules": {
             "comments": [],
             "scenario": []
         },
@@ -34,12 +45,24 @@
                 "form"
             ]
         },
-        "connectors": [
-            {
-                "name": "fortisoar-soc-simulator",
-                "version": "1.0.8"
-            }
-        ],
+        "viewTemplates": {
+            "navigation": [
+                "Dashboard",
+                "Incident Response",
+                "Vulnerability Management",
+                "Automation",
+                "Resources",
+                "Reports",
+                "Marketplace",
+                "Help",
+                "User Community",
+                "Queue Management",
+                "Threat Intelligence",
+                "Widget Library",
+                "Simulations",
+                "Knowledge Base"
+            ]
+        },
         "roles": [
             {
                 "name": "Application Administrator"
@@ -64,6 +87,12 @@
             },
             {
                 "name": "Threat Intelligence"
+            }
+        ],
+        "connectors": [
+            {
+                "name": "fortisoar-soc-simulator",
+                "version": "1.0.8"
             }
         ]
     }
