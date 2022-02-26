@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/3\/contexts\/StagingModelMetadata",
-    "@id": "\/api\/3\/staging_model_metadatas\/31b121a0-b521-4aed-8caf-18af0a1b0903",
+    "@id": "\/api\/3\/staging_model_metadatas\/ee4ee267-4005-4b18-9ffa-eb7501b8e0e4",
     "@type": "StagingModelMetadata",
     "type": "scenario",
     "parentType": null,
@@ -17,7 +17,56 @@
     "writable": true,
     "attributes": [
         {
-            "@id": "\/api\/3\/attribute_metadatas\/90604945-5aaa-4078-9cdf-961963564bb5",
+            "@id": "\/api\/3\/attribute_metadatas\/74592051-a86c-42f0-befc-fb73ef7f29fa",
+            "@type": "AttributeMetadata",
+            "type": "object",
+            "name": "steps",
+            "length": 0,
+            "orderIndex": 4,
+            "formType": "object",
+            "dataSource": [],
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": true,
+                "minlength": 0,
+                "maxlength": 10485761
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": [],
+            "defaultValue": null,
+            "tooltip": "define the steps of use case in the prescribed format",
+            "visibility": true,
+            "htmlEscape": false,
+            "orphanRemoval": false,
+            "readable": true,
+            "writeable": true,
+            "identifier": false,
+            "unique": false,
+            "recommend": false,
+            "uuid": "74592051-a86c-42f0-befc-fb73ef7f29fa",
+            "recordTags": [
+                "FSRSolutionPack",
+                "socSimulator-1.0.1"
+            ],
+            "displayName": "{{ steps }}",
+            "descriptions": {
+                "singular": "Steps"
+            }
+        },
+        {
+            "@id": "\/api\/3\/attribute_metadatas\/840d94ab-51b8-4782-ab37-5b0bdbfcbf69",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "configuration",
@@ -55,10 +104,10 @@
             "identifier": null,
             "unique": false,
             "recommend": false,
-            "uuid": "90604945-5aaa-4078-9cdf-961963564bb5",
+            "uuid": "840d94ab-51b8-4782-ab37-5b0bdbfcbf69",
             "recordTags": [
                 "FSRSolutionPack",
-                "sOCSimulator-1.0.0"
+                "socSimulator-1.0.1"
             ],
             "displayName": "{{ configuration }}",
             "descriptions": {
@@ -66,7 +115,7 @@
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/50df6a3d-f6f9-402a-acf8-000c3de38608",
+            "@id": "\/api\/3\/attribute_metadatas\/64308afb-66ce-4081-91fe-08c257c720e8",
             "@type": "AttributeMetadata",
             "type": "comments",
             "name": "comments",
@@ -83,7 +132,7 @@
             "gridColumn": false,
             "collection": true,
             "inversedField": "scenario",
-            "ownsRelationship": false,
+            "ownsRelationship": true,
             "validation": {
                 "required": false,
                 "minlength": 0,
@@ -102,10 +151,10 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "uuid": "50df6a3d-f6f9-402a-acf8-000c3de38608",
+            "uuid": "64308afb-66ce-4081-91fe-08c257c720e8",
             "recordTags": [
                 "FSRSolutionPack",
-                "sOCSimulator-1.0.0"
+                "socSimulator-1.0.1"
             ],
             "displayName": "{{ comments }}",
             "descriptions": {
@@ -113,7 +162,7 @@
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/9dada5e6-04f1-413a-8e3e-4bc328d9cb9b",
+            "@id": "\/api\/3\/attribute_metadatas\/7b795797-5ef5-4026-880a-a4b4381bcb00",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "title",
@@ -152,10 +201,10 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "uuid": "9dada5e6-04f1-413a-8e3e-4bc328d9cb9b",
+            "uuid": "7b795797-5ef5-4026-880a-a4b4381bcb00",
             "recordTags": [
                 "FSRSolutionPack",
-                "sOCSimulator-1.0.0"
+                "socSimulator-1.0.1"
             ],
             "displayName": "{{ title }}",
             "descriptions": {
@@ -163,7 +212,7 @@
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/1c25eac8-4463-4698-a65d-039df273baff",
+            "@id": "\/api\/3\/attribute_metadatas\/54e289b1-99b5-4950-a4b7-c332756d366b",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "description",
@@ -201,10 +250,10 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "uuid": "1c25eac8-4463-4698-a65d-039df273baff",
+            "uuid": "54e289b1-99b5-4950-a4b7-c332756d366b",
             "recordTags": [
                 "FSRSolutionPack",
-                "sOCSimulator-1.0.0"
+                "socSimulator-1.0.1"
             ],
             "displayName": "{{ description }}",
             "descriptions": {
@@ -212,56 +261,7 @@
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/96de38ee-8926-4bd4-a0dd-7bef4f0245cf",
-            "@type": "AttributeMetadata",
-            "type": "object",
-            "name": "steps",
-            "length": 0,
-            "orderIndex": 4,
-            "formType": "object",
-            "dataSource": [],
-            "searchable": false,
-            "peerReplicable": true,
-            "system": false,
-            "encrypted": false,
-            "gridColumn": false,
-            "collection": false,
-            "inversedField": null,
-            "ownsRelationship": false,
-            "validation": {
-                "required": true,
-                "minlength": 0,
-                "maxlength": 10485761
-            },
-            "bulkAction": {
-                "allow": false,
-                "buttonText": "",
-                "buttonIcon": "",
-                "buttonClass": "btn btn-default btn-sm"
-            },
-            "dataSourceFilters": [],
-            "defaultValue": null,
-            "tooltip": "define the steps of use case in the prescribed format",
-            "visibility": true,
-            "htmlEscape": false,
-            "orphanRemoval": false,
-            "readable": true,
-            "writeable": true,
-            "identifier": false,
-            "unique": false,
-            "recommend": false,
-            "uuid": "96de38ee-8926-4bd4-a0dd-7bef4f0245cf",
-            "recordTags": [
-                "FSRSolutionPack",
-                "sOCSimulator-1.0.0"
-            ],
-            "displayName": "{{ steps }}",
-            "descriptions": {
-                "singular": "Steps"
-            }
-        },
-        {
-            "@id": "\/api\/3\/attribute_metadatas\/23b01ad7-d90e-410d-b807-94952cc577d1",
+            "@id": "\/api\/3\/attribute_metadatas\/c208c3a6-a027-4ed6-acc5-229830617ff4",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "createdAlertsID",
@@ -299,10 +299,10 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "uuid": "23b01ad7-d90e-410d-b807-94952cc577d1",
+            "uuid": "c208c3a6-a027-4ed6-acc5-229830617ff4",
             "recordTags": [
                 "FSRSolutionPack",
-                "sOCSimulator-1.0.0"
+                "socSimulator-1.0.1"
             ],
             "displayName": "{{ createdAlertsID }}",
             "descriptions": {
@@ -321,10 +321,10 @@
         "delete_primary_data_after": 60
     },
     "archivalFilters": [],
-    "uuid": "31b121a0-b521-4aed-8caf-18af0a1b0903",
+    "uuid": "ee4ee267-4005-4b18-9ffa-eb7501b8e0e4",
     "recordTags": [
         "FSRSolutionPack",
-        "sOCSimulator-1.0.0"
+        "socSimulator-1.0.1"
     ],
     "displayName": "{{ title }}",
     "descriptions": {
