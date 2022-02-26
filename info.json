@@ -17,7 +17,7 @@
     "publisher": "Fortinet",
     "description": "SOC Simulator Solution Pack",
     "summary": null,
-    "help": "https:\/\/github.com\/fortinet-fortisoar\/solution-pack-incident-response\/blob\/develop\/README.md",
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/README.md",
     "category": [],
     "supportInfo": "support@fortinet.com",
     "iconLarge": null,
@@ -42,9 +42,7 @@
         },
         "views": {
             "navigation": [
-                [
                     "Simulations"
-                ]
             ]
         },
         "roles": [
