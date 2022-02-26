@@ -1,6 +1,6 @@
 {
-    "name": "sOCSimulator",
-    "version": "1.0.0",
+    "name": "socSimulator",
+    "version": "1.0.1",
     "type": "solutionpack",
     "local": true,
     "label": "SOC Simulator",
