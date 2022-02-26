@@ -1,12 +1,13 @@
 {
     "@context": "\/api\/3\/contexts\/StagingModelMetadata",
-    "@id": "\/api\/3\/staging_model_metadatas\/3713a4ed-988d-499c-8935-4b5bbc330ce6",
+    "@id": "\/api\/3\/staging_model_metadatas\/31b121a0-b521-4aed-8caf-18af0a1b0903",
     "@type": "StagingModelMetadata",
     "type": "scenario",
     "parentType": null,
     "tableName": "scenario",
     "ownable": false,
     "userOwnable": false,
+    "queueable": false,
     "trackable": true,
     "taggable": true,
     "peerReplicable": false,
@@ -16,7 +17,7 @@
     "writable": true,
     "attributes": [
         {
-            "@id": "\/api\/3\/attribute_metadatas\/5cb98ed3-d2e7-4751-b52d-1e14654d8849",
+            "@id": "\/api\/3\/attribute_metadatas\/90604945-5aaa-4078-9cdf-961963564bb5",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "configuration",
@@ -54,15 +55,18 @@
             "identifier": null,
             "unique": false,
             "recommend": false,
-            "sattrib": "\/api\/3\/staging_model_metadatas\/3713a4ed-988d-499c-8935-4b5bbc330ce6",
-            "uuid": "5cb98ed3-d2e7-4751-b52d-1e14654d8849",
+            "uuid": "90604945-5aaa-4078-9cdf-961963564bb5",
+            "recordTags": [
+                "FSRSolutionPack",
+                "sOCSimulator-1.0.0"
+            ],
             "displayName": "{{ configuration }}",
             "descriptions": {
                 "singular": "Configuration"
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/1f049c3d-1872-44ad-a6cd-d68e2dfb6b10",
+            "@id": "\/api\/3\/attribute_metadatas\/50df6a3d-f6f9-402a-acf8-000c3de38608",
             "@type": "AttributeMetadata",
             "type": "comments",
             "name": "comments",
@@ -98,15 +102,18 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "sattrib": "\/api\/3\/staging_model_metadatas\/3713a4ed-988d-499c-8935-4b5bbc330ce6",
-            "uuid": "1f049c3d-1872-44ad-a6cd-d68e2dfb6b10",
+            "uuid": "50df6a3d-f6f9-402a-acf8-000c3de38608",
+            "recordTags": [
+                "FSRSolutionPack",
+                "sOCSimulator-1.0.0"
+            ],
             "displayName": "{{ comments }}",
             "descriptions": {
                 "singular": "Comments"
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/e54bf1df-8155-4783-b514-f24bb5ff2fb8",
+            "@id": "\/api\/3\/attribute_metadatas\/9dada5e6-04f1-413a-8e3e-4bc328d9cb9b",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "title",
@@ -145,15 +152,18 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "sattrib": "\/api\/3\/staging_model_metadatas\/3713a4ed-988d-499c-8935-4b5bbc330ce6",
-            "uuid": "e54bf1df-8155-4783-b514-f24bb5ff2fb8",
+            "uuid": "9dada5e6-04f1-413a-8e3e-4bc328d9cb9b",
+            "recordTags": [
+                "FSRSolutionPack",
+                "sOCSimulator-1.0.0"
+            ],
             "displayName": "{{ title }}",
             "descriptions": {
                 "singular": "Title"
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/ac8edcb0-6444-4963-9023-39a63be9002c",
+            "@id": "\/api\/3\/attribute_metadatas\/1c25eac8-4463-4698-a65d-039df273baff",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "description",
@@ -191,15 +201,18 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "sattrib": "\/api\/3\/staging_model_metadatas\/3713a4ed-988d-499c-8935-4b5bbc330ce6",
-            "uuid": "ac8edcb0-6444-4963-9023-39a63be9002c",
+            "uuid": "1c25eac8-4463-4698-a65d-039df273baff",
+            "recordTags": [
+                "FSRSolutionPack",
+                "sOCSimulator-1.0.0"
+            ],
             "displayName": "{{ description }}",
             "descriptions": {
                 "singular": "Description"
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/b6427547-acd9-43dc-ad97-076a9e85d3c3",
+            "@id": "\/api\/3\/attribute_metadatas\/96de38ee-8926-4bd4-a0dd-7bef4f0245cf",
             "@type": "AttributeMetadata",
             "type": "object",
             "name": "steps",
@@ -237,15 +250,18 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "sattrib": "\/api\/3\/staging_model_metadatas\/3713a4ed-988d-499c-8935-4b5bbc330ce6",
-            "uuid": "b6427547-acd9-43dc-ad97-076a9e85d3c3",
+            "uuid": "96de38ee-8926-4bd4-a0dd-7bef4f0245cf",
+            "recordTags": [
+                "FSRSolutionPack",
+                "sOCSimulator-1.0.0"
+            ],
             "displayName": "{{ steps }}",
             "descriptions": {
                 "singular": "Steps"
             }
         },
         {
-            "@id": "\/api\/3\/attribute_metadatas\/7a342fca-379c-4122-9c0b-f7fb3c5be793",
+            "@id": "\/api\/3\/attribute_metadatas\/23b01ad7-d90e-410d-b807-94952cc577d1",
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "createdAlertsID",
@@ -283,8 +299,11 @@
             "identifier": false,
             "unique": false,
             "recommend": false,
-            "sattrib": "\/api\/3\/staging_model_metadatas\/3713a4ed-988d-499c-8935-4b5bbc330ce6",
-            "uuid": "7a342fca-379c-4122-9c0b-f7fb3c5be793",
+            "uuid": "23b01ad7-d90e-410d-b807-94952cc577d1",
+            "recordTags": [
+                "FSRSolutionPack",
+                "sOCSimulator-1.0.0"
+            ],
             "displayName": "{{ createdAlertsID }}",
             "descriptions": {
                 "singular": "Created Alerts ID"
@@ -293,7 +312,20 @@
     ],
     "system": false,
     "module": "scenario",
-    "uuid": "3713a4ed-988d-499c-8935-4b5bbc330ce6",
+    "softDeleteable": false,
+    "archivable": false,
+    "paused": false,
+    "partitionBy": "modifyDate",
+    "archivalCriteria": {
+        "keep_primary_data_for": 24,
+        "delete_primary_data_after": 60
+    },
+    "archivalFilters": [],
+    "uuid": "31b121a0-b521-4aed-8caf-18af0a1b0903",
+    "recordTags": [
+        "FSRSolutionPack",
+        "sOCSimulator-1.0.0"
+    ],
     "displayName": "{{ title }}",
     "descriptions": {
         "singular": "Scenario",

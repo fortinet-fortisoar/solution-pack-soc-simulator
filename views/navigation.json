@@ -1,0 +1,28 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "app",
+    "config": {
+        "navigation": [
+            {
+                "icon": "fa fa-play",
+                "open": false,
+                "state": {
+                    "name": "main.modules.list",
+                    "parameters": {
+                        "module": "scenario"
+                    }
+                },
+                "title": "Simulations",
+                "require": {
+                    "module": "scenario",
+                    "action": "read"
+                },
+                "editMode": false,
+                "isEnabled": false,
+                "openStatus": false
+            }
+        ]
+    },
+    "uuid": "navigation"
+}
