@@ -5,36 +5,34 @@
         "category": "information",
         "description": "FortiSOAR SOC Simulator",
         "publisher": null,
-        "version": "1.0.8",
         "operation_roles": {
             "bad_ip": [],
             "bad_url": [],
             "bad_filehash": [],
             "bad_domain": [],
-            "replace_variables": []
+            "replace_variables": [],
+            "malicious_file_indicator": [],
+            "create_simulated_alert": []
         },
         "configurations": [
             {
-                "id": 3,
+                "id": 5,
                 "config_id": "d5eaebf5-f96e-43df-aacd-ed9f5cac566e",
                 "status": 1,
-                "name": "SOC Simulator",
+                "name": "demo",
                 "default": true,
                 "config": {
-                    "load_threat": true,
-                    "import_records": ""
+                    "load_threat": true
                 },
                 "remote_status": [],
                 "health_status": [],
                 "connector": 35,
-                "agent": "8e6150dfc847aa0cbd7b00f73ddf5bc2",
+                "agent": "5b7b0dfa0e78dfbbe807d53317aa1875",
                 "teams": []
             }
         ],
         "dataImports": [],
-        "rpm_name": "cyops-connector-fortisoar-soc-simulator-1.0.8",
         "install_mode": "rpm",
-        "installer_path": "cyops-connector-fortisoar-soc-simulator-1.0.8",
         "ingestionPlaybooks": {
             "collections": [],
             "exported_tags": [],

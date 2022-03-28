@@ -17,14 +17,12 @@
     "certified": "true",
     "publisher": "Fortinet",
     "description": "SOC Simulator Solution Pack",
-    "help": "https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/README.md",
+    "help": "https:\/\/github.com\/fortinet-fortisoar\/solution-pack-soc-simulator\/blob\/develop\/README.md",
     "category": [],
     "supportInfo": "support@fortinet.com",
     "iconLarge": null,
     "fsrMinCompatibility": "7.2.0",
-    "date": "2022-03-16T20:41:38+00:00",
-    "exported_from": "master.fortisoar.com",
-    "exported_by": "CS Admin",
+    "date": "2022-03-28T14:00:59+00:00",
     "contents": {
         "modules": {
             "scenario": {
@@ -49,11 +47,15 @@
                 "name": "Full App Permissions"
             }
         ],
+        "playbooks": [
+            {
+                "name": "SOC Simulator"
+            }
+        ],
         "connectors": [
             {
                 "name": "FortiSOAR SOC Simulator",
-                "apiName": "fortisoar-soc-simulator",
-                "version": "1.0.8"
+                "apiName": "fortisoar-soc-simulator"
             }
         ]
     }

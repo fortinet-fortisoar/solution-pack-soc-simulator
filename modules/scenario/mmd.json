@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/3\/contexts\/StagingModelMetadata",
-    "@id": "\/api\/3\/staging_model_metadatas\/ee4ee267-4005-4b18-9ffa-eb7501b8e0e4",
+    "@id": "\/api\/3\/staging_model_metadatas\/a872dbfe-dc23-4e23-9bf3-2d4eb8381feb",
     "@type": "StagingModelMetadata",
     "type": "scenario",
     "parentType": null,
@@ -56,10 +56,6 @@
             "unique": false,
             "recommend": false,
             "uuid": "74592051-a86c-42f0-befc-fb73ef7f29fa",
-            "recordTags": [
-                "FSRSolutionPack",
-                "socSimulator-1.0.1"
-            ],
             "displayName": "{{ steps }}",
             "descriptions": {
                 "singular": "Steps"
@@ -105,10 +101,6 @@
             "unique": false,
             "recommend": false,
             "uuid": "840d94ab-51b8-4782-ab37-5b0bdbfcbf69",
-            "recordTags": [
-                "FSRSolutionPack",
-                "socSimulator-1.0.1"
-            ],
             "displayName": "{{ configuration }}",
             "descriptions": {
                 "singular": "Configuration"
@@ -152,10 +144,6 @@
             "unique": false,
             "recommend": false,
             "uuid": "64308afb-66ce-4081-91fe-08c257c720e8",
-            "recordTags": [
-                "FSRSolutionPack",
-                "socSimulator-1.0.1"
-            ],
             "displayName": "{{ comments }}",
             "descriptions": {
                 "singular": "Comments"
@@ -202,10 +190,6 @@
             "unique": false,
             "recommend": false,
             "uuid": "7b795797-5ef5-4026-880a-a4b4381bcb00",
-            "recordTags": [
-                "FSRSolutionPack",
-                "socSimulator-1.0.1"
-            ],
             "displayName": "{{ title }}",
             "descriptions": {
                 "singular": "Title"
@@ -251,10 +235,6 @@
             "unique": false,
             "recommend": false,
             "uuid": "54e289b1-99b5-4950-a4b7-c332756d366b",
-            "recordTags": [
-                "FSRSolutionPack",
-                "socSimulator-1.0.1"
-            ],
             "displayName": "{{ description }}",
             "descriptions": {
                 "singular": "Description"
@@ -300,10 +280,6 @@
             "unique": false,
             "recommend": false,
             "uuid": "c208c3a6-a027-4ed6-acc5-229830617ff4",
-            "recordTags": [
-                "FSRSolutionPack",
-                "socSimulator-1.0.1"
-            ],
             "displayName": "{{ createdAlertsID }}",
             "descriptions": {
                 "singular": "Created Alerts ID"
@@ -321,11 +297,7 @@
         "delete_primary_data_after": 60
     },
     "archivalFilters": [],
-    "uuid": "ee4ee267-4005-4b18-9ffa-eb7501b8e0e4",
-    "recordTags": [
-        "FSRSolutionPack",
-        "socSimulator-1.0.1"
-    ],
+    "uuid": "a872dbfe-dc23-4e23-9bf3-2d4eb8381feb",
     "displayName": "{{ title }}",
     "descriptions": {
         "singular": "Scenario",

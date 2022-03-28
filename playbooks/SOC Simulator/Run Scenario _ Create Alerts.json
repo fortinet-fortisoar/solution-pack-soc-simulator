@@ -1,0 +1,561 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Run Scenario > Create Alerts",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "steps",
+        "recordIRI",
+        "recordID"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/973f3b45-5bc1-4522-9e23-0fe88432bd88",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "Wait_Time": "{{vars.input.params.steps.waitTimeforNextStep}}",
+                "alert_Steps": "{{vars.input.params.steps}}"
+            },
+            "status": null,
+            "top": "160",
+            "left": "480",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "07647d63-6c21-475d-883d-7bfa4580f284"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Format ALert List",
+            "description": null,
+            "arguments": {
+                "formatted_alert_list": "{{vars.createdAlertId + [vars.alertIRI]}}"
+            },
+            "status": null,
+            "top": "1380",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "33879d82-ba52-4860-b18e-87ba352a95c0"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Add comments to Use Case module",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "{% if vars.alert_Steps.preCreateMessage %}\n{{vars.alert_Steps.preCreateMessage}}\n{%endif%}\n\n",
+                    "records": "{{vars.input.params.recordIRI}}"
+                },
+                "resource": [],
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "{{vars.input.params.recordIRI}}",
+                "collectionType": "\/api\/3\/scenario",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "uuid": "344806ac-fa54-46a7-8d59-acada5ed82d9"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Alert",
+            "description": null,
+            "arguments": {
+                "when": "{{vars.alert_Steps.type == \"createAlert\"}}",
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "{% if vars.alert_Steps.postCreateMessage %}\n{{vars.alert_Steps.postCreateMessage}}\n{%endif%}",
+                    "records": "{{vars.input.params.recordIRI}}"
+                },
+                "resource": {
+                    "url": "{% if  'url' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.url}}{% else %}None{% endif %}",
+                    "name": "{% if  'name' in vars.steps.Replace_String.data.alertFields  %}{{vars.steps.Replace_String.data.alertFields.name}}{% else %}None{% endif %}",
+                    "type": "{% if 'type' in vars.steps.Replace_String.data.alertFields%}{{\"AlertType\" | picklist(vars.steps.Replace_String.data.alertFields.type, \"@id\")}}{% else %}None{% endif %}",
+                    "state": "{% if  'state' in vars.steps.Replace_String.data.alertFields %}{{\"AlertState\" | picklist(vars.steps.Replace_String.data.alertFields.state, \"@id\")}}{%else%}None{% endif %}",
+                    "domain": "{% if  'domain' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.domain}}{% else %}None{% endif %}",
+                    "source": "{% if  'source' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.source}}{% else %}None{% endif %}",
+                    "status": "{% if  'status' in vars.steps.Replace_String.data.alertFields %}{{\"AlertStatus\" | picklist(vars.steps.Replace_String.data.alertFields.status, \"@id\")}}{% else %}None{% endif %}",
+                    "emailTo": "{% if  'emailTo' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.emailTo}}{% else %}None{% endif %}",
+                    "metrics": "{% if  'metrics' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.metrics}}{% else %}None{% endif %}",
+                    "fileHash": "{% if  'fileHash' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.fileHash}}{% else %}None{% endif %}",
+                    "fileName": "{% if  'fileName' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.fileName}}{% else %}None{% endif %}",
+                    "filePath": "{% if  'filePath' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.filePath}}{% else %}None{% endif %}",
+                    "reporter": "{% if  'reporter' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.reporter}}{% else %}None{% endif %}",
+                    "services": "{% if  'services' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.services}}{% else %}None{% endif %}",
+                    "severity": "{% if  'severity' in vars.steps.Replace_String.data.alertFields %}{{\"Severity\" | picklist(vars.steps.Replace_String.data.alertFields.severity, \"@id\")}}{% else %}None{% endif %}",
+                    "sourceId": "{% if  'sourceId' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourceId}}{% else %}None{% endif %}",
+                    "sourceIp": "{% if  'sourceIp' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourceIp}}{% else %}None{% endif %}",
+                    "userName": "{% if  'userName' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.userName}}{% else %}None{% endif %}",
+                    "__replace": "",
+                    "deviceUID": "{% if  'deviceUID' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.deviceUID}}{% else %}None{% endif %}",
+                    "emailBody": "{% if  'emailBody' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.emailBody}}{% else %}None{% endif %}",
+                    "epochTime": "{% if  'epochTime' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.epochTime}}{% else %}None{% endif %}",
+                    "eventTime": "{% if  'eventTime' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.eventTime}}{% else %}None{% endif %}",
+                    "processId": "{% if  'processId' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.processId}}{% else %}None{% endif %}",
+                    "bucketName": "{% if  'bucketName' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.bucketName}}{% else %}None{% endif %}",
+                    "returnPath": "{% if  'returnPath' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.returnPath}}{% else %}None{% endif %}",
+                    "sourcePort": "{% if  'sourcePort' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourcePort}}{% else %}None{% endif %}",
+                    "sourceTool": "{% if  'sourceTool' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourceTool}}{% else %}None{% endif %}",
+                    "sourceType": "{% if  'sourceType' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourceType}}{% else %}None{% endif %}",
+                    "sourcedata": "{% if vars.steps.Replace_String.data.alertFields.sourcedata is mapping %}{{vars.steps.Replace_String.data.alertFields.sourcedata | toJSON }}\n{% elif  'sourcedata' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourcedata | toDict | toJSON }}{% else %}None{% endif %}",
+                    "commandLine": "{% if  'commandLine' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.commandLine}}{% else %}None{% endif %}",
+                    "description": "{% if  'description' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.description}}{% else %}None{% endif %}",
+                    "processGuid": "{% if  'processGuid' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.processGuid}}{% else %}None{% endif %}",
+                    "processName": "{% if  'processName' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.processName}}{% else %}None{% endif %}",
+                    "processTree": "{% if  'processTree' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.processTree}}{% else %}None{% endif %}",
+                    "registryKey": "{% if  'registryKey' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.registryKey}}{% else %}None{% endif %}",
+                    "targetAsset": "{% if  'targetAsset' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.targetAsset}}{% else %}None{% endif %}",
+                    "userDetails": "{% if  'userDetails' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.userDetails}}{% else %}None{% endif %}",
+                    "ackSlaStatus": {
+                        "id": 289,
+                        "@id": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                        "icon": null,
+                        "@type": "Picklist",
+                        "color": "#808080",
+                        "display": "Awaiting Action",
+                        "listName": "\/api\/3\/picklist_names\/fe36a8f2-fcba-4221-b4ab-1081f596b153",
+                        "itemValue": "Awaiting Action",
+                        "orderIndex": 2
+                    },
+                    "closureNotes": "{% if  'closureNotes' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.closureNotes}}{% else %}None{% endif %}",
+                    "computerName": "{% if  'computerName' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.computerName}}{% else %}None{% endif %}",
+                    "emailHeaders": "{% if  'emailHeaders' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.emailHeaders | toJSON }}{% else %}None{% endif %}",
+                    "emailSubject": "{% if  'emailSubject' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.emailSubject}}{% else %}None{% endif %}",
+                    "senderDomain": "{% if  'senderDomain' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.senderDomain}}{% else %}None{% endif %}",
+                    "destinationIp": "{% if  'destinationIp' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.destinationIp}}{% else %}None{% endif %}",
+                    "mitreattackid": "{% if  'mitreattackid' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.mitreattackid}}{% else %}None{% endif %}",
+                    "respSlaStatus": {
+                        "id": 289,
+                        "@id": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                        "icon": null,
+                        "@type": "Picklist",
+                        "color": "#808080",
+                        "display": "Awaiting Action",
+                        "listName": "\/api\/3\/picklist_names\/fe36a8f2-fcba-4221-b4ab-1081f596b153",
+                        "itemValue": "Awaiting Action",
+                        "orderIndex": 2
+                    },
+                    "scheduledTask": "{% if  'scheduledTask' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.scheduledTask}}{% else %}None{% endif %}",
+                    "sourceProcess": "{% if  'sourceProcess' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourceProcess}}{% else %}None{% endif %}",
+                    "targetProcess": "{% if  'targetProcess' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.targetProcess}}{% else %}None{% endif %}",
+                    "mitreTechnique": "{% if  'mitreTechnique' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.mitreTechnique}}{% else %}None{% endif %}",
+                    "attachmentNames": "{% if  'attachmentNames' in vars.steps.Replace_String.data.alertFields  %}{{vars.steps.Replace_String.data.alertFields.attachmentNames}}{% else %}None{% endif %}",
+                    "destinationPort": "{% if  'destinationPort' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.destinationPort}}{% else %}None{% endif %}",
+                    "bytesTransferred": "{% if  'bytesTransferred' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.bytesTransferred}}{% else %}None{% endif %}",
+                    "escalationReason": "{% if  'escalationReason' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.escalationReason}}{% else %}None{% endif %}",
+                    "parentProcessPid": "{% if  'parentProcessPid' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.parentProcessPid}}{% else %}None{% endif %}",
+                    "registryKeyValue": "{% if  'registryKeyValue' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.registryKeyValue}}{% else %}None{% endif %}",
+                    "parentProcessName": "{% if  'parentProcessName' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.parentProcessName}}{% else %}None{% endif %}",
+                    "reporterEmailBody": "{% if  'reporterEmailBody' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.reporterEmailBody}}{% else %}None{% endif %}",
+                    "decodedCommandLine": "{% if  'decodedCommandLine' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.decodedCommandLine}}{% else %}None{% endif %}",
+                    "senderEmailAddress": "{% if  'senderEmailAddress' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.senderEmailAddress}}{% else %}None{% endif %}",
+                    "parentProcessCmdLine": "{% if  'parentProcessCmdLine' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.parentProcessCmdLine}}{% else %}None{% endif %}",
+                    "recipientEmailAddress": "{% if  'recipientEmailAddress' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.recipientEmailAddress}}{% else %}None{% endif %}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/alerts",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "840",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "uuid": "392a85b3-21a8-449c-9516-fb05b1c62ac0"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Find Created Alerts ID",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "id",
+                            "value": "{{vars.input.params.recordID}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "createdAlertsID"
+                    ]
+                },
+                "module": "scenario?$limit=30",
+                "checkboxFields": true,
+                "step_variables": {
+                    "createdAlertId": "{{vars.result[0].createdAlertsID| ternary(vars.result[0].createdAlertsID, [])}}",
+                    "alertByExecutePlaybook": "{%if vars.alert_Steps.name in ['LogRhythm Alarms','FDC Alerts'] %}{{vars.steps.Launch_Step_Playbook | json_query('[*].[\"@id\"][]')}}{% elif '@id' in vars.steps.Launch_Step_Playbook %}{{vars.steps.Launch_Step_Playbook[\"@id\"]}} {%else%}{{vars.steps.Launch_Step_Playbook.recordIRI[\"@id\"]}}{%endif%}"
+                }
+            },
+            "status": null,
+            "top": "1110",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "uuid": "8a4d5d53-0f00-49a9-bd99-d1444ec02fca"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": []
+            },
+            "status": null,
+            "top": "30",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "973f3b45-5bc1-4522-9e23-0fe88432bd88"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Replace String",
+            "description": null,
+            "arguments": {
+                "name": "FortiSOAR SOC Simulator",
+                "config": "59dbf54a-cb74-48ef-b24a-23fc84f9fdd1",
+                "params": {
+                    "variables": "{{vars.input.params.steps}}"
+                },
+                "version": "1.0.0",
+                "connector": "fortisoar-soc-simulator",
+                "operation": "replace_variables",
+                "operationTitle": "Replace Variables",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "uuid": "9ad26588-b055-4490-bf0b-bda7100f1abf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Launch Step Playbook",
+            "description": null,
+            "arguments": {
+                "when": "{{vars.alert_Steps.type == \"executePlaybook\"}}",
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "{{vars.alert_Steps.playbookIRI}}"
+            },
+            "status": null,
+            "top": "975",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "9fe2e735-c7a9-4716-8bf8-930610721d18"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Alert if no wait time",
+            "description": null,
+            "arguments": {
+                "params": [],
+                "version": "3.0.3",
+                "connector": "cyops_utilities",
+                "operation": "no_op",
+                "operationTitle": "Utils: No Operation",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "705",
+            "left": "825",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "b0c4732c-307d-476d-b54a-d05a9ef63678"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update created Alerts ID list",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "createdAlertsID": "{{(vars.formatted_alert_list | sum(start=[])| toJSON) if (vars.formatted_alert_list[0] | type_debug == \"list\") else (vars.formatted_alert_list|toJSON|replace(\" \",\"\"))}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "{{vars.input.params.recordIRI}}",
+                "collectionType": "\/api\/3\/scenario",
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1515",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "uuid": "c5a4517c-0da1-4fe3-af43-2a270e443ef2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Wait for Alert Creation",
+            "description": null,
+            "arguments": {
+                "delay": {
+                    "days": 0,
+                    "hours": 0,
+                    "weeks": 0,
+                    "minutes": "0",
+                    "seconds": "{{vars.Wait_Time}}"
+                }
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/6832e556-b9c7-497a-babe-feda3bd27dbf",
+            "uuid": "d6724a53-3568-4655-8c3f-92c0c563e076"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "AlertIRI based on create or Execute ALert",
+            "description": null,
+            "arguments": {
+                "alertIRI": "{{vars.steps.Create_Alert['@id']| ternary(vars.steps.Create_Alert['@id'],vars.alertByExecutePlaybook)}}"
+            },
+            "status": null,
+            "top": "1245",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "d9a1118c-5a92-4f56-9400-9c90f0e33a3e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Wait For Next Step",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Wait Time < 0",
+                        "step_iri": "\/api\/3\/workflow_steps\/f1d05606-cd6f-4564-8cc6-3824b8f8eb1c",
+                        "condition": "{{ vars.Wait_Time == -1 }}",
+                        "step_name": "Manual Task to Action"
+                    },
+                    {
+                        "option": "Wait Time > 0",
+                        "step_iri": "\/api\/3\/workflow_steps\/d6724a53-3568-4655-8c3f-92c0c563e076",
+                        "condition": "{{ vars.Wait_Time > 0 }}",
+                        "step_name": "Wait for Alert Creation"
+                    },
+                    {
+                        "option": "create alert",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/b0c4732c-307d-476d-b54a-d05a9ef63678",
+                        "step_name": "Create Alert if no wait time"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "570",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "uuid": "e930794a-99ea-420f-a551-5696db6e47f7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Manual Task to Action",
+            "description": null,
+            "arguments": {
+                "type": "DecisionBased",
+                "input": {
+                    "schema": {
+                        "title": "Proceed with Alert Record creation ?",
+                        "description": "Click **Proceed** to confirm the Alert Record Creation \n<span style=\"color: #33ACFF;\">Name : {{vars.alert_Steps.name}}<\/span>\n\n \n",
+                        "inputVariables": []
+                    }
+                },
+                "record": "{{vars.input.params.recordIRI}}",
+                "resources": "usecase",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Proceed",
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/392a85b3-21a8-449c-9516-fb05b1c62ac0"
+                        }
+                    ],
+                    "duplicateOption": false
+                }
+            },
+            "status": null,
+            "top": "705",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "uuid": "f1d05606-cd6f-4564-8cc6-3824b8f8eb1c"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alert -> Launch Step Playbook",
+            "targetStep": "\/api\/3\/workflow_steps\/9fe2e735-c7a9-4716-8bf8-930610721d18",
+            "sourceStep": "\/api\/3\/workflow_steps\/392a85b3-21a8-449c-9516-fb05b1c62ac0",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "0f8bf0aa-8288-4393-b547-2e8356bb85bb"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Add comments to Use Case module -> Wait For Next Step",
+            "targetStep": "\/api\/3\/workflow_steps\/e930794a-99ea-420f-a551-5696db6e47f7",
+            "sourceStep": "\/api\/3\/workflow_steps\/344806ac-fa54-46a7-8d59-acada5ed82d9",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "0f8d0814-4226-4301-9c32-b61b6960e72e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Wait For Next Step -> Create Alert if no wait time",
+            "targetStep": "\/api\/3\/workflow_steps\/b0c4732c-307d-476d-b54a-d05a9ef63678",
+            "sourceStep": "\/api\/3\/workflow_steps\/e930794a-99ea-420f-a551-5696db6e47f7",
+            "label": "create alert",
+            "isExecuted": false,
+            "uuid": "1e0502d2-7a67-482a-bea8-77a773c5ac34"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Format ALert List -> Update created Alerts ID list",
+            "targetStep": "\/api\/3\/workflow_steps\/c5a4517c-0da1-4fe3-af43-2a270e443ef2",
+            "sourceStep": "\/api\/3\/workflow_steps\/33879d82-ba52-4860-b18e-87ba352a95c0",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "4cfa8416-c012-44ae-ace9-5b6e290b2d55"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Launch Step Playbook -> Find Created Alerts ID",
+            "targetStep": "\/api\/3\/workflow_steps\/8a4d5d53-0f00-49a9-bd99-d1444ec02fca",
+            "sourceStep": "\/api\/3\/workflow_steps\/9fe2e735-c7a9-4716-8bf8-930610721d18",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "5e4a770b-bff7-468b-a006-85b0450bc598"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Wait step -> wait for that much time",
+            "targetStep": "\/api\/3\/workflow_steps\/d6724a53-3568-4655-8c3f-92c0c563e076",
+            "sourceStep": "\/api\/3\/workflow_steps\/e930794a-99ea-420f-a551-5696db6e47f7",
+            "label": "Wait Time > 0",
+            "isExecuted": false,
+            "uuid": "6d12b74c-3aad-4dd1-8fbe-18d5b713cfd8"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "alertIRI1 -> Format ALert List",
+            "targetStep": "\/api\/3\/workflow_steps\/33879d82-ba52-4860-b18e-87ba352a95c0",
+            "sourceStep": "\/api\/3\/workflow_steps\/d9a1118c-5a92-4f56-9400-9c90f0e33a3e",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "a930f5c4-403d-4423-b8b3-0c7bb036b500"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Replace String -> Add comments to Use Case module",
+            "targetStep": "\/api\/3\/workflow_steps\/344806ac-fa54-46a7-8d59-acada5ed82d9",
+            "sourceStep": "\/api\/3\/workflow_steps\/9ad26588-b055-4490-bf0b-bda7100f1abf",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c074f2c2-cde3-4b82-b598-f37b4b2bc15f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Created Alerts ID -> alertIRI1",
+            "targetStep": "\/api\/3\/workflow_steps\/d9a1118c-5a92-4f56-9400-9c90f0e33a3e",
+            "sourceStep": "\/api\/3\/workflow_steps\/8a4d5d53-0f00-49a9-bd99-d1444ec02fca",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c6393dee-2549-4ba5-8018-ae2b86150a4d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alert if no wait time -> Create Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/392a85b3-21a8-449c-9516-fb05b1c62ac0",
+            "sourceStep": "\/api\/3\/workflow_steps\/b0c4732c-307d-476d-b54a-d05a9ef63678",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "cff3ba8e-1afc-43ce-8f85-d0e8fce73cd8"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Wait for Alert Creation -> Create Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/392a85b3-21a8-449c-9516-fb05b1c62ac0",
+            "sourceStep": "\/api\/3\/workflow_steps\/d6724a53-3568-4655-8c3f-92c0c563e076",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "d3bb1fdf-8e03-4936-bcd2-bbf7e0ea8367"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Replace String",
+            "targetStep": "\/api\/3\/workflow_steps\/9ad26588-b055-4490-bf0b-bda7100f1abf",
+            "sourceStep": "\/api\/3\/workflow_steps\/07647d63-6c21-475d-883d-7bfa4580f284",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "d80ebf43-82fd-461a-8262-b6188ff22c45"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Wait step -> a",
+            "targetStep": "\/api\/3\/workflow_steps\/f1d05606-cd6f-4564-8cc6-3824b8f8eb1c",
+            "sourceStep": "\/api\/3\/workflow_steps\/e930794a-99ea-420f-a551-5696db6e47f7",
+            "label": "Wait Time < 0",
+            "isExecuted": false,
+            "uuid": "e0e54fc8-9cfa-403d-a203-97043d4714a6"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/07647d63-6c21-475d-883d-7bfa4580f284",
+            "sourceStep": "\/api\/3\/workflow_steps\/973f3b45-5bc1-4522-9e23-0fe88432bd88",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "e3f975ce-64af-4a1b-862e-cbd6148d5e47"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Manual Task to Action -> Create Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/392a85b3-21a8-449c-9516-fb05b1c62ac0",
+            "sourceStep": "\/api\/3\/workflow_steps\/f1d05606-cd6f-4564-8cc6-3824b8f8eb1c",
+            "label": "Proceed",
+            "isExecuted": false,
+            "uuid": "f06c2e50-1a69-4a45-84cf-3bb7d4dec298"
+        }
+    ],
+    "priority": null,
+    "uuid": "27b9c187-cc01-48e5-90bf-deea72d558b6",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": []
+}

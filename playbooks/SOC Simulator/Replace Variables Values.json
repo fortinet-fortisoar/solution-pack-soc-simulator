@@ -1,0 +1,131 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Replace Variables Values",
+    "aliasName": null,
+    "tag": null,
+    "description": "Replace all variables (Tags) with their dynamic values",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/16245e66-9e5e-453e-bc63-80c6b14d4220",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "e4d47994-90e7-457c-970d-a84325d4402d",
+                "resources": [
+                    "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "uuid": "16245e66-9e5e-453e-bc63-80c6b14d4220"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Output",
+            "description": null,
+            "arguments": {
+                "str_output": "{{vars.steps.replace.data}}"
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "65097059-6929-451f-9e4d-2ec951e3f87f"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "replace",
+            "description": null,
+            "arguments": {
+                "name": "FortiSOAR SOC Simulator",
+                "config": "2735a75b-acf3-433f-988d-258836752f2c",
+                "params": {
+                    "variables": "{{vars.mystr}}"
+                },
+                "version": "1.0.8",
+                "connector": "fortisoar-soc-simulator",
+                "operation": "replace_variables",
+                "operationTitle": "Replace Variables",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "uuid": "8d2cbdf0-86f3-4fba-9fe4-d27aaf833c17"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "input",
+            "description": null,
+            "arguments": {
+                "mystr": "{\n   \"bad_ip\":\"[{TR_MALICIOUS_IP}]\",\n   \"bad_domain\":\"domain[{TR_MALICIOUS_DOMAIN}]\",\n   \"bad_url\":\"ftp:\/\/[{TR_MALICIOUS_URL}]\",\n   \"bad_filehash\":\"[{TR_MALICIOUS_HASH}]\",\n   \"get_random_integer\":\"[{TR_RANDOM_INTEGER}]\",\n   \"get_random_integer_custom\":\"[{TR_RANDOM_INTEGER,10,20}]\",\n   \"get_my_public_ip\":\"[{TR_PUBLIC_IP}]\",\n   \"get_username\":\"[{TR_USERNAME}]\",\n   \"get_asset_ip\":\"[{TR_ASSET_IP}]\",\n   \"get_asset_ip_custom\":\"[{TR_ASSET_IP,192.168.0.0}]\",\n   \"get_time_now\":\"[{TR_NOW}]\",\n   \"get_time_past\":\"[{TR_PAST}]\",\n   \"get_time_minus_one\":\"[{TR_T-1}]\",\n   \"get_time_minus_two\":\"[{TR_T-2}]\",\n   \"get_time_minus_three\":\"[{TR_T-3}]\",\n   \"get_time_minus_four\":\"[{TR_T-4}]\",\n   \"get_time_minus_five\":\"[{TR_T-5}]\",\n   \"get_time_minus_six\":\"[{TR_T-6}]\"\n}"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "b6099ec4-8f1c-48ce-a576-3518479269f2"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> input",
+            "targetStep": "\/api\/3\/workflow_steps\/b6099ec4-8f1c-48ce-a576-3518479269f2",
+            "sourceStep": "\/api\/3\/workflow_steps\/16245e66-9e5e-453e-bc63-80c6b14d4220",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "07d99da7-7153-49e8-9ae3-b08286e4d329"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "replace -> Output",
+            "targetStep": "\/api\/3\/workflow_steps\/65097059-6929-451f-9e4d-2ec951e3f87f",
+            "sourceStep": "\/api\/3\/workflow_steps\/8d2cbdf0-86f3-4fba-9fe4-d27aaf833c17",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "1845e33a-6482-4a77-83f2-874c127a6832"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "input -> replace",
+            "targetStep": "\/api\/3\/workflow_steps\/8d2cbdf0-86f3-4fba-9fe4-d27aaf833c17",
+            "sourceStep": "\/api\/3\/workflow_steps\/b6099ec4-8f1c-48ce-a576-3518479269f2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "e6196e16-5f97-4664-8dd5-f0b57de82eee"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "ea3fe513-1d24-408a-845f-af3b4fec1b96",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "FortiSOAR SOC Simulator"
+    ]
+}

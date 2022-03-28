@@ -1,0 +1,168 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Run Scenario",
+    "aliasName": null,
+    "tag": null,
+    "description": "Execute a scenario and create its related records",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/6296aabe-9fc3-48ff-b077-6199bd340339",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "alert_Steps": "{{vars.input.records[0].steps.Steps}}"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Alerts",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.alert_Steps}}",
+                    "condition": ""
+                },
+                "arguments": {
+                    "steps": "{{vars.item}}",
+                    "recordID": "{{vars.input.records[0].id}}",
+                    "recordIRI": "{{vars.input.records[0]['@id']}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/27b9c187-cc01-48e5-90bf-deea72d558b6"
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "32ef4b38-2fec-4933-abcc-f51e77938491"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "7f0834e0-f79e-49a2-aa19-2ef7ce9aac32",
+                "title": "Simulate Scenario",
+                "resources": [
+                    "scenario"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "displayConditions": {
+                    "alerts": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "usecase": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "scenario": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "OR",
+                        "filters": [
+                            {
+                                "type": "primitive",
+                                "field": "createdAlertsID",
+                                "value": "true",
+                                "operator": "isnull",
+                                "_operator": "isnull"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Simulate Scenario",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "uuid": "6296aabe-9fc3-48ff-b077-6199bd340339"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Check Pre Req",
+            "description": null,
+            "arguments": {
+                "when": "{{vars.input.records[0].configuration}}",
+                "arguments": {
+                    "recordIRI": "{{vars.input.records[0]['@id']}}",
+                    "recordName": "{{vars.input.records[0].configuration}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/bac46748-666a-4374-a780-92539f0efc98"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "c77368a4-73f7-47d6-a5ec-9441ebe28be2"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Check Pre Req",
+            "targetStep": "\/api\/3\/workflow_steps\/c77368a4-73f7-47d6-a5ec-9441ebe28be2",
+            "sourceStep": "\/api\/3\/workflow_steps\/2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "0217ad10-63c7-4d38-bb3e-69166579729c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Check Pre Req -> Create Alerts",
+            "targetStep": "\/api\/3\/workflow_steps\/32ef4b38-2fec-4933-abcc-f51e77938491",
+            "sourceStep": "\/api\/3\/workflow_steps\/c77368a4-73f7-47d6-a5ec-9441ebe28be2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "d8ac8ce6-33ba-4a63-9ef1-8e0a706f22d1"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713",
+            "sourceStep": "\/api\/3\/workflow_steps\/6296aabe-9fc3-48ff-b077-6199bd340339",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "ddb16d2b-aac8-454c-b934-b85b3cccb799"
+        }
+    ],
+    "priority": null,
+    "uuid": "a10522ac-2622-40bd-ad79-4487d9a1d7d7",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "Simulation"
+    ]
+}
