@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/3\/contexts\/WorkflowCollection",
+    "@type": "WorkflowCollection",
+    "name": "02 - Use Case - SOC Simulator",
+    "description": "Sample playbooks for \"FortiSOAR SOC Simulator\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+    "visible": true,
+    "image": "\/api\/3\/images\/425ceaeb-5619-4189-95a8-d39d9a126524",
+    "uuid": "86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "deletedAt": null,
+    "recordTags": []
+}

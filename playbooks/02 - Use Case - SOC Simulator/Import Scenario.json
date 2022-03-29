@@ -1,0 +1,263 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Import Scenario",
+    "aliasName": null,
+    "tag": null,
+    "description": "Imports a scenario when a valid JSON file is provided",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/5d22caeb-2354-4b93-bf8b-e3d8694fc1fe",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Import relationship fields via Bulk API",
+            "description": null,
+            "arguments": {
+                "when": "{{vars.input.params.importRelationships}}",
+                "params": {
+                    "iri": "\/api\/3\/update\/{{vars.fileData.type }}",
+                    "body": "{{ {'data': vars.recordsWithRelationships} }}",
+                    "method": "PUT"
+                },
+                "version": "2.7.0",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "CyOPs: Make CyOPs API Call",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "24bac88e-b1b5-4dfd-9098-c13be14c1db7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Split by lists",
+            "description": null,
+            "arguments": {
+                "recordsWithPrimaryFields": "{% set ns = namespace(primaryFields=[]) %}{% for record in vars.fileData.records %}{% for key,value in record.items() %}{% if value is iterable and value is not string and (value['@id'] or (value[0] and value[0]['@id'])) %}{% set _dummy = ns.primaryFields.append(key) %}{% endif %}{% endfor %}{% for field in ns.primaryFields %}{% if field in record %}{% set _dummy = record.pop(field) %}{% endif %}{% endfor %}{% endfor %}{{ vars.fileData.records }}",
+                "recordsWithRelationships": "{% set ns = namespace(primaryFields=[]) %}{% for record in vars.fileDataCopy.records %}{% set iri = '\/api\/3\/' + vars.fileDataCopy.type + '\/' + record.uuid %}{% for key,value in record.items() %}{% if value is not iterable or value is string or not (value['@id'] or (value[0] and value[0]['@id'])) %}{% set _dummy = ns.primaryFields.append(key) %}{% endif %}{% endfor %}{% for field in ns.primaryFields %}{% if field in record %}{% set _dummy = record.pop(field) %}{% endif %}{% set _dummy = record.update({'@id': iri}) %}{% endfor %}{% endfor %}{{ vars.fileDataCopy.records }}"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "43930233-ebc4-467a-a11e-20787df119bd"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "670b0692-c78b-4b8f-aa5e-25080cf7d03c",
+                "title": "Import Scenario",
+                "resources": [
+                    "scenario"
+                ],
+                "inputVariables": [
+                    {
+                        "name": "jSONFile",
+                        "type": "string",
+                        "label": "JSON File",
+                        "title": "File Field",
+                        "usable": true,
+                        "tooltip": "Exported JSON file from Export playbook",
+                        "dataType": "file",
+                        "formType": "file",
+                        "required": false,
+                        "_expanded": true,
+                        "mmdUpdate": true,
+                        "collection": false,
+                        "dataSource": {
+                            "model": "files"
+                        },
+                        "searchable": false,
+                        "templateUrl": "app\/components\/form\/fields\/file.html",
+                        "defaultValue": null,
+                        "_previousName": "",
+                        "lengthConstraint": true,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "useRecordFieldDefault": false
+                    },
+                    {
+                        "name": "importRelationships",
+                        "type": "boolean",
+                        "label": "Import Relationships",
+                        "title": "Checkbox",
+                        "usable": true,
+                        "tooltip": "If checked, will only update the existing records with the relationships",
+                        "dataType": "checkbox",
+                        "formType": "checkbox",
+                        "required": false,
+                        "_expanded": false,
+                        "collection": false,
+                        "searchable": true,
+                        "templateUrl": "app\/components\/form\/fields\/checkbox.html",
+                        "defaultValue": null,
+                        "lengthConstraint": false,
+                        "allowedEncryption": false,
+                        "allowedGridColumn": true,
+                        "useRecordFieldDefault": false
+                    }
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "jSONFile": "{{vars.request.data[\"jSONFile\"]}}",
+                            "importRelationships": "{{vars.request.data[\"importRelationships\"]}}"
+                        },
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "_promptexpanded": true,
+                "displayConditions": {
+                    "alerts": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "assets": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "events": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "incidents": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "huntalerts": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "indicators": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "uuid": "5d22caeb-2354-4b93-bf8b-e3d8694fc1fe"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Download file",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "iri": "{{vars.input.params.jSONFile['@id']}}"
+                },
+                "version": "2.7.0",
+                "connector": "cyops_utilities",
+                "operation": "download_file_from_cyops",
+                "operationTitle": "File: Compute Hash",
+                "step_variables": {
+                    "fileData": "{{vars.result.data['cyops_file_path'] | readfile | toJSON | toDict | toDict}}",
+                    "fileDataCopy": "{{vars.result.data['cyops_file_path'] | readfile | toJSON | toDict | toDict}}"
+                }
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "d5dbfb67-afd8-4988-8456-9fad98de0d69"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Import primary fields via Bulk API",
+            "description": null,
+            "arguments": {
+                "when": "{{not vars.input.params.importRelationships}}",
+                "params": {
+                    "iri": "\/api\/3\/",
+                    "body": "{{vars.recordsWithPrimaryFields}}",
+                    "method": "POST"
+                },
+                "version": "2.7.0",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "CyOPs: Make CyOPs API Call",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "f8559c3d-2db0-49ae-8af1-a93665020aaa"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Download file -> Split by lists",
+            "targetStep": "\/api\/3\/workflow_steps\/43930233-ebc4-467a-a11e-20787df119bd",
+            "sourceStep": "\/api\/3\/workflow_steps\/d5dbfb67-afd8-4988-8456-9fad98de0d69",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "51cc198a-eb7c-4da7-b617-53f6f0c8c529"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Import primary fields via Bulk API -> Copy  of Import primary fields via Bulk API",
+            "targetStep": "\/api\/3\/workflow_steps\/24bac88e-b1b5-4dfd-9098-c13be14c1db7",
+            "sourceStep": "\/api\/3\/workflow_steps\/f8559c3d-2db0-49ae-8af1-a93665020aaa",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "8d507f1f-c9a6-4c85-83d6-6ad845d34efe"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Split by lists -> Import via Bulk API",
+            "targetStep": "\/api\/3\/workflow_steps\/f8559c3d-2db0-49ae-8af1-a93665020aaa",
+            "sourceStep": "\/api\/3\/workflow_steps\/43930233-ebc4-467a-a11e-20787df119bd",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "ac12cc89-f1bf-4158-ab50-1aa7014ab9fe"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Download file",
+            "targetStep": "\/api\/3\/workflow_steps\/d5dbfb67-afd8-4988-8456-9fad98de0d69",
+            "sourceStep": "\/api\/3\/workflow_steps\/5d22caeb-2354-4b93-bf8b-e3d8694fc1fe",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c1dfc925-04d6-4b9a-8c02-6df9706ca45b"
+        }
+    ],
+    "priority": null,
+    "uuid": "a9e6d165-ecc9-4e51-a262-9c451fd38184",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "ManualTrigger"
+    ]
+}

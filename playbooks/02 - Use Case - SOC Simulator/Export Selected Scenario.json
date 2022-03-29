@@ -1,0 +1,239 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Export Selected Scenario",
+    "aliasName": null,
+    "tag": null,
+    "description": "Export all selected scenario to a JSON file. This file is created as attachment record",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/34562beb-6b99-4b73-aa42-6acd4994859b",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Create file",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "contents": "{{ {'records': vars.steps.Export_selected_items.data['hydra:member'], 'type': vars.recordType} | toJSON }}",
+                    "filename": "{{vars.input.params.fileName}}.json"
+                },
+                "version": "2.7.0",
+                "connector": "cyops_utilities",
+                "operation": "create_file_from_string",
+                "operationTitle": "File: Create File from String",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "1427ecbe-5c47-4931-a3e9-c73ed8f781e3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "5972337a-16d2-4bea-8a09-5615bba70221",
+                "title": "Export Scenario",
+                "resources": [
+                    "scenario"
+                ],
+                "inputVariables": [
+                    {
+                        "name": "fileName",
+                        "type": "string",
+                        "label": "File Name",
+                        "tooltip": "",
+                        "dataType": "text",
+                        "formType": "text",
+                        "required": true,
+                        "_expanded": true,
+                        "defaultValue": "Export",
+                        "useRecordFieldDefault": false
+                    }
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": {
+                            "fileName": "{{vars.request.data[\"fileName\"]}}"
+                        },
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "_promptexpanded": true,
+                "displayConditions": {
+                    "files": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "alerts": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "assets": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "events": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "usecase": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "scenario": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "incidents": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "indicators": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "uuid": "34562beb-6b99-4b73-aa42-6acd4994859b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create attachment from file",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "name": "{{vars.steps.Create_file.data.filename}}",
+                    "filename": "{{vars.steps.Create_file.data.filename}}",
+                    "description": "",
+                    "request_headers": "",
+                    "multipart_headers": "",
+                    "extra_multipart_fields": ""
+                },
+                "version": "2.3.1",
+                "connector": "cyops_utilities",
+                "operation": "create_cyops_attachment",
+                "operationTitle": "File: Create CyOPs Attachment from File",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "3f164afd-eb64-4c68-a9c7-4e61b43f40d3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set recordType",
+            "description": null,
+            "arguments": {
+                "recordType": "{{ vars.input.records[0]['@id'].split('\/')[3] }}"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "617b96b6-9b59-4931-af38-63df7f19c32e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Export selected items",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "iri": "\/api\/query\/{{vars.recordType}}?$export=true&$relationships=true",
+                    "body": "{\"filters\": [{\"field\": \"uuid\", \"operator\": \"in\", \"value\": \"{{vars.input.records | json_query('[].\"@id\"') | map('replace', '\/api\/3\/' + vars.recordType + '\/', '') | join('|') }}\"}], \"logic\": \"AND\"}",
+                    "method": "POST"
+                },
+                "version": "2.7.0",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "CyOPs: Make CyOPs API Call",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "885adbf6-1acc-4c28-90c2-4f96e0d470ce"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Set recordType -> Export selected items",
+            "targetStep": "\/api\/3\/workflow_steps\/885adbf6-1acc-4c28-90c2-4f96e0d470ce",
+            "sourceStep": "\/api\/3\/workflow_steps\/617b96b6-9b59-4931-af38-63df7f19c32e",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "4576587b-5a71-4cf0-a95a-38fe8a781e4b"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Export selected items -> Create attachment",
+            "targetStep": "\/api\/3\/workflow_steps\/1427ecbe-5c47-4931-a3e9-c73ed8f781e3",
+            "sourceStep": "\/api\/3\/workflow_steps\/885adbf6-1acc-4c28-90c2-4f96e0d470ce",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "9889aa94-ff5b-42a5-813b-c9b03fde390a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create attachment -> Create attachment from file",
+            "targetStep": "\/api\/3\/workflow_steps\/3f164afd-eb64-4c68-a9c7-4e61b43f40d3",
+            "sourceStep": "\/api\/3\/workflow_steps\/1427ecbe-5c47-4931-a3e9-c73ed8f781e3",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "d1439a5d-ce94-4271-be07-fbf38144c8c2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Set type",
+            "targetStep": "\/api\/3\/workflow_steps\/617b96b6-9b59-4931-af38-63df7f19c32e",
+            "sourceStep": "\/api\/3\/workflow_steps\/34562beb-6b99-4b73-aa42-6acd4994859b",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "ee17794d-c90b-4ca2-9fc9-7b7ff7c5e826"
+        }
+    ],
+    "priority": null,
+    "uuid": "bf1d3de1-9b41-4649-85c2-dccbaf73a04a",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "ManualTrigger"
+    ]
+}
