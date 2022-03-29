@@ -167,7 +167,7 @@
             "name": "Get Related Data",
             "description": null,
             "arguments": {
-                "__tmp_get_records": "{%for iri in (vars.input.records[0].createdAlertsID|toDict)%}\n{{vars.records_list.append((iri+'\/indicators?&__selectFields=id')|fromIRI) if vars.relatedModules.users}}\n{{vars.records_list.append((iri+'\/indicators?&__selectFields=id')|fromIRI)if vars.relatedModules.indicators}}\n{{vars.records_list.append((iri+'\/incidents?&__selectFields=id')|fromIRI) if vars.relatedModules.incidents}}\n{{vars.records_list.append((iri+'\/assets?&__selectFields=id')|fromIRI)if vars.relatedModules.assets}}\n{{vars.records_list.append((iri+'\/tasks?&__selectFields=id')|fromIRI)if vars.relatedModules.tasks}}\n{%endfor%}"
+                "__tmp_get_records": "{%for iri in (vars.input.records[0].createdAlertsID|toDict)%}{% if 'alerts' in iri %}\n{{vars.records_list.append((iri+'\/indicators?&__selectFields=id')|fromIRI) if vars.relatedModules.users}}\n{{vars.records_list.append((iri+'\/indicators?&__selectFields=id')|fromIRI)if vars.relatedModules.indicators}}\n{{vars.records_list.append((iri+'\/incidents?&__selectFields=id')|fromIRI) if vars.relatedModules.incidents}}\n{{vars.records_list.append((iri+'\/assets?&__selectFields=id')|fromIRI)if vars.relatedModules.assets}}\n{{vars.records_list.append((iri+'\/tasks?&__selectFields=id')|fromIRI)if vars.relatedModules.tasks}}\n{% endif %}\n{%endfor%}"
             },
             "status": null,
             "top": "570",

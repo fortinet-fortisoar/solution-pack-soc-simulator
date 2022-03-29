@@ -49,7 +49,7 @@
         ],
         "playbooks": [
             {
-                "name": "SOC Simulator"
+                "name": "02 - Use Case - SOC Simulator"
             }
         ],
         "connectors": [

@@ -1,8 +1,5 @@
 [
-    "FortiSOAR SOC Simulator",
-    "Sample",
-    "Cleanup",
-    "Simulation",
     "ManualTrigger",
-    "Use-Case"
+    "Simulation",
+    "Cleanup"
 ]
