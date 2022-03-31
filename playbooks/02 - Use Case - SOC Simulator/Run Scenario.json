@@ -47,7 +47,7 @@
                 "workflowReference": "\/api\/3\/workflows\/27b9c187-cc01-48e5-90bf-deea72d558b6"
             },
             "status": null,
-            "top": "435",
+            "top": "300",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "uuid": "32ef4b38-2fec-4933-abcc-f51e77938491"
@@ -122,31 +122,13 @@
                 "workflowReference": "\/api\/3\/workflows\/bac46748-666a-4374-a780-92539f0efc98"
             },
             "status": null,
-            "top": "300",
-            "left": "125",
+            "top": "30",
+            "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "uuid": "c77368a4-73f7-47d6-a5ec-9441ebe28be2"
         }
     ],
     "routes": [
-        {
-            "@type": "WorkflowRoute",
-            "name": "Configuration -> Check Pre Req",
-            "targetStep": "\/api\/3\/workflow_steps\/c77368a4-73f7-47d6-a5ec-9441ebe28be2",
-            "sourceStep": "\/api\/3\/workflow_steps\/2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "0217ad10-63c7-4d38-bb3e-69166579729c"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Check Pre Req -> Create Alerts",
-            "targetStep": "\/api\/3\/workflow_steps\/32ef4b38-2fec-4933-abcc-f51e77938491",
-            "sourceStep": "\/api\/3\/workflow_steps\/c77368a4-73f7-47d6-a5ec-9441ebe28be2",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "d8ac8ce6-33ba-4a63-9ef1-8e0a706f22d1"
-        },
         {
             "@type": "WorkflowRoute",
             "name": "Start -> Configuration",
@@ -155,6 +137,15 @@
             "label": null,
             "isExecuted": false,
             "uuid": "ddb16d2b-aac8-454c-b934-b85b3cccb799"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Create Alerts",
+            "targetStep": "\/api\/3\/workflow_steps\/32ef4b38-2fec-4933-abcc-f51e77938491",
+            "sourceStep": "\/api\/3\/workflow_steps\/2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "20b052c7-acd6-459a-98e0-b6c3f65b515e"
         }
     ],
     "priority": null,
