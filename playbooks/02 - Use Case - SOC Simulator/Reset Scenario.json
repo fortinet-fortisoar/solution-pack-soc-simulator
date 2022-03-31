@@ -6,7 +6,7 @@
     "tag": null,
     "description": "Deletes created alerts and related records",
     "isActive": true,
-    "debug": true,
+    "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
     "parameters": [],
