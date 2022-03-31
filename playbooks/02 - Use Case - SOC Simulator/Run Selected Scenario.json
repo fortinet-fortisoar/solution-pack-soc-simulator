@@ -22,6 +22,7 @@
             "arguments": {
                 "for_each": {
                     "item": "{{vars.steps.Get_Scenario_Details[0].steps.Steps}}",
+                    "parallel": false,
                     "condition": ""
                 },
                 "arguments": {
@@ -34,7 +35,7 @@
                 "workflowReference": "\/api\/3\/workflows\/27b9c187-cc01-48e5-90bf-deea72d558b6"
             },
             "status": null,
-            "top": "570",
+            "top": "435",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "uuid": "2c9928ad-8400-42ba-b4d0-1f2dcb5e40f1"
@@ -51,26 +52,6 @@
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "uuid": "3d8aab01-b491-4f49-a057-33d8cfe26ef9"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Check Pre Req",
-            "description": null,
-            "arguments": {
-                "when": "{{not vars.input.records[0].configDeployed}}",
-                "arguments": {
-                    "recordIRI": "{{vars.steps.Get_Scenario_Details[0]['@id']}}",
-                    "recordName": "{{vars.steps.Get_Scenario_Details[0].configuration}}"
-                },
-                "apply_async": false,
-                "step_variables": [],
-                "workflowReference": "\/api\/3\/workflows\/bac46748-666a-4374-a780-92539f0efc98"
-            },
-            "status": null,
-            "top": "435",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
-            "uuid": "4615ace1-c9f8-4b37-a119-a82746ff3eb3"
         },
         {
             "@type": "WorkflowStep",
@@ -175,24 +156,6 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Get Scenario Details -> Check Pre Req",
-            "targetStep": "\/api\/3\/workflow_steps\/4615ace1-c9f8-4b37-a119-a82746ff3eb3",
-            "sourceStep": "\/api\/3\/workflow_steps\/6f0657e4-2712-4706-a464-38f089d20bb2",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "060e1842-6d23-40aa-809e-d1c827404b76"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Check Pre Req -> Create Scenario",
-            "targetStep": "\/api\/3\/workflow_steps\/2c9928ad-8400-42ba-b4d0-1f2dcb5e40f1",
-            "sourceStep": "\/api\/3\/workflow_steps\/4615ace1-c9f8-4b37-a119-a82746ff3eb3",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "71ecd887-c0c4-4291-a3fc-eb64bf4f1a62"
-        },
-        {
-            "@type": "WorkflowRoute",
             "name": "Start -> Configuration",
             "targetStep": "\/api\/3\/workflow_steps\/3d8aab01-b491-4f49-a057-33d8cfe26ef9",
             "sourceStep": "\/api\/3\/workflow_steps\/82ca2fd5-bb31-4db8-ba9c-9930eeaa5dff",
@@ -208,6 +171,15 @@
             "label": null,
             "isExecuted": false,
             "uuid": "e49dd191-86c1-4c5c-a64b-dc1e3a90a15f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Scenario Details -> Create Scenario",
+            "targetStep": "\/api\/3\/workflow_steps\/2c9928ad-8400-42ba-b4d0-1f2dcb5e40f1",
+            "sourceStep": "\/api\/3\/workflow_steps\/6f0657e4-2712-4706-a464-38f089d20bb2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "40245b45-22f1-4924-a4c0-907e600997cc"
         }
     ],
     "priority": null,

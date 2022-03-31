@@ -97,7 +97,7 @@
             "name": "Extract Related Records",
             "description": null,
             "arguments": {
-                "related_records_iris": "{{vars.records_list|json_query('[][\"hydra:member\"][][][\"@id\"][]')}}"
+                "related_records_iris": "{{vars.records_list|json_query('[][\"hydra:member\"][][][\"@id\"][]') | unique}}"
             },
             "status": null,
             "top": "705",
@@ -185,9 +185,11 @@
                     "body": "",
                     "method": "DELETE"
                 },
-                "version": "3.0.3",
+                "version": "3.2.1",
                 "for_each": {
                     "item": "{{vars.input.records[0].createdAlertsID}}",
+                    "__bulk": false,
+                    "parallel": true,
                     "condition": ""
                 },
                 "connector": "cyops_utilities",
@@ -213,10 +215,11 @@
                     "body": "",
                     "method": "DELETE"
                 },
-                "version": "3.2.0",
+                "version": "3.2.1",
                 "for_each": {
-                    "item": "{{vars.related_records_iris}}",
-                    "parallel": false,
+                    "item": "{{vars.related_records_iris | unique}}",
+                    "__bulk": false,
+                    "parallel": true,
                     "condition": ""
                 },
                 "connector": "cyops_utilities",
@@ -246,15 +249,6 @@
         }
     ],
     "routes": [
-        {
-            "@type": "WorkflowRoute",
-            "name": "Delete Alerts -> Copy  of Delete Alerts",
-            "targetStep": "\/api\/3\/workflow_steps\/fc3e4763-51d6-44b4-8a3b-d9328b834240",
-            "sourceStep": "\/api\/3\/workflow_steps\/ddaca4c1-77ba-4dd9-9eb7-929737c763d2",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "3048d0ce-7875-4fcc-9168-a50a6c98e1f0"
-        },
         {
             "@type": "WorkflowRoute",
             "name": "Extract Related Records -> Delete Alerts",
@@ -317,6 +311,15 @@
             "label": null,
             "isExecuted": false,
             "uuid": "b12e253f-9276-43d4-bc65-9435129488e8"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Delete Alerts -> Delete Related Records",
+            "targetStep": "\/api\/3\/workflow_steps\/fc3e4763-51d6-44b4-8a3b-d9328b834240",
+            "sourceStep": "\/api\/3\/workflow_steps\/ddaca4c1-77ba-4dd9-9eb7-929737c763d2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "74588b91-429a-4495-afc5-aa3a9a6c2687"
         }
     ],
     "priority": null,
@@ -325,7 +328,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "Cleanup",
-        "Simulation"
+        "Simulation",
+        "Cleanup"
     ]
 }
