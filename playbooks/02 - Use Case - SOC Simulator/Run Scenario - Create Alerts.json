@@ -4,7 +4,7 @@
     "name": "Run Scenario - Create Alerts",
     "aliasName": null,
     "tag": null,
-    "description": "Creates records related to scenario",
+    "description": "Create records related to a scenario",
     "isActive": true,
     "debug": false,
     "singleRecordExecution": false,
