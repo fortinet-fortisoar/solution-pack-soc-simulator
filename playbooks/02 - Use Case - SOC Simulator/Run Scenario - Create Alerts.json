@@ -4,7 +4,7 @@
     "name": "Run Scenario - Create Alerts",
     "aliasName": null,
     "tag": null,
-    "description": null,
+    "description": "Create records related to a scenario",
     "isActive": true,
     "debug": false,
     "singleRecordExecution": false,
@@ -35,7 +35,7 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "Format ALert List",
+            "name": "Format Alert List",
             "description": null,
             "arguments": {
                 "formatted_alert_list": "{{vars.createdAlertId + [vars.alertIRI]}}"
@@ -561,5 +561,7 @@
     "owners": [],
     "isPrivate": false,
     "deletedAt": null,
-    "recordTags": []
+    "recordTags": [
+        "Simulation"
+    ]
 }

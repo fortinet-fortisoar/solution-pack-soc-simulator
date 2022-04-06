@@ -106,26 +106,6 @@
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
             "uuid": "6296aabe-9fc3-48ff-b077-6199bd340339"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Check Pre Req",
-            "description": null,
-            "arguments": {
-                "when": "{{vars.input.records[0].configuration}}",
-                "arguments": {
-                    "recordIRI": "{{vars.input.records[0]['@id']}}",
-                    "recordName": "{{vars.input.records[0].configuration}}"
-                },
-                "apply_async": false,
-                "step_variables": [],
-                "workflowReference": "\/api\/3\/workflows\/bac46748-666a-4374-a780-92539f0efc98"
-            },
-            "status": null,
-            "top": "30",
-            "left": "475",
-            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
-            "uuid": "c77368a4-73f7-47d6-a5ec-9441ebe28be2"
         }
     ],
     "routes": [
