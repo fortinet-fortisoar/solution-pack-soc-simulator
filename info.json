@@ -31,11 +31,15 @@
             }
         },
         "viewTemplates": {
-            "scenario": [
-                "list",
-                "detail",
-                "form"
-            ]
+            "scenario": {
+                "name": "Scenario",
+                "apiName": "scenario",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            }
         },
         "views": {
             "navigation": [
