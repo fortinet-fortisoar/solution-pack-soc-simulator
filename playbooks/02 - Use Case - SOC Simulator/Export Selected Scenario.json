@@ -5,7 +5,7 @@
     "aliasName": null,
     "tag": null,
     "description": "Export all selected scenario to a JSON file. This file is created as attachment record",
-    "isActive": true,
+    "isActive": false,
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
