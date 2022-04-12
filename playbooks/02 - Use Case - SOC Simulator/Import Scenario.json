@@ -5,7 +5,7 @@
     "aliasName": null,
     "tag": null,
     "description": "Imports a scenario when a valid JSON file is provided",
-    "isActive": true,
+    "isActive": false,
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
