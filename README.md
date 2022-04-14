@@ -34,7 +34,7 @@ More information about the usage of the SOC Simulator Solution Pack can be found
 
         **Warning:** After deployment, this Solution Pack will install or upgrade the stated connectors list.
 
-2. Module(s)
+2. Module Schema(s)
     - Scenario
 
 3. Playbook Collection(s)
