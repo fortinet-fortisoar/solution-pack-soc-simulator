@@ -42,7 +42,8 @@ Ensure that the below solution packs are deployed:
 
 3. Playbook Collection(s)
     - 02 - Use Case - SOC Simulator (4):
-Following is a list of playbooks under “02 - Use Case - SOC Simulator”
+
+        Following is a list of playbooks under "02 - Use Case - SOC Simulator"
 
     |**Playbook Name**|**Description**
     | :- | :- |
@@ -51,4 +52,4 @@ Following is a list of playbooks under “02 - Use Case - SOC Simulator”
     |Run Scenario - Create Alerts|Creates records related to a scenario|
     |Run Selected Scenario|Executes a scenario and create related records triggered from 'Alerts' page|
 
-    **Warning:** It is recommended not to modify these playbooks to avoid any breaks in scenario simulation functionality
+     **Warning:** It is recommended not to modify these playbooks to avoid any breaks in scenario simulation functionality
