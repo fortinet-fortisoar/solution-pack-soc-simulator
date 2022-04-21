@@ -42,8 +42,6 @@ Ensure that the below solution packs are deployed:
 3. Playbook Collection(s)
     - 02 - Use Case - SOC Simulator (4):
 
-        Following is a list of playbooks under "02 - Use Case - SOC Simulator"
-
     |**Playbook Name**|**Description**
     | :- | :- |
     |Reset Scenario|Deletes created alerts and related records|
