@@ -21,10 +21,9 @@ The FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator) enabl
 
 Ensure that the below solution packs are deployed:
 
-**Solution Pack**|**Purpose**|**Doc Link**|
+|**Solution Pack**|**Purpose**|**Doc Link**|
 | :- | :- | :- |
 |SOAR Framework 1.0.0|Require for Incident Response modules and Action playbooks|[Click here](https://github.com/fortinet-fortisoar/solution-pack-soar-framework/blob/develop/README.md)|
-
 
 - Ensure that the following URL is unblocked in your environment, in order to gather threat intelegence data:
   - [https://otx.alienvault.com](https://otx.alienvault.com)
