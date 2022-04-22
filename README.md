@@ -13,7 +13,7 @@ The FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator) enabl
 
 ### Usage
 
-For a better understanding of the Simulate and Reset scenarios, refer to the document [here](docs/solution-pack-guide.md).
+For a better understanding of the Simulate and Reset scenarios, refer to the document [here](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/solution-pack-guide.md).
 
 ## Prerequisite
 
