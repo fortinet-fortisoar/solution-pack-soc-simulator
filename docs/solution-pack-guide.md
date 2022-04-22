@@ -40,7 +40,7 @@ There are various ways a user can run a scenario simulation:
     ![Simulate From Alert Page Popup](media/simulateScenarioAlertPopup.png)
 
 This action creates alerts and records corresponding to the selected scenario.
-Click an alert that this simulation created, for example, "Windows User Created" alert. The alert opens.
+Click an alert created by this simulation, for example, "Windows User Created" alert. The alert opens.
 Point to the comments icon on the far right corner and select it.
 Click on the Recommendations tab to observe that there are other similar alerts indicating that related operations are taking place.
 Hence, the FortiSOAR™ engine solves the task of a SOC analyst of going through several alerts to figure out what is similar. Now, you can select similar alerts, link them, or escalate them to create a Security Incident.
