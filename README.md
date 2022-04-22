@@ -1,5 +1,3 @@
-# SOC Simulator Solution Pack
-
 ## Release Information
 
 - Solution Pack Version: 1.0.1
@@ -15,7 +13,7 @@ The FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator) enabl
 
 ### Usage
 
-[Refer](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/solution-pack-guide.md) to Simulate Scenario documentation to undersand how to Simulate and Reset Scenario.
+To Simulate Scenario documentation for a better understanding of the Simulate and Reset Scenario, refer to the content [here](docs/solution-pack-guide.md).
 
 ## Prerequisite
 
@@ -25,7 +23,7 @@ Ensure that the below solution packs are deployed:
 | :- | :- | :- |
 |SOAR Framework 1.0.0|Require for Incident Response modules and Action playbooks|[Click here](https://github.com/fortinet-fortisoar/solution-pack-soar-framework/blob/develop/README.md)|
 
-- Ensure that the following URL is unblocked in your environment, in order to gather threat intelegence data:
+- Ensure that the following URL is unblocked in your environment, to gather threat intelligence data:
   - [https://otx.alienvault.com](https://otx.alienvault.com)
 
 ## Contents
@@ -47,8 +45,8 @@ Ensure that the below solution packs are deployed:
     |**Playbook Name**|**Description**
     | :- | :- |
     |Reset Scenario|Deletes created alerts and related records|
-    |Run Scenario|Executes a scenario and create its related records triggered from 'Scenario' record|
+    |Run Scenario|Executes a scenario and create its related records triggered from the 'Scenario' record|
     |Run Scenario - Create Alerts|Creates records related to a scenario|
-    |Run Selected Scenario|Executes a scenario and create related records triggered from 'Alerts' page|
+    |Run Selected Scenario|Executes a scenario and create related records triggered from the 'Alerts' page|
 
      **Warning:** It is recommended not to modify these playbooks to avoid any breaks in scenario simulation functionality
