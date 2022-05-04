@@ -9,7 +9,7 @@
 
 ### Introduction
 
-The FortiSOAR™ SOC Simulator Solution Pack (solution-pack-soc-simulator) enables users to experience the power and capability of FortiSOAR™ incident response for SOC Simulator scenarios. This pack contains utilities for demonstrating FortiSOAR capabilities around a variety of important SOC use-cases without having to integrate with actual device endpoints.
+The **FortiSOAR™ SOC Simulator Solution Pack** enables users to experience the power and capability of FortiSOAR™ incident response for SOC Simulator scenarios. This pack contains utilities for demonstrating FortiSOAR capabilities around a variety of important SOC use-cases without having to integrate with actual device endpoints.
 
 ### Usage
 
@@ -39,6 +39,8 @@ Ensure that the below solution packs are deployed:
 
 3. Playbook Collection(s)
     - 02 - Use Case - SOC Simulator (4):
+
+        Following is a list of playbooks under "02 - Use Case - SOC Simulator"
 
     |**Playbook Name**|**Description**
     | :- | :- |
