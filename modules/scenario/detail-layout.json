@@ -93,7 +93,7 @@
                                                 }
                                             },
                                             "icon": "icon icon-alert",
-                                            "show": true
+                                            "show": false
                                         },
                                         {
                                             "title": "Source",
@@ -148,6 +148,52 @@
                                                 }
                                             },
                                             "icon": "icon icon-running-playbooks",
+                                            "show": false
+                                        },
+                                        {
+                                            "title": "Scenario Validation",
+                                            "active": 0,
+                                            "icon": "fa fa-none",
+                                            "widget": {
+                                                "type": "editableFormGroup",
+                                                "config": {
+                                                    "wid": "ff05f7ae-de3a-48ce-a7af-a5b348e1f8d9",
+                                                    "rows": [
+                                                        {
+                                                            "columns": [
+                                                                {
+                                                                    "fields": [
+                                                                        {
+                                                                            "name": "testThisScenario",
+                                                                            "highlightMode": true,
+                                                                            "linky": true,
+                                                                            "readOnly": false
+                                                                        },
+                                                                        {
+                                                                            "name": "expectedData",
+                                                                            "highlightMode": true,
+                                                                            "linky": true,
+                                                                            "readOnly": false
+                                                                        },
+                                                                        {
+                                                                            "name": "testResult",
+                                                                            "highlightMode": true,
+                                                                            "linky": true,
+                                                                            "readOnly": false
+                                                                        },
+                                                                        {
+                                                                            "name": "resultJson",
+                                                                            "highlightMode": true,
+                                                                            "linky": true,
+                                                                            "readOnly": false
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            },
                                             "show": true
                                         }
                                     ],
@@ -170,14 +216,14 @@
                 "icon": "fa fa-play"
             },
             {
-                "id": "\/api\/3\/workflows\/98506caa-32ab-429d-9c0f-42d92a71b5d1",
+                "id": "\/api\/3\/workflows\/caa0be1d-8de4-4df9-9014-68ac2659edc6",
                 "name": "Reset Scenario",
                 "icon": "fa fa-trash-o"
             },
             {
-                "id": "\/api\/3\/workflows\/bf1d3de1-9b41-4649-85c2-dccbaf73a04a",
-                "name": "Export Selected Scenario",
-                "icon": "icon icon-export"
+                "id": "\/api\/3\/workflows\/b790a914-c8a5-4a18-8f2b-38a460e6af8c",
+                "name": "Execute and Test Scenario",
+                "icon": "icon icon-test-configuration"
             }
         ],
         "wid": "bbb4522a-1f19-4a2c-ad2f-a4b0f7a4ace0",

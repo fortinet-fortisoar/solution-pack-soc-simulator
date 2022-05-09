@@ -1,0 +1,210 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Validate Extraction And Enrichment",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "alertIRI",
+        "expectedIndicatorDetail"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/698e2e15-8da9-49cd-b8ca-63a4bc7c2737",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Fetch Indicators Post Enrichment",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "alerts.uuid",
+                            "value": "{{vars.input.params.alertIRI.split('\/')[-1]}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ]
+                },
+                "module": "indicators?$limit=30",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "uuid": "b9549222-1e35-4ef7-95d2-c4fed7e00f62"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Indicator Enrichment",
+            "description": null,
+            "arguments": {
+                "config": "f64da63c-ab37-4310-8be5-78cafa1061a7",
+                "params": {
+                    "python_function": "expectedIndicators = {{vars.input.params.expectedIndicatorDetail}}\nactualIndicators = {{vars.steps.Fetch_Indicators_Post_Enrichment}}\n\n\n\nstatus = True\nfound = False\nif len(actualIndicators) == expectedIndicators['numberOfIndicators']:\n    fixedIndicatorsDetails = expectedIndicators.get('fixedIndicatorsDetails',[])\n    dynamicIndicatorDetails = expectedIndicators.get('dynamicIndicatorDetails',{'reputation':[],'type':[]})\n    for actualIndicator in actualIndicators:\n        for expectedIndicator in fixedIndicatorsDetails:\n            if actualIndicator['value'] == expectedIndicator['value'] and actualIndicator['reputation']['itemValue'] == expectedIndicator['reputation'] and actualIndicator['typeofindicator']['itemValue'] == expectedIndicator['type']:\n                found = True\n                break\n        if not found and actualIndicator['value'] is not None and actualIndicator['reputation']['itemValue'] in dynamicIndicatorDetails['reputation'] and actualIndicator['typeofindicator']['itemValue'] in dynamicIndicatorDetails['type']:\n            found = True\n        if not found:\n            status = False\n            break\n        found = False\nelse:\n    status = False\n\nprint(status)"
+                },
+                "version": "1.2.5",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "560",
+            "left": "120",
+            "stepType": "\/api\/3\/workflow_step_types\/1fdd14cc-d6b4-4335-a3af-ab49c8ed2fd8",
+            "uuid": "a065ec4c-f341-4bd4-9696-e6b360ddc9d7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Validation Result",
+            "description": null,
+            "arguments": {
+                "hasPassed": "{{vars.steps.Validate_Indicator_Enrichment.data['code_output']}}"
+            },
+            "status": null,
+            "top": "705",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "e4801a16-9377-4508-8c3b-4498152c099b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Find Related Indicators",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "alerts.uuid",
+                            "value": "{{vars.input.params.alertIRI.split('\/')[-1]}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ]
+                },
+                "module": "indicators?$limit=30",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "uuid": "7abe033e-fc8e-43db-864b-2266fa9bd640"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Fetch Enrichment Playbook Execution Status",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Find_Related_Indicators}}",
+                    "__bulk": false,
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "recordIRI": "{{vars.item['@id']}}",
+                    "playbookName": "Get Reputation"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/41dce8b8-f6a9-4474-9707-a960c8613bf0"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "a83c8172-573f-409e-a4a1-413e7e53871f"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "698e2e15-8da9-49cd-b8ca-63a4bc7c2737"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Find Related Indicators",
+            "targetStep": "\/api\/3\/workflow_steps\/7abe033e-fc8e-43db-864b-2266fa9bd640",
+            "sourceStep": "\/api\/3\/workflow_steps\/698e2e15-8da9-49cd-b8ca-63a4bc7c2737",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "fc00ffed-ed60-47ad-8f6b-36a8b0654edd"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Fetch Enrichment Playbook Execution Status -> Copy of Find Related Indicators",
+            "targetStep": "\/api\/3\/workflow_steps\/b9549222-1e35-4ef7-95d2-c4fed7e00f62",
+            "sourceStep": "\/api\/3\/workflow_steps\/a83c8172-573f-409e-a4a1-413e7e53871f",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "7ec5feca-6527-46a5-9f95-c2ff3a8d21c7"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Copy of Find Related Indicators -> Validate Indicator Enrichment",
+            "targetStep": "\/api\/3\/workflow_steps\/a065ec4c-f341-4bd4-9696-e6b360ddc9d7",
+            "sourceStep": "\/api\/3\/workflow_steps\/b9549222-1e35-4ef7-95d2-c4fed7e00f62",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "cc7141de-a3e5-4ccb-ac5b-bea3b4793eb2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate Extraction -> Indicator Extraction Detail Do Not Match",
+            "targetStep": "\/api\/3\/workflow_steps\/e4801a16-9377-4508-8c3b-4498152c099b",
+            "sourceStep": "\/api\/3\/workflow_steps\/a065ec4c-f341-4bd4-9696-e6b360ddc9d7",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "861eb352-572b-4f4c-a4e1-8bec51de446f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Related Indicators -> Fetch Enrichment Playbook Execution Status",
+            "targetStep": "\/api\/3\/workflow_steps\/a83c8172-573f-409e-a4a1-413e7e53871f",
+            "sourceStep": "\/api\/3\/workflow_steps\/7abe033e-fc8e-43db-864b-2266fa9bd640",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "7d4a68f8-5c2f-4039-9d18-3dae40b7e737"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "9ca29d8a-04de-4ce2-99f2-08243837365a",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SP Test Automation",
+        "Simulated Alert Validation"
+    ]
+}

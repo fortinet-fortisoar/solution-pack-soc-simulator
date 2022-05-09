@@ -1,0 +1,172 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Default Validation Of Hunt Creation And Investigation",
+    "aliasName": null,
+    "tag": null,
+    "description": "Validation of default flow of events post hunt creation in demo use case",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "huntIRI",
+        "expectedData"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/c0047fe1-622f-453d-9780-1590f4fcd6d7",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "40",
+            "left": "40",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "c0047fe1-622f-453d-9780-1590f4fcd6d7"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Find Hunt",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "uuid",
+                            "value": "{{vars.input.params.huntIRI.split('\/')[-1]}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ]
+                },
+                "module": "hunt?$limit=30",
+                "checkboxFields": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "40",
+            "left": "420",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "uuid": "80407977-02a0-4f65-b8e4-ea4ebd431af4"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Hunt Details",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "recordIRI": "{{vars.input.params.huntIRI}}",
+                    "expectedRecordDetails": "{{vars.input.params.expectedData['huntFields']}}"
+                },
+                "apply_async": false,
+                "ignore_errors": true,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/b39cd767-f176-42c2-b7a5-421e09bd1559"
+            },
+            "status": null,
+            "top": "40",
+            "left": "800",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "1c85ef11-e008-44c2-82ba-6cb2c30c8411"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Prepare Json Report",
+            "description": null,
+            "arguments": {
+                "config": "824a0753-4872-48fe-9af0-0c80b19b7ca6",
+                "params": {
+                    "python_function": "report = []\n\n#huntDetails\nresult = {{vars.steps.Validate_Hunt_Details['hasPassed']}}\nif result :\n  status = 'Passed'\nelse:\n status = 'Failed'\nreport.append( {\"title\": \"Hunt creation and detail comparison\", \"result\": status})\n\nprint(report)"
+                },
+                "version": "1.2.5",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": {
+                    "report": "{{vars.result.data['code_output']}}"
+                }
+            },
+            "status": null,
+            "top": "40",
+            "left": "1200",
+            "stepType": "\/api\/3\/workflow_step_types\/1fdd14cc-d6b4-4335-a3af-ab49c8ed2fd8",
+            "uuid": "5d9ecd4a-153e-4ad2-b10a-3ba1635c6a42"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Validation Result",
+            "description": null,
+            "arguments": {
+                "Test Steps": "{{vars.steps.Prepare_Json_Report.data['code_output']}}",
+                "Test Identifier": "{{vars.steps.Find_Hunt[0].name}}"
+            },
+            "status": null,
+            "top": "40",
+            "left": "1680",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "e685e5d4-c950-4492-929f-4cefa897fca9"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Find Hunt",
+            "targetStep": "\/api\/3\/workflow_steps\/80407977-02a0-4f65-b8e4-ea4ebd431af4",
+            "sourceStep": "\/api\/3\/workflow_steps\/c0047fe1-622f-453d-9780-1590f4fcd6d7",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "ffb5ed43-097e-40c3-862e-1ee368485f14"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Hunt -> Validate Alert Details",
+            "targetStep": "\/api\/3\/workflow_steps\/1c85ef11-e008-44c2-82ba-6cb2c30c8411",
+            "sourceStep": "\/api\/3\/workflow_steps\/80407977-02a0-4f65-b8e4-ea4ebd431af4",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "0d2aff51-0533-431f-a66b-2afd25a225f1"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate Hunt Details -> Prepare Json Report",
+            "targetStep": "\/api\/3\/workflow_steps\/5d9ecd4a-153e-4ad2-b10a-3ba1635c6a42",
+            "sourceStep": "\/api\/3\/workflow_steps\/1c85ef11-e008-44c2-82ba-6cb2c30c8411",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "39ee9b12-a9be-4ce9-a5c0-39c9c37792c1"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Prepare Json Report -> Set Validation Result",
+            "targetStep": "\/api\/3\/workflow_steps\/e685e5d4-c950-4492-929f-4cefa897fca9",
+            "sourceStep": "\/api\/3\/workflow_steps\/5d9ecd4a-153e-4ad2-b10a-3ba1635c6a42",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "573d2abc-4d63-4a08-b914-c788973282cc"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "abc07b5f-561f-4eb0-bf16-2ac67a7ed8a4",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SP Test Automation",
+        "Hunt Validation"
+    ]
+}

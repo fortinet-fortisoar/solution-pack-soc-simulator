@@ -9,7 +9,9 @@
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
-    "parameters": [],
+    "parameters": [
+        "scenarioTitle"
+    ],
     "synchronous": false,
     "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
     "versions": [],
@@ -45,7 +47,7 @@
             "name": "Configuration",
             "description": null,
             "arguments": {
-                "selectedScenario": "{{vars.input.params.scenario.title}}"
+                "selectedScenario": "{{vars.input.params.scenario.title|  ternary(vars.input.params.scenario.title,vars.input.params.scenarioTitle)}}"
             },
             "status": null,
             "top": "165",
@@ -128,7 +130,8 @@
                 "step_variables": {
                     "input": {
                         "params": {
-                            "scenario": "{{vars.request.data[\"scenario\"]}}"
+                            "scenario": "{{vars.request.data[\"scenario\"]}}",
+                            "scenarioTitle": "{{ vars.scenarioTitle }}"
                         },
                         "records": "{{vars.input.records}}"
                     }
