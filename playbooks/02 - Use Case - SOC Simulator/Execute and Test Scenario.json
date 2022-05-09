@@ -1,0 +1,427 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Execute and Test Scenario",
+    "aliasName": null,
+    "tag": null,
+    "description": "",
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/df3e0178-b4c2-43d9-b2d2-77f844a3d683",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Reset Scenario",
+            "description": null,
+            "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "ignore_errors": true,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/98506caa-32ab-429d-9c0f-42d92a71b5d1"
+            },
+            "status": null,
+            "top": "300",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "165dcea3-206e-4f3f-969c-89b76f3c9ebf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Test Result",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Validation Completed<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
+                "resource": {
+                    "resultJson": "{{vars.steps.Prepare_JSON_Report.data['code_output']}}",
+                    "testResult": "<p>{{vars.steps.Prepare_HTML_Report['HTML_Report']}}<\/p>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/scenario",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1380",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "uuid": "cbcf57ee-501c-4c79-b26a-76eede1a31f8"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Created Records From Scenario",
+            "description": null,
+            "arguments": {
+                "expectednumber": "{{vars.input.records[0].expectedData | length}}",
+                "created_alerts_id": "{{vars.steps.Get_Scenario_Details_After_Alerts_Are_Created[0].createdAlertsID}}"
+            },
+            "status": null,
+            "top": "705",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "13c1a39f-27c5-4cf3-bdf9-1cb3c4d955a2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Scenario Details After Alerts Are Created",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "title",
+                            "value": "{{vars.input.records[0].title}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ],
+                    "__selectFields": [
+                        "steps",
+                        "createdAlertsID"
+                    ]
+                },
+                "module": "scenario?$limit=1",
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Validation Started<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
+                "ignore_errors": false,
+                "checkboxFields": true,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "uuid": "ade0bd47-9ed9-482a-95f8-3467a870c419"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Scenario As Record Count Did Not Match",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "content": "<p>Validation Completed<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
+                "resource": {
+                    "testResult": "<p><span style=\"font-size: 12pt;\"><strong><span style=\"color: #e03e2d;\">Validation Failed:<\/span><\/strong> <\/span><\/p>\n<p>Expected record count mismatch.<\/p>\n<p>Expected record count: {{vars.input.records[0].expectedData| length}}<\/p>\n<p>Actual record count: {{vars.created_alerts_id | length }}&nbsp;<\/p>"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/scenario",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "975",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "uuid": "710f1971-15e5-44c7-96bb-467dda53e257"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "iterator": "[]"
+            },
+            "status": null,
+            "top": "165",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "47ef4689-0077-4f5e-8bd2-4fb1b5a259fb"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "3744bd67-7782-41d8-9a1a-25d2cc4ddcec",
+                "title": "Test Scenario",
+                "resources": [
+                    "scenario"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "_promptexpanded": false,
+                "displayConditions": {
+                    "alerts": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": []
+                    },
+                    "scenario": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "primitive",
+                                "field": "title",
+                                "value": "Brute Force Attempt",
+                                "operator": "eq",
+                                "_operator": "eq"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+            },
+            "status": null,
+            "top": "30",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "uuid": "df3e0178-b4c2-43d9-b2d2-77f844a3d683"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Match Expected Record Count",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Not Matched",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/710f1971-15e5-44c7-96bb-467dda53e257",
+                        "step_name": "Update Scenario As Alert Count Did Not Match"
+                    },
+                    {
+                        "option": "Matched",
+                        "step_iri": "\/api\/3\/workflow_steps\/b9485ab7-0b7a-4748-9b41-4a327c0350c4",
+                        "condition": "{{ vars.created_alerts_id | length == vars.input.records[0].expectedData| length }}",
+                        "step_name": "Append Values To Iterator"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "840",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "uuid": "ab02650f-2c2d-46c1-a1bc-46df73fca827"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Prepare HTML Report",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "resultJson": "{{vars.steps.Execute_Test_Steps}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/b516f25e-890a-4efc-9793-9949f68b0f4e"
+            },
+            "status": null,
+            "top": "1245",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "b37ea4a2-2c35-4713-835f-0410f16d5ffa"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Append Values To Iterator",
+            "description": null,
+            "arguments": {
+                "temp": "{% for i in range(0,vars.created_alerts_id| length) %}\n{{vars.iterator.append(i)}}\n{%endfor%}"
+            },
+            "status": null,
+            "top": "975",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "b9485ab7-0b7a-4748-9b41-4a327c0350c4"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Run Selected Scenario",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "scenarioTitle": "{{vars.input.records[0].title}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/71cf1ad8-9215-49e6-9aa2-be27c3c3ffa6"
+            },
+            "status": null,
+            "top": "435",
+            "left": "300",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "ba02c375-5d70-415e-a67e-cf58a015e2d6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Execute Test Steps",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.iterator}}",
+                    "__bulk": false,
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "recordIRI": "{{vars.created_alerts_id[vars.item]}}",
+                    "expectedData": "{{vars.input.records[0].expectedData[vars.item]}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/e96c1b7f-e55f-4433-b719-5ab8be9c2033"
+            },
+            "status": null,
+            "top": "1110",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "644e1688-141a-4f1e-8fd2-e491a4739b5d"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Copy  of Find Scenario -> Get Alert Fields from scenario step",
+            "targetStep": "\/api\/3\/workflow_steps\/13c1a39f-27c5-4cf3-bdf9-1cb3c4d955a2",
+            "sourceStep": "\/api\/3\/workflow_steps\/ade0bd47-9ed9-482a-95f8-3467a870c419",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "1736e385-406b-46f3-a14e-ec6601141f94"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/47ef4689-0077-4f5e-8bd2-4fb1b5a259fb",
+            "sourceStep": "\/api\/3\/workflow_steps\/df3e0178-b4c2-43d9-b2d2-77f844a3d683",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "930d253b-37fa-45b3-94b1-a862b4c9ca0b"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Prepare HTML Report -> Update Test Result",
+            "targetStep": "\/api\/3\/workflow_steps\/cbcf57ee-501c-4c79-b26a-76eede1a31f8",
+            "sourceStep": "\/api\/3\/workflow_steps\/b37ea4a2-2c35-4713-835f-0410f16d5ffa",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "74a04154-14cf-4857-b7d7-33df7076ceb0"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Reset Scenario -> Run Selected Scenario",
+            "targetStep": "\/api\/3\/workflow_steps\/ba02c375-5d70-415e-a67e-cf58a015e2d6",
+            "sourceStep": "\/api\/3\/workflow_steps\/165dcea3-206e-4f3f-969c-89b76f3c9ebf",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "b20d92b6-02f8-4607-ac71-e64717decd4c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Match Expected Alert Count -> Append Values To Iterator",
+            "targetStep": "\/api\/3\/workflow_steps\/b9485ab7-0b7a-4748-9b41-4a327c0350c4",
+            "sourceStep": "\/api\/3\/workflow_steps\/ab02650f-2c2d-46c1-a1bc-46df73fca827",
+            "label": "Matched",
+            "isExecuted": false,
+            "uuid": "2766ce18-236b-4ec6-a5ca-0bac0d82096d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Reset Scenario",
+            "targetStep": "\/api\/3\/workflow_steps\/165dcea3-206e-4f3f-969c-89b76f3c9ebf",
+            "sourceStep": "\/api\/3\/workflow_steps\/47ef4689-0077-4f5e-8bd2-4fb1b5a259fb",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "167adfca-1170-44ae-bcff-c2dad93b61c2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Alert Fields from scenario step -> if actual number of alerts match expected numbers",
+            "targetStep": "\/api\/3\/workflow_steps\/ab02650f-2c2d-46c1-a1bc-46df73fca827",
+            "sourceStep": "\/api\/3\/workflow_steps\/13c1a39f-27c5-4cf3-bdf9-1cb3c4d955a2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "75aa5a07-49b7-4b75-96fb-0dd9499ded08"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "If Actual Number Of Alerts Match Expected Numbers -> Update result to indicate mismatch in number of alerts",
+            "targetStep": "\/api\/3\/workflow_steps\/710f1971-15e5-44c7-96bb-467dda53e257",
+            "sourceStep": "\/api\/3\/workflow_steps\/ab02650f-2c2d-46c1-a1bc-46df73fca827",
+            "label": "Not Matched",
+            "isExecuted": false,
+            "uuid": "a4e726dc-4957-4771-9ecb-df02b69b69a8"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Run Selected Scenario -> Get Scenario Details After Alerts Are Created",
+            "targetStep": "\/api\/3\/workflow_steps\/ade0bd47-9ed9-482a-95f8-3467a870c419",
+            "sourceStep": "\/api\/3\/workflow_steps\/ba02c375-5d70-415e-a67e-cf58a015e2d6",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "fd035854-c50f-421e-881f-e5aeb33d196a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Append Values To Iterator -> Execute Test Steps",
+            "targetStep": "\/api\/3\/workflow_steps\/644e1688-141a-4f1e-8fd2-e491a4739b5d",
+            "sourceStep": "\/api\/3\/workflow_steps\/b9485ab7-0b7a-4748-9b41-4a327c0350c4",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "6f09cef5-25aa-4baf-b5e2-8a411746d4e2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Execute Test Steps -> Prepare HTML Report",
+            "targetStep": "\/api\/3\/workflow_steps\/b37ea4a2-2c35-4713-835f-0410f16d5ffa",
+            "sourceStep": "\/api\/3\/workflow_steps\/644e1688-141a-4f1e-8fd2-e491a4739b5d",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "b9514d1c-0143-4141-9ae8-2a10709925e9"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "b790a914-c8a5-4a18-8f2b-38a460e6af8c",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "FortiSOAR SOC Simulator",
+        "SP Test Automation"
+    ]
+}

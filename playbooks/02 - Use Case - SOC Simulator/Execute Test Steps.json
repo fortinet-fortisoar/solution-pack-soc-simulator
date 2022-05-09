@@ -1,0 +1,325 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Execute Test Steps",
+    "aliasName": null,
+    "tag": null,
+    "description": "This will call the playbook implemented for standard validation of a particular record type",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "recordIRI",
+        "expectedData"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/fd7b3843-1202-46e3-8be4-62c66cebb993",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "350",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "fd7b3843-1202-46e3-8be4-62c66cebb993"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Check Record Type",
+            "description": null,
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Alert",
+                        "step_iri": "\/api\/3\/workflow_steps\/40cba7e5-ae7f-418d-b75f-95d4bcc7a987",
+                        "condition": "{{ 'alert' in vars.input.params.recordIRI }}",
+                        "step_name": "Execute Test Steps For Alert"
+                    },
+                    {
+                        "option": "Other",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/6302b825-4ee5-418b-80dc-e1eec5388f07",
+                        "step_name": "Test Validation Playbook Not Yet Implemented"
+                    },
+                    {
+                        "option": "Hunt",
+                        "step_iri": "\/api\/3\/workflow_steps\/8348c5cd-8b58-417e-b427-986961e9e8a6",
+                        "condition": "{{ 'hunt' in vars.input.params.recordIRI }}",
+                        "step_name": "Copy of Execute Test Steps For Alert"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "190",
+            "left": "1101",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "uuid": "460ddbc0-f2d0-4979-b1bd-3c413c163126"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Execute Test Steps For Alert",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "recordIRI": "{{vars.input.params.recordIRI}}",
+                    "expectedData": "{{vars.input.params.expectedData}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/409085d6-0f30-4aeb-a0f1-248d4660e245"
+            },
+            "status": null,
+            "top": "30",
+            "left": "1425",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "40cba7e5-ae7f-418d-b75f-95d4bcc7a987"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Default Validation Playbook Not Yet Implemented",
+            "description": null,
+            "arguments": {
+                "Test Steps": "[\n{\n\"Execute Test Steps\":\"Default validation playbook for this record type is not found\"\n}\n]",
+                "Test Identifier": "{{vars.input.params.recordIRI}}"
+            },
+            "status": null,
+            "top": "200",
+            "left": "1420",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "6302b825-4ee5-418b-80dc-e1eec5388f07"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Validation Result For Alerts",
+            "description": null,
+            "arguments": {
+                "Test Steps": "{{vars.steps.Execute_Test_Steps_For_Alert['Test Steps']}}",
+                "Test Identifier": "{{vars.testIdentifier}}"
+            },
+            "status": null,
+            "top": "40",
+            "left": "1760",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "29ecbc0b-fedb-4fd1-8146-0ffbdcd87144"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Execute Test Steps For Hunt",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "huntIRI": "{{vars.input.params.recordIRI}}",
+                    "expectedData": "{{vars.input.params.expectedData}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/abc07b5f-561f-4eb0-bf16-2ac67a7ed8a4"
+            },
+            "status": null,
+            "top": "350",
+            "left": "1425",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "8348c5cd-8b58-417e-b427-986961e9e8a6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Validation Result For Hunts",
+            "description": null,
+            "arguments": {
+                "Test Steps": "{{vars.steps.Execute_Test_Steps_For_Hunt['Test Steps']}}",
+                "Test Identifier": "{{vars.testIdentifier}}"
+            },
+            "status": null,
+            "top": "360",
+            "left": "1760",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "fa868fc5-bbce-4524-b84a-cefd874dff1a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "testIdentifier": "{{vars.input.params.expectedData.testIdentifier | ternary(vars.input.params.expectedData.testIdentifier,'Test identifier missing from test data for this record')}}",
+                "testValidationPBIRI": "{{vars.input.params.expectedData.testValidationPBIRI | ternary(vars.input.params.expectedData.testValidationPBIRI, 'Default')}}"
+            },
+            "status": null,
+            "top": "360",
+            "left": "460",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "7f638985-9a42-438e-a3d0-ef1a3f43b50b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "If Custom Test Validation PB Is Available",
+            "description": "If Custom Validation PB IRI is available in expected data that will be executed else default validation playbook will be executed",
+            "arguments": {
+                "conditions": [
+                    {
+                        "option": "Yes",
+                        "step_iri": "\/api\/3\/workflow_steps\/e34d8b47-19a3-420c-85f9-12c8613fb675",
+                        "condition": "{{ vars.testValidationPBIRI != \"Default\" }}",
+                        "step_name": "Execute Custom Validation Playbook"
+                    },
+                    {
+                        "option": "No",
+                        "default": true,
+                        "step_iri": "\/api\/3\/workflow_steps\/460ddbc0-f2d0-4979-b1bd-3c413c163126",
+                        "step_name": "Check Record Type"
+                    }
+                ]
+            },
+            "status": null,
+            "top": "360",
+            "left": "780",
+            "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "uuid": "0f9c8559-932d-4490-96d8-b3821edb4d9d"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Execute Custom Validation Playbook",
+            "description": "Execute Custom Validation Playbook. \nThe Custom Playbook must return execution result in correct json format under variable 'Test Steps'. This 'Test Steps' variable is read in next step and is returned to the parent playbook.\nFor reference please check the default validation playbooks",
+            "arguments": {
+                "arguments": {
+                    "recordIRI": "{{vars.input.params.recordIRI}}",
+                    "expectedData": "{{vars.input.params.expectedData}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "{{vars.testValidationPBIRI}}"
+            },
+            "status": null,
+            "top": "510",
+            "left": "1101",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "e34d8b47-19a3-420c-85f9-12c8613fb675"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Execution Result For Custom Validation",
+            "description": null,
+            "arguments": {
+                "Test Steps": "{{vars.steps.Execute_Custom_Validation_Playbook['Test Steps']}}",
+                "Test Identifier": "{{vars.testIdentifier}}"
+            },
+            "status": null,
+            "top": "520",
+            "left": "1420",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "7a0164b8-76af-448c-a333-eec6e7f8713e"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Check Record Type -> Execute Test Steps For Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/40cba7e5-ae7f-418d-b75f-95d4bcc7a987",
+            "sourceStep": "\/api\/3\/workflow_steps\/460ddbc0-f2d0-4979-b1bd-3c413c163126",
+            "label": "Alert",
+            "isExecuted": false,
+            "uuid": "f6037f35-7a56-49d6-a7b0-e2900b121743"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Check Record Type -> Test Validation Playbook Not Yet Implemented",
+            "targetStep": "\/api\/3\/workflow_steps\/6302b825-4ee5-418b-80dc-e1eec5388f07",
+            "sourceStep": "\/api\/3\/workflow_steps\/460ddbc0-f2d0-4979-b1bd-3c413c163126",
+            "label": "Other",
+            "isExecuted": false,
+            "uuid": "4942e49f-ff96-4e65-be09-9445ef868858"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Execute Test Steps For Alert -> Set Validation Result",
+            "targetStep": "\/api\/3\/workflow_steps\/29ecbc0b-fedb-4fd1-8146-0ffbdcd87144",
+            "sourceStep": "\/api\/3\/workflow_steps\/40cba7e5-ae7f-418d-b75f-95d4bcc7a987",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "31c049b3-6012-4dc9-80d8-5b7aedb457c4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Check Record Type -> Copy of Execute Test Steps For Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/8348c5cd-8b58-417e-b427-986961e9e8a6",
+            "sourceStep": "\/api\/3\/workflow_steps\/460ddbc0-f2d0-4979-b1bd-3c413c163126",
+            "label": "Hunt",
+            "isExecuted": false,
+            "uuid": "cf08b5de-e218-4473-9c4c-07a39ea0ec9f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Copy of Execute Test Steps For Alert -> Copy of Set Validation Result",
+            "targetStep": "\/api\/3\/workflow_steps\/fa868fc5-bbce-4524-b84a-cefd874dff1a",
+            "sourceStep": "\/api\/3\/workflow_steps\/8348c5cd-8b58-417e-b427-986961e9e8a6",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "3d876812-d358-41b7-9824-988955693695"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/7f638985-9a42-438e-a3d0-ef1a3f43b50b",
+            "sourceStep": "\/api\/3\/workflow_steps\/fd7b3843-1202-46e3-8be4-62c66cebb993",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "f777b8e5-3f41-4d4f-a27f-6d1b34aa344e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> If Custom Test Validation PB IRI is available in test data",
+            "targetStep": "\/api\/3\/workflow_steps\/0f9c8559-932d-4490-96d8-b3821edb4d9d",
+            "sourceStep": "\/api\/3\/workflow_steps\/7f638985-9a42-438e-a3d0-ef1a3f43b50b",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "ba484919-47f0-4231-8120-2c28960d8dd2"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "If Custom Test Validation PB IRI is available in test data -> Check Record Type",
+            "targetStep": "\/api\/3\/workflow_steps\/460ddbc0-f2d0-4979-b1bd-3c413c163126",
+            "sourceStep": "\/api\/3\/workflow_steps\/0f9c8559-932d-4490-96d8-b3821edb4d9d",
+            "label": "No",
+            "isExecuted": false,
+            "uuid": "d43b20e6-5db5-450d-aa84-5c9ef61f3c68"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "If Custom Test Validation PB Is Available -> Execute Custom Validation Playbook",
+            "targetStep": "\/api\/3\/workflow_steps\/e34d8b47-19a3-420c-85f9-12c8613fb675",
+            "sourceStep": "\/api\/3\/workflow_steps\/0f9c8559-932d-4490-96d8-b3821edb4d9d",
+            "label": "Yes",
+            "isExecuted": false,
+            "uuid": "b9d52b8c-6ff2-4936-a2bd-602b7a0e1f20"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Execute Custom Validation Playbook -> Copy of Set Validation Result For Hunts",
+            "targetStep": "\/api\/3\/workflow_steps\/7a0164b8-76af-448c-a333-eec6e7f8713e",
+            "sourceStep": "\/api\/3\/workflow_steps\/e34d8b47-19a3-420c-85f9-12c8613fb675",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "1ea84118-abb0-49f7-a60d-ff3c430b3a6a"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "e96c1b7f-e55f-4433-b719-5ab8be9c2033",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "FortiSOAR SOC Simulator",
+        "SP Test Automation"
+    ]
+}

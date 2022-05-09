@@ -1,0 +1,369 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Default Validation Of Alert Triage And Investigation",
+    "aliasName": null,
+    "tag": null,
+    "description": "Validation of default flow of events post alert creation in demo use cases",
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "recordIRI",
+        "expectedData"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/663a7d13-61a1-4f6d-acdc-ff68fd98097a",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate SLA",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "createDate": "{{vars.steps.Find_Alert[0].createDate}}",
+                    "respDueDate": "{{vars.steps.Find_Alert[0].respDueDate}}"
+                },
+                "apply_async": false,
+                "ignore_errors": true,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/36e8453a-8425-4900-834f-1bdb2aa632ce"
+            },
+            "status": null,
+            "top": "190",
+            "left": "1426",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "a1f10918-a112-410d-8c41-9eb33fa064a1"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Extraction And EnrichMent",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "alertIRI": "{{vars.input.params.recordIRI}}",
+                    "expectedIndicatorDetail": "{{vars.input.params.expectedData.indicatorDetails}}"
+                },
+                "apply_async": false,
+                "ignore_errors": true,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/9ca29d8a-04de-4ce2-99f2-08243837365a"
+            },
+            "status": null,
+            "top": "350",
+            "left": "1426",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "a77116c1-d37e-4509-9b45-3a25d94ba3c1"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Investigation",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "alerRecord": "{{vars.steps.Find_Alert[0]}}",
+                    "investigationDetails": "{{vars.input.params.expectedData.investigationDetails}}"
+                },
+                "apply_async": false,
+                "ignore_errors": true,
+                "step_variables": [],
+                "workflowReference": "{{vars.input.params.expectedData.investigationDetails.validateInvestigationPBIRI}}"
+            },
+            "status": null,
+            "top": "270",
+            "left": "1751",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "08c25de0-9e3c-4e6e-8240-e7ef9be0a5cf"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "270",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "663a7d13-61a1-4f6d-acdc-ff68fd98097a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Find Alert",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "uuid",
+                            "value": "{{vars.input.params.recordIRI.split('\/')[-1]}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ]
+                },
+                "module": "alerts?$limit=30",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "280",
+            "left": "1100",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "uuid": "234c0103-30f1-46e1-abd4-e194e2723504"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Alert Details",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "recordIRI": "{{vars.input.params.recordIRI}}",
+                    "expectedRecordDetails": "{{vars.input.params.expectedData['alertFields']}}"
+                },
+                "apply_async": false,
+                "ignore_errors": true,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/b39cd767-f176-42c2-b7a5-421e09bd1559"
+            },
+            "status": null,
+            "top": "510",
+            "left": "1426",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "512c3ab8-2f0c-4ca4-b8b7-88c081b7b5a2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Assigned Date",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "createDate": "{{vars.steps.Find_Alert[0].createDate}}",
+                    "assignedDate": "{{vars.steps.Find_Alert[0].assigneddate}}"
+                },
+                "apply_async": false,
+                "ignore_errors": true,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/544fee58-9b7d-4841-93ec-59307fb6db4e"
+            },
+            "status": null,
+            "top": "30",
+            "left": "1426",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "a1fef69a-c6d4-455b-b7c2-f4ba865240a2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Validation Result",
+            "description": null,
+            "arguments": {
+                "Test Steps": "{{vars.steps.Prepare_Json_Report.data['code_output']}}"
+            },
+            "status": null,
+            "top": "280",
+            "left": "2400",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "a2aa8b49-e80e-419f-b645-174dfaa604af"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Prepare Json Report",
+            "description": null,
+            "arguments": {
+                "config": "824a0753-4872-48fe-9af0-0c80b19b7ca6",
+                "params": {
+                    "python_function": "report = []\n#playbookExecution\nresults = {{vars.steps.Validate_Playbook_Execution}}\nstatus = \"Passed\"\nfor result in results:\n if 'finished' not in result['executionStatus']:\n  status = \"Failed\"\n  break\n\nreport.append( {\"title\": \"Default PB Execution For Alert\", \"result\": status})\n\n\n\n#alertDetails\nresult = {{vars.steps.Validate_Alert_Details['hasPassed']|ternary(vars.steps.Validate_Alert_Details['hasPassed'],\"False\")}}\nif result :\n  status = 'Passed'\nelse:\n status = 'Failed'\nreport.append( {\"title\": \"Alert created and details matched\", \"result\": status})\n\n\n#assignedDate\nresult= {{vars.steps.Validate_Assigned_Date['hasPassed']|ternary(vars.steps.Validate_Assigned_Date['hasPassed'],\"False\")}}\nif result :\n  status = 'Passed'\nelse:\n status = 'Failed'\nreport.append({\"title\": \"Assigned date is set\", \"result\": status})\n\n#SLA Validation\nresult = {{vars.steps.Validate_SLA['hasPassed']|ternary(vars.steps.Validate_SLA['hasPassed'],\"False\")}}\nif result :\n  status = 'Passed'\nelse:\n status = 'Failed'\nreport.append({\"title\": \"Alert SLA is set\", \"result\": status})\n\n#Extraction and Enrichment\nresult= {{vars.steps.Validate_Extraction_And_EnrichMent['hasPassed']|ternary(vars.steps.Validate_Extraction_And_EnrichMent['hasPassed'],\"False\")}}\nif result :\n  status = 'Passed'\nelse:\n status = 'Failed'\nreport.append({\"title\": \"Indicator extraction and enrichment successful\", \"result\": status})\n\n#Investigation\ninvestigationResult= {{vars.steps.Validate_Investigation|ternary(vars.steps.Validate_Investigation,\"False\")}}\nif 'Error message' in investigationResult :\n if 'playbook referenced is non-existent' in investigationResult['Error message']:\n  status = 'Investigation validation playbook not found'\nelse:\n if investigationResult['hasPassed'] :\n   status = 'Passed'\n else:\n  status = 'Failed'\nincludeInvestigation = '{{vars.input.params.expectedData.investigationDetails.validateInvestigationPBIRI|ternary(vars.input.params.expectedData.investigationDetails.validateInvestigationPBIRI,\"Absent\")}}'\nif includeInvestigation is not \"Absent\":\n report.append({\"title\": \"Alert investigation is successful\", \"result\": status})\n\nprint(report)"
+                },
+                "version": "1.2.5",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": {
+                    "report": "{{vars.result.data['code_output']}}"
+                }
+            },
+            "status": null,
+            "top": "260",
+            "left": "2080",
+            "stepType": "\/api\/3\/workflow_step_types\/1fdd14cc-d6b4-4335-a3af-ab49c8ed2fd8",
+            "uuid": "d6b30609-8afe-49e3-be94-e79563ec7344"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Playbook Execution",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.pbListToValidate}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "recordIRI": "{{vars.input.params.recordIRI}}",
+                    "playbookName": "{{vars.item}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/41dce8b8-f6a9-4474-9707-a960c8613bf0"
+            },
+            "status": null,
+            "top": "270",
+            "left": "776",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "57b81bad-c992-4872-9d1b-d9318a4ebb06"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "iterator": "[]",
+                "pbListToValidate": "[\n\"Assign Random User to Unassigned Alerts\",\n\"Set Assigned Date\", \n\"Capture All SLA\",\n\"Extract Indicators\",\n\"Compute Alert Priority Weight\"\n]"
+            },
+            "status": null,
+            "top": "280",
+            "left": "460",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "4143b958-9bc7-4674-adb4-565a30027436"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Alert -> Validate SLA",
+            "targetStep": "\/api\/3\/workflow_steps\/a1f10918-a112-410d-8c41-9eb33fa064a1",
+            "sourceStep": "\/api\/3\/workflow_steps\/234c0103-30f1-46e1-abd4-e194e2723504",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "6cec78e7-7220-459a-87f0-353995dd9c69"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate Assigned Date -> Validate Investigation",
+            "targetStep": "\/api\/3\/workflow_steps\/08c25de0-9e3c-4e6e-8240-e7ef9be0a5cf",
+            "sourceStep": "\/api\/3\/workflow_steps\/a1fef69a-c6d4-455b-b7c2-f4ba865240a2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "dc14e43e-9413-4f9d-a2a8-edf27f92c050"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate SLA -> Validate Investigation",
+            "targetStep": "\/api\/3\/workflow_steps\/08c25de0-9e3c-4e6e-8240-e7ef9be0a5cf",
+            "sourceStep": "\/api\/3\/workflow_steps\/a1f10918-a112-410d-8c41-9eb33fa064a1",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "9dae1bed-9701-4776-860e-9df8e7a2ccfa"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate Investigation -> Prepare Report",
+            "targetStep": "\/api\/3\/workflow_steps\/d6b30609-8afe-49e3-be94-e79563ec7344",
+            "sourceStep": "\/api\/3\/workflow_steps\/08c25de0-9e3c-4e6e-8240-e7ef9be0a5cf",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "807130c2-c5be-405a-b7eb-92031a3357d4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate Extraction And EnrichMent -> Validate Investigation",
+            "targetStep": "\/api\/3\/workflow_steps\/08c25de0-9e3c-4e6e-8240-e7ef9be0a5cf",
+            "sourceStep": "\/api\/3\/workflow_steps\/a77116c1-d37e-4509-9b45-3a25d94ba3c1",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "3eae0b9f-d149-4006-92ec-44b0f757794a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Prepare Report -> Set Output",
+            "targetStep": "\/api\/3\/workflow_steps\/a2aa8b49-e80e-419f-b645-174dfaa604af",
+            "sourceStep": "\/api\/3\/workflow_steps\/d6b30609-8afe-49e3-be94-e79563ec7344",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "b26b5023-7df4-4857-888d-1af041454407"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Check Alert Detail -> Validate Investigation",
+            "targetStep": "\/api\/3\/workflow_steps\/08c25de0-9e3c-4e6e-8240-e7ef9be0a5cf",
+            "sourceStep": "\/api\/3\/workflow_steps\/512c3ab8-2f0c-4ca4-b8b7-88c081b7b5a2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "9985a33b-fc9e-4142-b187-d7e0b7f3947e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Alert -> Validate Extraction And EnrichMent",
+            "targetStep": "\/api\/3\/workflow_steps\/a77116c1-d37e-4509-9b45-3a25d94ba3c1",
+            "sourceStep": "\/api\/3\/workflow_steps\/234c0103-30f1-46e1-abd4-e194e2723504",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "6593a42c-c5bb-46b1-88f8-32b9655ecc3a"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Alert -> Check Alert Detail",
+            "targetStep": "\/api\/3\/workflow_steps\/512c3ab8-2f0c-4ca4-b8b7-88c081b7b5a2",
+            "sourceStep": "\/api\/3\/workflow_steps\/234c0103-30f1-46e1-abd4-e194e2723504",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "9b9ca6cd-ae97-4920-bbe3-5810a25cec61"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Alert -> Validate Assigned Date",
+            "targetStep": "\/api\/3\/workflow_steps\/a1fef69a-c6d4-455b-b7c2-f4ba865240a2",
+            "sourceStep": "\/api\/3\/workflow_steps\/234c0103-30f1-46e1-abd4-e194e2723504",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "69041e45-94d1-42ee-a45e-a5d99dd19cf8"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/4143b958-9bc7-4674-adb4-565a30027436",
+            "sourceStep": "\/api\/3\/workflow_steps\/663a7d13-61a1-4f6d-acdc-ff68fd98097a",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "68ed99a4-7d67-4ed5-930d-5abbf7196595"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Validate Playbook Execution",
+            "targetStep": "\/api\/3\/workflow_steps\/57b81bad-c992-4872-9d1b-d9318a4ebb06",
+            "sourceStep": "\/api\/3\/workflow_steps\/4143b958-9bc7-4674-adb4-565a30027436",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "722fd6fa-6b5c-483b-8e15-e92661db38ad"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate Playbook Execution -> Find Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/234c0103-30f1-46e1-abd4-e194e2723504",
+            "sourceStep": "\/api\/3\/workflow_steps\/57b81bad-c992-4872-9d1b-d9318a4ebb06",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "9fb051b4-2d53-4c73-969b-590c9fef9eb0"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "409085d6-0f30-4aeb-a0f1-248d4660e245",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SP Test Automation",
+        "Simulated Alert Validation"
+    ]
+}

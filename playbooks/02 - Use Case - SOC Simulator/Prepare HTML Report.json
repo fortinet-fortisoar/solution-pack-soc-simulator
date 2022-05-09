@@ -1,0 +1,93 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Prepare HTML Report",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "resultJson"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/0242cd06-0c71-43ce-bd68-c7b703e62a78",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "0242cd06-0c71-43ce-bd68-c7b703e62a78"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set HTML Report Output",
+            "description": null,
+            "arguments": {
+                "HTML_Report": "{{vars.HTML_Report | replace ('\\n','')}}"
+            },
+            "status": null,
+            "top": "30",
+            "left": "775",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "020c70ce-3f91-4229-be04-61f8446a08f3"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create HTML Report From Input JSON",
+            "description": null,
+            "arguments": {
+                "HTML_Report": "{%for result in vars.input.params.resultJson%}\n<p><span style='font-size: 12pt;'><span style='color: #ffffff;'><span style='color: #919daf;'>Test Identifier: <\/span><\/span><strong><span style='color: #ffffff;'><span style='color: #919daf;'>&nbsp;<\/span>{{result['Test Identifier']}}<\/span><\/strong><\/span><\/p>\n<table style='border-collapse: collapse; width: 75%; border-color: #34495E; border-style: none;' border='1'><tbody><tr><td style='width: 30%;'><span style='font-size: 14pt; color: #f1c40f;'>&nbsp;Step Name<\/span><\/td><td style='width: 15%;'><span style='font-size: 14pt; color: #f1c40f;'>&nbsp;Result<\/span><\/td><\/tr>\n{%for step in result['Test Steps']%}\n{%if step['result'] == 'Passed'%}\n<tr><td style='width: 30%;'><span style='font-size: 10pt;'>&nbsp;{{step['title']}}<\/span><\/td><td style='width: 15%;'><span style='font-size: 10pt;'>&nbsp;{{step['result']}}<\/span><\/td><\/tr>\n{%else%}\n<tr>\n<td style='width: 30%;'><span style='font-size: 10pt;'>&nbsp;{{step['title']}}<\/span><\/td><td style='width: 15%;'><span style='font-size: 10pt;'>&nbsp;<span style='color: #e03e2d;'>{{step['result']}}<\/span><\/td>\n<\/tr>\n{%endif%}\n{%endfor%}\n<\/tbody><\/table><p>&nbsp;<\/p>\n{%endfor%}"
+            },
+            "status": null,
+            "top": "40",
+            "left": "460",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "6067eabb-4120-4c68-9a9f-815e972fb2fa"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Report",
+            "targetStep": "\/api\/3\/workflow_steps\/6067eabb-4120-4c68-9a9f-815e972fb2fa",
+            "sourceStep": "\/api\/3\/workflow_steps\/0242cd06-0c71-43ce-bd68-c7b703e62a78",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "6cf46892-2103-4af9-b59e-0a1176e82ed3"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Report -> set var",
+            "targetStep": "\/api\/3\/workflow_steps\/020c70ce-3f91-4229-be04-61f8446a08f3",
+            "sourceStep": "\/api\/3\/workflow_steps\/6067eabb-4120-4c68-9a9f-815e972fb2fa",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "283eb2d6-6412-4937-8ce0-5da7f05009e8"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "b516f25e-890a-4efc-9793-9949f68b0f4e",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SP Test Automation",
+        "FSRUtilities"
+    ]
+}

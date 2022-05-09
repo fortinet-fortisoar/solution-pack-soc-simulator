@@ -36,16 +36,6 @@
                                             "id": "\/api\/3\/workflows\/98506caa-32ab-429d-9c0f-42d92a71b5d1",
                                             "name": "Reset Scenario",
                                             "icon": "fa fa-trash-o"
-                                        },
-                                        {
-                                            "id": "\/api\/3\/workflows\/bf1d3de1-9b41-4649-85c2-dccbaf73a04a",
-                                            "name": "Export Scenario",
-                                            "icon": "icon icon-export"
-                                        },
-                                        {
-                                            "id": "\/api\/3\/workflows\/a9e6d165-ecc9-4e51-a262-9c451fd38184",
-                                            "name": "Import Scenario",
-                                            "icon": "icon icon-import"
                                         }
                                     ],
                                     "query": {
@@ -53,23 +43,17 @@
                                         "limit": 30,
                                         "logic": "AND",
                                         "filters": []
-                                    },
-                                    "editableFields": false
+                                    }
                                 }
                             }
                         ],
                         "style": "col-lg-12"
                     }
                 ],
-                "wid": "acfb8c55-e0fe-4483-a2cd-1667df0bf00b",
-                "_collapsed": false
+                "wid": "acfb8c55-e0fe-4483-a2cd-1667df0bf00b"
             }
         ],
-        "wid": "a2ed58fd-3a61-42c0-b076-2a2585aed6a6",
-        "metadata": {
-            "customTemplateTitle": "Scenario",
-            "originalTemplateTitle": "Scenario"
-        }
+        "wid": "a2ed58fd-3a61-42c0-b076-2a2585aed6a6"
     },
     "uuid": "modules-scenario-list"
 }

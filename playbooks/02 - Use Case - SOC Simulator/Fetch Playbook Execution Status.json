@@ -1,0 +1,109 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Fetch Playbook Execution Status",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "recordIRI",
+        "playbookName"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/99d8106e-6c41-4a19-81bf-759747dd462d",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Fetch Playbook Logs",
+            "description": "Fetch Playbook execution details based on record IRI and playbook name.",
+            "arguments": {
+                "params": {
+                    "iri": "\/api\/wf\/api\/workflows\/log_list\/?format=json&limit=1&offset=0&ordering=-modified&page=1&records={{vars.input.params.recordIRI}}&search={{vars.input.params.playbookName | replace(\" \", \"+\")}}&tags_exclude=&tags_include=",
+                    "body": "",
+                    "method": "POST"
+                },
+                "version": "3.2.1",
+                "do_until": {
+                    "delay": 50,
+                    "retries": 5,
+                    "condition": "{{'finished' in vars.result.data[\"hydra:member\"][0]['status'] or 'failed' in vars.result.data[\"hydra:member\"][0]['status']}}"
+                },
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "30",
+            "left": "450",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "5b6aa2be-af9d-4196-9459-d0e26a39d2c1"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "99d8106e-6c41-4a19-81bf-759747dd462d"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Execution Status",
+            "description": null,
+            "arguments": {
+                "playbookName": "{{vars.input.params.playbookName}}",
+                "executionStatus": "{{vars.steps.Fetch_Playbook_Logs.data[\"hydra:member\"][0]['status']}}"
+            },
+            "status": null,
+            "top": "30",
+            "left": "775",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "6778368e-d5b5-4d48-9abe-0cabce993504"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Fetch Playbook Logs",
+            "targetStep": "\/api\/3\/workflow_steps\/5b6aa2be-af9d-4196-9459-d0e26a39d2c1",
+            "sourceStep": "\/api\/3\/workflow_steps\/99d8106e-6c41-4a19-81bf-759747dd462d",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "df92dac0-b8af-4f18-9fdc-60a8943478fa"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Fetch Playbook Logs -> Set Execution Status",
+            "targetStep": "\/api\/3\/workflow_steps\/6778368e-d5b5-4d48-9abe-0cabce993504",
+            "sourceStep": "\/api\/3\/workflow_steps\/5b6aa2be-af9d-4196-9459-d0e26a39d2c1",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "00046152-a67d-4b7b-958b-ede28adcc6dc"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "41dce8b8-f6a9-4474-9707-a960c8613bf0",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SP Test Automation",
+        "FSRUtilities"
+    ]
+}

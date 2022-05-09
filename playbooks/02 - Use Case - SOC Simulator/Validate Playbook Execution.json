@@ -1,0 +1,138 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Validate Playbook Execution",
+    "aliasName": null,
+    "tag": null,
+    "description": null,
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "recordIRI",
+        "playbookList",
+        "recordName"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/f5cd3854-9aaf-4d2b-aef9-54e82a5226d6",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "f5cd3854-9aaf-4d2b-aef9-54e82a5226d6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Validation Result",
+            "description": null,
+            "arguments": {
+                "hasPassed": "{{vars.steps.Validate_Playbook_Execution_Status.data['code_output']}}",
+                "recordName": "{{vars.input.params.recordName}}"
+            },
+            "status": null,
+            "top": "30",
+            "left": "1100",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "ad3d85e8-d540-4a55-bcae-93a3362851ed"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Validate Playbook Execution Status",
+            "description": null,
+            "arguments": {
+                "config": "aeb92060-54c2-4cd1-92eb-cc78a6cccdfa",
+                "params": {
+                    "python_function": "results = {{vars.steps.Fetch_PB_Execution_Status}}\nstatus = True\n\nfor result in results:\n if 'finished' not in result['executionStatus']:\n  status = False\n  break\n\nprint(status)"
+                },
+                "version": "1.2.5",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "30",
+            "left": "775",
+            "stepType": "\/api\/3\/workflow_step_types\/1fdd14cc-d6b4-4335-a3af-ab49c8ed2fd8",
+            "uuid": "11200c46-2b03-413e-a5be-8f6bb6b9a48e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Fetch PB Execution Status",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.input.params.playbookList}}",
+                    "__bulk": false,
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "recordIRI": "{{vars.input.params.recordIRI}}",
+                    "playbookName": "{{vars.item}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "\/api\/3\/workflows\/41dce8b8-f6a9-4474-9707-a960c8613bf0"
+            },
+            "status": null,
+            "top": "30",
+            "left": "450",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "uuid": "b2649cbc-cdba-4854-8dc6-2cefcbadce5d"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Fetch PB Execution Status -> Validate Playbook Execution Status",
+            "targetStep": "\/api\/3\/workflow_steps\/11200c46-2b03-413e-a5be-8f6bb6b9a48e",
+            "sourceStep": "\/api\/3\/workflow_steps\/b2649cbc-cdba-4854-8dc6-2cefcbadce5d",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "a62e44e1-8d8d-477b-ae40-46eda6b884c5"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Fetch PB Execution Status",
+            "targetStep": "\/api\/3\/workflow_steps\/b2649cbc-cdba-4854-8dc6-2cefcbadce5d",
+            "sourceStep": "\/api\/3\/workflow_steps\/f5cd3854-9aaf-4d2b-aef9-54e82a5226d6",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "4d2d308e-ddce-4525-827e-daeaeb82aab9"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Validate Playbook Execution Status -> Set hasPassed",
+            "targetStep": "\/api\/3\/workflow_steps\/ad3d85e8-d540-4a55-bcae-93a3362851ed",
+            "sourceStep": "\/api\/3\/workflow_steps\/11200c46-2b03-413e-a5be-8f6bb6b9a48e",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "0e261c54-69bb-4c58-945c-9526535701d4"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "78abb8bc-2f25-4926-8efd-681d139f73b2",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SP Test Automation",
+        "FSRUtilities"
+    ]
+}

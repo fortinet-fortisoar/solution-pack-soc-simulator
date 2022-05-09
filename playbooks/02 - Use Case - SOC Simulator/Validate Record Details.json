@@ -1,0 +1,163 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Validate Record Details",
+    "aliasName": null,
+    "tag": null,
+    "description": "Compares expected and actual record detail. Just pass the expected data and the record IRI",
+    "isActive": true,
+    "debug": true,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "recordIRI",
+        "expectedRecordDetails"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/86c5ea16-d69d-46e1-8013-2437beadbb09",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/17a257d7-a794-4516-890f-9a65f9a9888e",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Set Validation Result",
+            "description": null,
+            "arguments": {
+                "hasPassed": "{{vars.steps.If_Details_Matched.data['code_output']}}"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "uuid": "4710b097-8c96-48e3-a82d-058046926640"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Refine Result",
+            "description": null,
+            "arguments": {
+                "config": "f64da63c-ab37-4310-8be5-78cafa1061a7",
+                "params": {
+                    "python_function": "actual_data = {{vars.steps.Get_Actual_Record_Detail.data}}\n\nresultSet = {}\nfields = actual_data.keys()\n\nfor field in fields:\n    if type(actual_data[field]) is dict:\n        if actual_data[field]['@type'] is 'Picklist':\n            resultSet.update({field: actual_data[field]['itemValue']})\n        if actual_data[field]['@type'] is 'Person':\n            resultSet.update({field: actual_data[field]['firstname']})\n    if type(actual_data[field]) is str:\n        resultSet.update({field: actual_data[field]})\n    if actual_data[field] is None:\n        resultSet.update({field:None})\n\nprint(resultSet)"
+                },
+                "version": "1.2.5",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "120",
+            "stepType": "\/api\/3\/workflow_step_types\/1fdd14cc-d6b4-4335-a3af-ab49c8ed2fd8",
+            "uuid": "9d27d60e-f556-4434-be97-2ce53533f44b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "If Details Matched",
+            "description": null,
+            "arguments": {
+                "config": "f64da63c-ab37-4310-8be5-78cafa1061a7",
+                "params": {
+                    "python_function": "actualData = {{vars.steps.Refine_Result.data['code_output']}}\nexpectedData = {{vars.input.params.expectedRecordDetails}}\nstatus = True\n\nfor key in expectedData:\n    if \"<<TR_\" in expectedData[key] or \"{TR_\" in expectedData[key]:\n        if actualData[key] == \"None\":\n            status = False\n            break\n    else:\n        if expectedData[key].lower().replace(\" \", \"\") != actualData[key].lower().replace(\" \", \"\"):\n            status = False\n            break\nprint(status)"
+                },
+                "version": "1.2.5",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "440",
+            "left": "120",
+            "stepType": "\/api\/3\/workflow_step_types\/1fdd14cc-d6b4-4335-a3af-ab49c8ed2fd8",
+            "uuid": "c3e9684f-acef-49d2-b664-3cc6cb1cff71"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "uuid": "17a257d7-a794-4516-890f-9a65f9a9888e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Actual Record Detail",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "iri": "{{vars.input.params.recordIRI}}",
+                    "body": "",
+                    "method": "GET"
+                },
+                "version": "3.2.1",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "55c83370-6801-4c0b-9838-5677d6bb3397"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Refine Result -> Find If Details Matched",
+            "targetStep": "\/api\/3\/workflow_steps\/c3e9684f-acef-49d2-b664-3cc6cb1cff71",
+            "sourceStep": "\/api\/3\/workflow_steps\/9d27d60e-f556-4434-be97-2ce53533f44b",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c6012697-3dbb-4a77-839a-54a2e18fdf25"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "If Details Matched -> Copy  of Set hasPassed To false as alert is not found",
+            "targetStep": "\/api\/3\/workflow_steps\/4710b097-8c96-48e3-a82d-058046926640",
+            "sourceStep": "\/api\/3\/workflow_steps\/c3e9684f-acef-49d2-b664-3cc6cb1cff71",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "ee227b30-ce1b-4b6e-8920-4c3afbe22729"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Get Actual Record Detail",
+            "targetStep": "\/api\/3\/workflow_steps\/55c83370-6801-4c0b-9838-5677d6bb3397",
+            "sourceStep": "\/api\/3\/workflow_steps\/17a257d7-a794-4516-890f-9a65f9a9888e",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "122c2464-c2c6-44d8-8e80-a8fbc12360c3"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Actual Record Detail -> Refine Result",
+            "targetStep": "\/api\/3\/workflow_steps\/9d27d60e-f556-4434-be97-2ce53533f44b",
+            "sourceStep": "\/api\/3\/workflow_steps\/55c83370-6801-4c0b-9838-5677d6bb3397",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "167ab74b-0f16-4716-ab67-c08b39966c81"
+        }
+    ],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "b39cd767-f176-42c2-b7a5-421e09bd1559",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "SP Test Automation",
+        "FSRUtilities"
+    ]
+}
