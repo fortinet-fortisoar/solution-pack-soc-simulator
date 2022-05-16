@@ -45,7 +45,7 @@
                     "records": "{{vars.input.records[0]['@id']}}"
                 },
                 "resource": {
-                    "resultJson": "{{vars.steps.Prepare_JSON_Report.data['code_output']}}",
+                    "resultJson": "{{vars.steps.Execute_Test_Steps}}",
                     "testResult": "<p>{{vars.steps.Prepare_HTML_Report['HTML_Report']}}<\/p>"
                 },
                 "_showJson": false,
@@ -60,7 +60,7 @@
             },
             "status": null,
             "top": "1380",
-            "left": "475",
+            "left": "480",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
             "uuid": "cbcf57ee-501c-4c79-b26a-76eede1a31f8"
         },
@@ -421,7 +421,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "FortiSOAR SOC Simulator",
-        "SP Test Automation"
+        "SP Test Automation",
+        "FortiSOAR SOC Simulator"
     ]
 }

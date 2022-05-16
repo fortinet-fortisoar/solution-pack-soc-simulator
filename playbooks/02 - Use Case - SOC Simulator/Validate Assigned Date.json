@@ -38,7 +38,7 @@
             "arguments": {
                 "config": "f64da63c-ab37-4310-8be5-78cafa1061a7",
                 "params": {
-                    "python_function": "createDate ={{vars.input.params.createDate}}\nassignedDate ={{vars.input.params.assignedDate}}\n\nif assignedDate >= createDate :\n print(True)\nelse:\n print(False)"
+                    "python_function": "createDate ={{vars.input.params.createDate | int}}\nassignedDate ={{vars.input.params.assignedDate | int}}\n\nif assignedDate >= createDate :\n print(True)\nelse:\n print(False)"
                 },
                 "version": "1.2.5",
                 "connector": "code-snippet",

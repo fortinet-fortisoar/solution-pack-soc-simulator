@@ -148,7 +148,7 @@
                                                 }
                                             },
                                             "icon": "icon icon-running-playbooks",
-                                            "show": false
+                                            "show": true
                                         },
                                         {
                                             "title": "Scenario Validation",
@@ -194,7 +194,7 @@
                                                     ]
                                                 }
                                             },
-                                            "show": true
+                                            "show": false
                                         }
                                     ],
                                     "wid": "83044353-f9cf-4bd4-b737-a43c61dd9859",
@@ -216,7 +216,7 @@
                 "icon": "fa fa-play"
             },
             {
-                "id": "\/api\/3\/workflows\/caa0be1d-8de4-4df9-9014-68ac2659edc6",
+                "id": "\/api\/3\/workflows\/98506caa-32ab-429d-9c0f-42d92a71b5d1",
                 "name": "Reset Scenario",
                 "icon": "fa fa-trash-o"
             },
