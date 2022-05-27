@@ -32,6 +32,7 @@
                     "recordTags": "Overwrite"
                 },
                 "step_variables": {
+                    "alerts_uuids": "{{vars.input.records[0].createdAlertsID|regex_findall('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')}}",
                     "relatedAlertIRI": "{{vars.input.records[0].createdAlertsID|toDict}}"
                 }
             },
@@ -58,7 +59,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "1110",
+            "top": "1245",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
             "uuid": "20c928f0-cd62-4c41-a140-d1c04541dc23"
@@ -100,7 +101,7 @@
                 "related_records_iris": "{{vars.records_list|json_query('[][\"hydra:member\"][][][\"@id\"][]') | unique}}"
             },
             "status": null,
-            "top": "705",
+            "top": "840",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "uuid": "46f3d026-d720-45d1-8d3d-e4113f89a95f"
@@ -170,7 +171,7 @@
                 "__tmp_get_records": "{%for iri in (vars.input.records[0].createdAlertsID|toDict)%}{% if 'alerts' in iri %}\n{{vars.records_list.append((iri+'\/indicators?&__selectFields=id')|fromIRI) if vars.relatedModules.users}}\n{{vars.records_list.append((iri+'\/indicators?&__selectFields=id')|fromIRI)if vars.relatedModules.indicators}}\n{{vars.records_list.append((iri+'\/incidents?&__selectFields=id')|fromIRI) if vars.relatedModules.incidents}}\n{{vars.records_list.append((iri+'\/assets?&__selectFields=id')|fromIRI)if vars.relatedModules.assets}}\n{{vars.records_list.append((iri+'\/tasks?&__selectFields=id')|fromIRI)if vars.relatedModules.tasks}}\n{% endif %}\n{%endfor%}"
             },
             "status": null,
-            "top": "570",
+            "top": "705",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "uuid": "a10912fe-1078-4368-a0fe-9ac68401a32e"
@@ -199,7 +200,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "840",
+            "top": "975",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
             "uuid": "ddaca4c1-77ba-4dd9-9eb7-929737c763d2"
@@ -229,23 +230,51 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "975",
+            "top": "1110",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
             "uuid": "fc3e4763-51d6-44b4-8a3b-d9328b834240"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Get Alert Corelation",
+            "name": "Get record",
             "description": null,
             "arguments": {
-                "relatedModules": "{{(vars.relatedAlertIRI[0]+\"?$relationships=true\")| fromIRI}}"
+                "params": {
+                    "query": "{\n    \"sort\": [\n        {\n            \"field\": \"createDate\",\n            \"direction\": \"DESC\",\n            \"_fieldName\": \"createDate\"\n        }\n    ],\n    \"limit\": 30,\n    \"logic\": \"AND\",\n    \"filters\": [\n        {\n            \"field\": \"uuid\",\n            \"operator\": \"eq\",\n            \"_operator\": \"eq\",\n            \"value\": \"{{vars.item}}\",\n            \"type\": \"primitive\"\n        },\n        {\n            \"sort\": [\n                {\n                    \"direction\": \"DESC\",\n                    \"field\": \"createDate\",\n                    \"_fieldTitle\": \"Created On\",\n                    \"_fieldName\": \"createDate\"\n                }\n            ],\n            \"limit\": 30,\n            \"logic\": \"AND\",\n            \"filters\": []\n        }\n    ],\n    \"__selectFields\": [\n        \"id\"\n    ]\n}",
+                    "resource": "alerts"
+                },
+                "version": "3.2.1",
+                "for_each": {
+                    "item": "{{vars.alerts_uuids}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "connector": "cyops_utilities",
+                "operation": "query_cyops_resource",
+                "operationTitle": "FSR: Find Record",
+                "step_variables": {
+                    "existing_alerts": "{{vars.result}}"
+                }
             },
             "status": null,
             "top": "435",
             "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "uuid": "b02b69a1-ac99-453b-9ba3-2f37a5e6415e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Existing Alerts",
+            "description": null,
+            "arguments": {
+                "relatedAlertIRI": "{{vars.existing_alerts|json_query('[][].data[][\"@id\"][]')|unique}}"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-            "uuid": "d6b7ea95-a282-450e-8c82-3b9d27b47f80"
+            "uuid": "3b3c65f3-8b6e-43da-aea2-165eb18d155d"
         }
     ],
     "routes": [
@@ -296,30 +325,39 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Clear Use Case comments -> Get Alert Corelation",
-            "targetStep": "\/api\/3\/workflow_steps\/d6b7ea95-a282-450e-8c82-3b9d27b47f80",
-            "sourceStep": "\/api\/3\/workflow_steps\/0e90a642-c833-4e74-817b-d9b728a201d7",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "e80ab950-743c-4576-9167-218f7c65ad47"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Get Alert Corelation -> Get Related Data",
-            "targetStep": "\/api\/3\/workflow_steps\/a10912fe-1078-4368-a0fe-9ac68401a32e",
-            "sourceStep": "\/api\/3\/workflow_steps\/d6b7ea95-a282-450e-8c82-3b9d27b47f80",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "b12e253f-9276-43d4-bc65-9435129488e8"
-        },
-        {
-            "@type": "WorkflowRoute",
             "name": "Delete Alerts -> Delete Related Records",
             "targetStep": "\/api\/3\/workflow_steps\/fc3e4763-51d6-44b4-8a3b-d9328b834240",
             "sourceStep": "\/api\/3\/workflow_steps\/ddaca4c1-77ba-4dd9-9eb7-929737c763d2",
             "label": null,
             "isExecuted": false,
             "uuid": "74588b91-429a-4495-afc5-aa3a9a6c2687"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Clear Use Case comments -> Get record",
+            "targetStep": "\/api\/3\/workflow_steps\/b02b69a1-ac99-453b-9ba3-2f37a5e6415e",
+            "sourceStep": "\/api\/3\/workflow_steps\/0e90a642-c833-4e74-817b-d9b728a201d7",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "5433db39-4f99-4872-9410-fd01e6a0da00"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get record -> Get Existing Alerts",
+            "targetStep": "\/api\/3\/workflow_steps\/3b3c65f3-8b6e-43da-aea2-165eb18d155d",
+            "sourceStep": "\/api\/3\/workflow_steps\/b02b69a1-ac99-453b-9ba3-2f37a5e6415e",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "7d56c577-8c2e-44e4-b30d-200a94ca4aa4"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Existing Alerts -> Get Related Data",
+            "targetStep": "\/api\/3\/workflow_steps\/a10912fe-1078-4368-a0fe-9ac68401a32e",
+            "sourceStep": "\/api\/3\/workflow_steps\/3b3c65f3-8b6e-43da-aea2-165eb18d155d",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "e8c2694a-5abb-4946-9c2e-d242a3a3f7d6"
         }
     ],
     "priority": null,
