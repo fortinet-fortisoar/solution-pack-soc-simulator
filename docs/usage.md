@@ -53,9 +53,7 @@ The **SOC Simulator** solution pack places the option to run simulations at mult
 ### From Alerts Page
 
 1. Click **Incident Response** > **Alerts** to open the Alerts page.
-
     ![Simulate From Alert Page](res/simulate-scenario-alert.png)
-    
 2. Click the button **Simulate Scenario**.
 3. From the **Simulate Scenario** select a scenario from the **Scenario** drop-down.
 4. Click **Start Simulation** to run the selected scenario.
@@ -83,4 +81,3 @@ You can reset a scenario by using any of the following methods.
 3. Click the button **Reset Scenario**.
 
     ![Delete Scenario Records from Scenario Record](res/delete-from-scenario-record.png)
-
