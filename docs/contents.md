@@ -22,7 +22,6 @@
 |02 - Use Case - SOC Simulator|
 |:--                          |
 
-
 | Playbook Name                | Description                                                                             |
 |:-----------------------------|:----------------------------------------------------------------------------------------|
 | Reset Scenario               | Deletes created alerts and related records                                              |
