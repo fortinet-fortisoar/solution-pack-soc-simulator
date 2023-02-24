@@ -1,4 +1,4 @@
-| [Home](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/README.md) | 
+| [Home](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/release/1.0.2/README.md) | 
 |--------------------------------------------|
 
 # Usage
@@ -9,7 +9,7 @@ There are other scenarios that demonstrate the investigation process and therefo
 
 For example, in the *Stolen Credentials* scenario &ndash; available with **Stolen Credential Leading to Data Exfiltration** solution pack &ndash; to expand the scenario and view the description, click the right-pointing arrow on the **Stolen credential leading to data exfiltration** row.
 
-![Stolen Credentials Scenario](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/stolen-creds-scenario.png)
+![Stolen Credentials Scenario](res/stolen-creds-scenario.png)
 
 ## Simulate a Scenario
 
@@ -22,13 +22,13 @@ Click an alert created by this simulation, for example, *Windows User Created* t
 
 Hence, the FortiSOAR™ engine eases a SOC analyst's task of going through several alerts to find out the similar ones. Now, they can select similar alerts, link them, or escalate them to create a security incident.
 
-![Alert created for the Stolen Credentials scenario](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/stolen-creds-scenario-alerts.png)
+![Alert created for the Stolen Credentials scenario](res/stolen-creds-scenario-alerts.png)
 
 To view the source for the **Stolen credential leading to data exfiltration** scenario,
 1. Click **Simulations** > **Scenario** > **Stolen credential leading to data exfiltration**.
 2. Go to the **Source** tab to view the **Steps** section that contains data used by playbooks to create the demo records. IDs of the alerts created here appear in the **Created Alerts** section:
 
-![Viewing source of the Stolen Credentials data](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/stolen-creds-source.png)
+![Viewing source of the Stolen Credentials data](res/stolen-creds-source.png)
 
 ## Launch a Scenario Simulation
 
@@ -40,7 +40,7 @@ The **SOC Simulator** solution pack places the option to run simulations at mult
 2. Click the checkbox to select a scenario.
 3. Click the button **Simulate Scenario**.
 
-    ![Simulate From Scenario Page](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/simulate-scenario-page.png)
+    ![Simulate From Scenario Page](res/simulate-scenario-page.png)
 
 ### From Scenario Record
 
@@ -48,21 +48,23 @@ The **SOC Simulator** solution pack places the option to run simulations at mult
 2. Click a scenario record to open it.
 3. Click the button **Simulate Scenario**.
 
-    ![Simulate From Scenario Record](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/simulate-scenario-record.png)
+    ![Simulate From Scenario Record](res/simulate-scenario-record.png)
 
 ### From Alerts Page
 
 1. Click **Incident Response** > **Alerts** to open the Alerts page.
-    ![Simulate From Alert Page](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/simulate-scenario-alert.png)
+
+    ![Simulate From Alert Page](res/simulate-scenario-alert.png)
+    
 2. Click the button **Simulate Scenario**.
 3. From the **Simulate Scenario** select a scenario from the **Scenario** drop-down.
 4. Click **Start Simulation** to run the selected scenario.
 
-    ![Simulate From Alert Page Popup](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/simulate-scenario-alert-popup.png)
+    ![Simulate From Alert Page Popup](res/simulate-scenario-alert-popup.png)
 
 ## Reset a Scenario
 
-Resetting a scenario removes any demo alerts created by that scenario. **Reset Scenario** option helps clear the environment of any example alerts and display only the actuals.
+Resetting a scenario removes any demo alerts created by that scenario. **Reset Scenario** option helps clear the environment of any example alerts and helps display only the actuals.
 
 You can reset a scenario by using any of the following methods.
 
@@ -72,7 +74,7 @@ You can reset a scenario by using any of the following methods.
 2. Click the checkbox to select a scenario that you have already run.
 3. Click the button **Reset Scenario**.
 
-    ![Delete Scenario Records from Scenario Page](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/delete-from-scenario-page.png)
+    ![Delete Scenario Records from Scenario Page](res/delete-from-scenario-page.png)
 
 ### From Scenario Record
 
@@ -80,4 +82,5 @@ You can reset a scenario by using any of the following methods.
 2. Click a scenario record, which you have already run, to open it.
 3. Click the button **Reset Scenario**.
 
-    ![Delete Scenario Records from Scenario Record](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/res/delete-from-scenario-record.png)
+    ![Delete Scenario Records from Scenario Record](res/delete-from-scenario-record.png)
+
