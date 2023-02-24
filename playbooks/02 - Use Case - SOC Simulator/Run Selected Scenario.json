@@ -17,12 +17,13 @@
     "steps": [
         {
             "@type": "WorkflowStep",
-            "name": "Create Scenario",
+            "name": "Create Alert",
             "description": null,
             "arguments": {
                 "for_each": {
                     "item": "{{vars.steps.Get_Scenario_Details[0].steps.Steps}}",
-                    "parallel": false,
+                    "__bulk": false,
+                    "parallel": true,
                     "condition": ""
                 },
                 "arguments": {
@@ -32,12 +33,14 @@
                 },
                 "apply_async": false,
                 "step_variables": [],
+                "pass_input_record": true,
                 "workflowReference": "\/api\/3\/workflows\/27b9c187-cc01-48e5-90bf-deea72d558b6"
             },
             "status": null,
             "top": "435",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
             "uuid": "2c9928ad-8400-42ba-b4d0-1f2dcb5e40f1"
         },
         {
@@ -51,6 +54,7 @@
             "top": "165",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
             "uuid": "3d8aab01-b491-4f49-a057-33d8cfe26ef9"
         },
         {
@@ -86,6 +90,7 @@
             "top": "300",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
             "uuid": "6f0657e4-2712-4706-a464-38f089d20bb2"
         },
         {
@@ -150,10 +155,20 @@
             "top": "30",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
             "uuid": "82ca2fd5-bb31-4db8-ba9c-9930eeaa5dff"
         }
     ],
     "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Scenario Details -> Create Scenario",
+            "targetStep": "\/api\/3\/workflow_steps\/2c9928ad-8400-42ba-b4d0-1f2dcb5e40f1",
+            "sourceStep": "\/api\/3\/workflow_steps\/6f0657e4-2712-4706-a464-38f089d20bb2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "40245b45-22f1-4924-a4c0-907e600997cc"
+        },
         {
             "@type": "WorkflowRoute",
             "name": "Start -> Configuration",
@@ -171,21 +186,15 @@
             "label": null,
             "isExecuted": false,
             "uuid": "e49dd191-86c1-4c5c-a64b-dc1e3a90a15f"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Get Scenario Details -> Create Scenario",
-            "targetStep": "\/api\/3\/workflow_steps\/2c9928ad-8400-42ba-b4d0-1f2dcb5e40f1",
-            "sourceStep": "\/api\/3\/workflow_steps\/6f0657e4-2712-4706-a464-38f089d20bb2",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "40245b45-22f1-4924-a4c0-907e600997cc"
         }
     ],
+    "groups": [],
     "priority": null,
     "uuid": "71cf1ad8-9215-49e6-9aa2-be27c3c3ffa6",
     "owners": [],
     "isPrivate": false,
     "deletedAt": null,
-    "recordTags": []
+    "recordTags": [
+        "Simulation"
+    ]
 }
