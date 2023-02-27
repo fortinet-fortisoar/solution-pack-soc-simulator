@@ -282,7 +282,7 @@
             "uuid": "c208c3a6-a027-4ed6-acc5-229830617ff4",
             "displayName": "{{ createdAlertsID }}",
             "descriptions": {
-                "singular": "Created Alerts ID"
+                "singular": "Created Records ID"
             }
         }
     ],
