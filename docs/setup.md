@@ -1,4 +1,4 @@
-| [Home](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/release/1.0.2/README.md) | 
+| [Home](/README.md) | 
 |--------------------------------------------|
 
 # Installation
