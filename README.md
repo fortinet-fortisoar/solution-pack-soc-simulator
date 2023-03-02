@@ -11,5 +11,5 @@ The **FortiSOAR™ SOC Simulator Solution Pack** enables you to experience the p
 
 # Next Steps 
  
-| [Installation](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/release/1.0.2/docs/setup.md#installation) | [Configuration](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/release/1.0.2/docs/setup.md#configuration) | [Usage](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/release/1.0.2/docs/usage.md) | [Contents](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/release/1.0.2/docs/contents.md) |
+| [Installation](/docs/setup.md#installation) | [Configuration](/docs/setup.md#configuration) | [Usage](/docs/usage.md) | [Contents](/docs/contents.md) |
 |--------------------------------------------|----------------------------------------------|------------------------|------------------------------|

@@ -1,4 +1,4 @@
-| [Home](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/release/1.0.2/README.md) | 
+| [Home](/README.md) | 
 |--------------------------------------------|
 
 # Contents
@@ -25,6 +25,7 @@
 | Playbook Name                | Description                                                                             |
 |:-----------------------------|:----------------------------------------------------------------------------------------|
 | Reset Scenario               | Deletes created alerts and related records                                              |
+| Reset Scenario - Get Correlated Records | Fetches all the correlated records of the demo record created for the simulation |
 | Run Scenario                 | Executes a scenario and create its related records triggered from the 'Scenario' record |
 | Run Scenario - Create Alerts | Creates records related to a scenario                                                   |
 | Run Selected Scenario        | Executes a scenario and create related records triggered from the 'Alerts' page         |
