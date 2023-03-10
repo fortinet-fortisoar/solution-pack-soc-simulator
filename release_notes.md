@@ -1,22 +1,29 @@
-## What's New
-### Playbook Enhancements
+# What's New
 
-- #### Modified *Run Selected Scenario* playbook
-  - The loop execution mode of the *Create Alert* step is updated from `Sequential` to `Parallel`
-  - The `Simulation` tag is added to the playbook
-  - The *Create Scenario* step is renamed to **Create Alerts** 
+## Playbook Enhancements
 
-- #### Modified *Run Scenario* playbook
-  - The loop execution mode of the *Create Alert* step is updated from `Sequential` to `Parallel`
+- Added a new playbook **Reset Scenario - Get Correlated Records** that fetches all the correlated records of the demo record created for the simulation
 
-- #### Modified *Run Scenario - Create Alerts* playbook
-  - Updated playbooks to get post-create comments added in scenario records after demo records creation
+- Following playbooks have been modified
 
-- #### Added new playbook 'Reset Scenario - Get Correlated Records' 
-  - This playbook fetches all the correlated records of the demo record created for the simulation
+  - **Run Selected Scenario** playbook modifications:
 
-### Module Enhancements
-- #### Modified *Scenario* module
-  - The label of "Created Alerts ID" fields updated to "Created Records ID"
+    - The loop execution mode of the *Create Alert* step is updated from `Sequential` to `Parallel`
+
+    - A `Simulation` tag is added to the playbook
+
+    - The **Create Scenario** step is renamed to **Create Alerts** 
+
+  - **Run Scenario** playbook modifications:
+
+    - The loop execution mode of the *Create Alert* step is updated from `Sequential` to `Parallel`
+
+  - **Run Scenario - Create Alerts** playbook modifications:
+
+    - Updated the playbook so it now adds post-create comments in scenario records after demo records creation
+
+## Module Enhancements
+
+- `Created Alerts ID` field label has been updated to `Created Records ID` in the *Scenario* module
 
 
