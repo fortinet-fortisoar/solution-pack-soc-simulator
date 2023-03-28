@@ -3,7 +3,7 @@
 
 # Usage
 
-FortiSOAR™ can handle various scenarios that demonstrate its various features, such as the FortiSOAR™ recommendation engine that lists alerts related to similar hosts. This recommendation gives you a complete picture of the incident.
+FortiSOAR&trade; can handle various scenarios that demonstrate its various features, such as the FortiSOAR&trade; recommendation engine that lists alerts related to similar hosts. This recommendation gives you a complete picture of the incident.
 
 There are other scenarios that demonstrate the investigation process and therefore contain associated investigation playbooks.
 
