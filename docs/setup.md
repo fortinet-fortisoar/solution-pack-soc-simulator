@@ -13,8 +13,8 @@
 Ensure that the following solution pack is deployed:
 
 | Solution Pack  | Version | Purpose                                                     |
-|:---------------|:-|:------------------------------------------------------------|
-| SOAR Framework | 2.0.0 | Required for Incident Response modules and Action playbooks |
+|:---------------|:--------|:------------------------------------------------------------|
+| SOAR Framework | 2.0.0   | Required for Incident Response modules and Action playbooks |
 
 >**NOTE**: To effectively gather threat intelligence data, ensure that the following URL is unblocked in your environment:
 >
