@@ -68,6 +68,7 @@
             "name": "Check if Demo Record Exists",
             "description": null,
             "arguments": {
+                "when": "{{vars.moduleName}}",
                 "params": {
                     "query": "{\n      \"sort\": [],\n      \"limit\": 30,\n      \"logic\": \"AND\",\n      \"filters\": [\n        {\n          \"type\": \"primitive\",\n          \"field\": \"uuid\",\n          \"value\": \"{{vars.input.params.demoRecordIRI.split('\/')[4]}}\",\n          \"operator\": \"eq\",\n          \"_operator\": \"eq\"\n        }\n      ]\n    }",
                     "resource": "{{vars.moduleName}}"

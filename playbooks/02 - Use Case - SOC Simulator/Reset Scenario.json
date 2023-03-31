@@ -200,7 +200,7 @@
                     {
                         "option": "Yes",
                         "step_iri": "\/api\/3\/workflow_steps\/3b68c4b7-e9b3-4021-bae0-5c8b1c650c24",
-                        "condition": "{{ (vars.demoRecordIRIs | length > 0) and (vars.demoRecordIRIs is iterable and (vars.demoRecordIRIs is not string and vars.demoRecordIRIs is not mapping and vars.demoRecordIRIs is not integer)) }}",
+                        "condition": "{{ (vars.demoRecordIRIs | length > 0) and (vars.demoRecordIRIs | type_debug == 'list') }}",
                         "step_name": "Find Comments Associated with Scenario"
                     },
                     {
@@ -248,7 +248,7 @@
                     "item": "{{vars.demoRecordIRIs}}",
                     "__bulk": false,
                     "parallel": true,
-                    "condition": ""
+                    "condition": "{{vars.item}}"
                 },
                 "connector": "cyops_utilities",
                 "operation": "make_cyops_request",
