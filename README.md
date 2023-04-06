@@ -1,15 +1,16 @@
 # Release Information
 
-- **Version**:  1.0.1 
-- **Certified**: Yes 
-- **Publisher**: Fortinet 
-- **Compatible Version**: FortiSOAR v7.2.0 and above 
+- **Version**:  1.0.2
+- **Certified**: Yes
+- **Publisher**: Fortinet
+- **Compatible Version**: FortiSOAR v7.2.0 and above
+- [Release Notes](./release_notes.md)
 
 # Overview
 
-The **FortiSOAR™ SOC Simulator Solution Pack** enables you to experience the power and capability of FortiSOAR™ incident response for SOC Simulator scenarios. This pack contains utilities for demonstrating FortiSOAR capabilities around a variety of important SOC use-cases without having to integrate with actual device endpoints.
+The **FortiSOAR&trade; SOC Simulator** solution pack helps you experience the power and capability of FortiSOAR&trade; incident response for SOC simulation scenarios. This pack contains utilities for demonstrating FortiSOAR&trade; capabilities around a variety of important SOC use-cases without having to integrate with actual device endpoints.
 
 # Next Steps 
  
-| [Installation](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/setup.md#installation) | [Configuration](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/setup.md#configuration) | [Usage](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/usage.md) | [Contents](https://github.com/fortinet-fortisoar/solution-pack-soc-simulator/blob/develop/docs/contents.md) |
+| [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) | [Contents](./docs/contents.md) |
 |--------------------------------------------|----------------------------------------------|------------------------|------------------------------|

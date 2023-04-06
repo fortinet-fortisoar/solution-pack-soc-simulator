@@ -31,11 +31,12 @@
             "top": "165",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
             "uuid": "07647d63-6c21-475d-883d-7bfa4580f284"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Format Alert List",
+            "name": "Format Record List",
             "description": null,
             "arguments": {
                 "formatted_alert_list": "{{vars.createdAlertId + [vars.alertIRI]}}"
@@ -44,35 +45,8 @@
             "top": "1380",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
             "uuid": "33879d82-ba52-4860-b18e-87ba352a95c0"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Add comments to Use Case module",
-            "description": null,
-            "arguments": {
-                "message": {
-                    "tags": [],
-                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
-                    "tenant": "",
-                    "content": "{% if vars.alert_Steps.preCreateMessage %}\n{{vars.alert_Steps.preCreateMessage}}\n{%endif%}\n\n",
-                    "records": "{{vars.input.params.recordIRI}}"
-                },
-                "resource": [],
-                "_showJson": false,
-                "operation": "Overwrite",
-                "collection": "{{vars.input.params.recordIRI}}",
-                "collectionType": "\/api\/3\/scenario",
-                "fieldOperation": {
-                    "recordTags": "Overwrite"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "435",
-            "left": "475",
-            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
-            "uuid": "344806ac-fa54-46a7-8d59-acada5ed82d9"
         },
         {
             "@type": "WorkflowStep",
@@ -80,13 +54,6 @@
             "description": null,
             "arguments": {
                 "when": "{{vars.alert_Steps.type == \"createAlert\"}}",
-                "message": {
-                    "tags": [],
-                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
-                    "tenant": "",
-                    "content": "{% if vars.alert_Steps.postCreateMessage %}\n{{vars.alert_Steps.postCreateMessage}}\n{%endif%}",
-                    "records": "{{vars.input.params.recordIRI}}"
-                },
                 "resource": {
                     "url": "{% if  'url' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.url}}{% else %}None{% endif %}",
                     "name": "{% if  'name' in vars.steps.Replace_String.data.alertFields  %}{{vars.steps.Replace_String.data.alertFields.name}}{% else %}None{% endif %}",
@@ -126,17 +93,7 @@
                     "registryKey": "{% if  'registryKey' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.registryKey}}{% else %}None{% endif %}",
                     "targetAsset": "{% if  'targetAsset' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.targetAsset}}{% else %}None{% endif %}",
                     "userDetails": "{% if  'userDetails' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.userDetails}}{% else %}None{% endif %}",
-                    "ackSlaStatus": {
-                        "id": 289,
-                        "@id": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
-                        "icon": null,
-                        "@type": "Picklist",
-                        "color": "#808080",
-                        "display": "Awaiting Action",
-                        "listName": "\/api\/3\/picklist_names\/fe36a8f2-fcba-4221-b4ab-1081f596b153",
-                        "itemValue": "Awaiting Action",
-                        "orderIndex": 2
-                    },
+                    "ackSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
                     "closureNotes": "{% if  'closureNotes' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.closureNotes}}{% else %}None{% endif %}",
                     "computerName": "{% if  'computerName' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.computerName}}{% else %}None{% endif %}",
                     "emailHeaders": "{% if  'emailHeaders' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.emailHeaders | toJSON }}{% else %}None{% endif %}",
@@ -144,21 +101,12 @@
                     "senderDomain": "{% if  'senderDomain' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.senderDomain}}{% else %}None{% endif %}",
                     "destinationIp": "{% if  'destinationIp' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.destinationIp}}{% else %}None{% endif %}",
                     "mitreattackid": "{% if  'mitreattackid' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.mitreattackid}}{% else %}None{% endif %}",
-                    "respSlaStatus": {
-                        "id": 289,
-                        "@id": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
-                        "icon": null,
-                        "@type": "Picklist",
-                        "color": "#808080",
-                        "display": "Awaiting Action",
-                        "listName": "\/api\/3\/picklist_names\/fe36a8f2-fcba-4221-b4ab-1081f596b153",
-                        "itemValue": "Awaiting Action",
-                        "orderIndex": 2
-                    },
+                    "respSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
                     "scheduledTask": "{% if  'scheduledTask' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.scheduledTask}}{% else %}None{% endif %}",
                     "sourceProcess": "{% if  'sourceProcess' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.sourceProcess}}{% else %}None{% endif %}",
                     "targetProcess": "{% if  'targetProcess' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.targetProcess}}{% else %}None{% endif %}",
                     "mitreTechnique": "{% if  'mitreTechnique' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.mitreTechnique}}{% else %}None{% endif %}",
+                    "priorityWeight": 1,
                     "attachmentNames": "{% if  'attachmentNames' in vars.steps.Replace_String.data.alertFields  %}{{vars.steps.Replace_String.data.alertFields.attachmentNames}}{% else %}None{% endif %}",
                     "destinationPort": "{% if  'destinationPort' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.destinationPort}}{% else %}None{% endif %}",
                     "bytesTransferred": "{% if  'bytesTransferred' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.bytesTransferred}}{% else %}None{% endif %}",
@@ -169,12 +117,15 @@
                     "reporterEmailBody": "{% if  'reporterEmailBody' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.reporterEmailBody}}{% else %}None{% endif %}",
                     "decodedCommandLine": "{% if  'decodedCommandLine' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.decodedCommandLine}}{% else %}None{% endif %}",
                     "senderEmailAddress": "{% if  'senderEmailAddress' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.senderEmailAddress}}{% else %}None{% endif %}",
+                    "escalatedtoincident": "\/api\/3\/picklists\/2128a09c-153d-4db3-985d-de6be33deae5",
+                    "alertRemainingAckSLA": 0,
                     "parentProcessCmdLine": "{% if  'parentProcessCmdLine' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.parentProcessCmdLine}}{% else %}None{% endif %}",
                     "recipientEmailAddress": "{% if  'recipientEmailAddress' in vars.steps.Replace_String.data.alertFields %}{{vars.steps.Replace_String.data.alertFields.recipientEmailAddress}}{% else %}None{% endif %}"
                 },
                 "_showJson": false,
                 "operation": "Overwrite",
                 "collection": "\/api\/3\/alerts",
+                "__recommend": [],
                 "fieldOperation": {
                     "recordTags": "Overwrite"
                 },
@@ -184,11 +135,12 @@
             "top": "840",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
             "uuid": "392a85b3-21a8-449c-9516-fb05b1c62ac0"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Find Created Alerts ID",
+            "name": "Find Created Records ID",
             "description": null,
             "arguments": {
                 "query": {
@@ -219,7 +171,38 @@
             "top": "1110",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
             "uuid": "8a4d5d53-0f00-49a9-bd99-d1444ec02fca"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Add Post Create Message to Scenario",
+            "description": null,
+            "arguments": {
+                "when": "{{vars.alert_Steps.postCreateMessage}}",
+                "resource": {
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "people": [],
+                    "content": "<p>{{vars.alert_Steps.postCreateMessage}}<\/p>",
+                    "scenario": "{{vars.input.params.recordIRI}}",
+                    "__replace": "",
+                    "isImportant": false,
+                    "peopleUpdated": false
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/comments",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1650",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "8f35f010-98a1-4c69-8251-163f09bc4009"
         },
         {
             "@type": "WorkflowStep",
@@ -236,6 +219,7 @@
             "top": "30",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
             "uuid": "973f3b45-5bc1-4522-9e23-0fe88432bd88"
         },
         {
@@ -258,6 +242,7 @@
             "top": "300",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
             "uuid": "9ad26588-b055-4490-bf0b-bda7100f1abf"
         },
         {
@@ -275,6 +260,7 @@
             "top": "975",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
             "uuid": "9fe2e735-c7a9-4716-8bf8-930610721d18"
         },
         {
@@ -293,11 +279,12 @@
             "top": "705",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
             "uuid": "b0c4732c-307d-476d-b54a-d05a9ef63678"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Update created Alerts ID list",
+            "name": "Update Created Records ID list",
             "description": null,
             "arguments": {
                 "resource": {
@@ -306,6 +293,7 @@
                 "_showJson": false,
                 "operation": "Overwrite",
                 "collection": "{{vars.input.params.recordIRI}}",
+                "__recommend": [],
                 "collectionType": "\/api\/3\/scenario",
                 "fieldOperation": {
                     "recordTags": "Overwrite"
@@ -316,7 +304,38 @@
             "top": "1515",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
             "uuid": "c5a4517c-0da1-4fe3-af43-2a270e443ef2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Add Pre Create Message to Scenario",
+            "description": null,
+            "arguments": {
+                "when": "{{vars.alert_Steps.preCreateMessage}}",
+                "resource": {
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "people": [],
+                    "content": "<p>{{vars.alert_Steps.preCreateMessage}}<\/p>",
+                    "scenario": "{{vars.input.params.recordIRI}}",
+                    "__replace": "",
+                    "isImportant": false,
+                    "peopleUpdated": false
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/comments",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "475",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "d11c7b04-e7d7-40cc-aaeb-301d70157569"
         },
         {
             "@type": "WorkflowStep",
@@ -335,11 +354,12 @@
             "top": "705",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/6832e556-b9c7-497a-babe-feda3bd27dbf",
+            "group": null,
             "uuid": "d6724a53-3568-4655-8c3f-92c0c563e076"
         },
         {
             "@type": "WorkflowStep",
-            "name": "AlertIRI based on create or Execute ALert",
+            "name": "Alert IRI based on Create or Execute Playbook",
             "description": null,
             "arguments": {
                 "alertIRI": "{{vars.steps.Create_Alert['@id']| ternary(vars.steps.Create_Alert['@id'],vars.alertByExecutePlaybook)}}"
@@ -348,6 +368,7 @@
             "top": "1245",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
             "uuid": "d9a1118c-5a92-4f56-9400-9c90f0e33a3e"
         },
         {
@@ -380,6 +401,7 @@
             "top": "570",
             "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+            "group": null,
             "uuid": "e930794a-99ea-420f-a551-5696db6e47f7"
         },
         {
@@ -416,10 +438,29 @@
             "top": "705",
             "left": "825",
             "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
             "uuid": "f1d05606-cd6f-4564-8cc6-3824b8f8eb1c"
         }
     ],
     "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Created Records ID -> Alert IRI based on Create or Execute Playbook",
+            "targetStep": "\/api\/3\/workflow_steps\/d9a1118c-5a92-4f56-9400-9c90f0e33a3e",
+            "sourceStep": "\/api\/3\/workflow_steps\/8a4d5d53-0f00-49a9-bd99-d1444ec02fca",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "7c463dbd-cdbb-4af8-8961-e2ed54994ad1"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Alert IRI based on Create or Execute Playbook -> Format Record List",
+            "targetStep": "\/api\/3\/workflow_steps\/33879d82-ba52-4860-b18e-87ba352a95c0",
+            "sourceStep": "\/api\/3\/workflow_steps\/d9a1118c-5a92-4f56-9400-9c90f0e33a3e",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "c3e9f674-ecd3-4e53-b68f-3b3e560165f5"
+        },
         {
             "@type": "WorkflowRoute",
             "name": "Create Alert -> Launch Step Playbook",
@@ -428,15 +469,6 @@
             "label": null,
             "isExecuted": false,
             "uuid": "0f8bf0aa-8288-4393-b547-2e8356bb85bb"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Add comments to Use Case module -> Wait For Next Step",
-            "targetStep": "\/api\/3\/workflow_steps\/e930794a-99ea-420f-a551-5696db6e47f7",
-            "sourceStep": "\/api\/3\/workflow_steps\/344806ac-fa54-46a7-8d59-acada5ed82d9",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "0f8d0814-4226-4301-9c32-b61b6960e72e"
         },
         {
             "@type": "WorkflowRoute",
@@ -458,48 +490,12 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Launch Step Playbook -> Find Created Alerts ID",
-            "targetStep": "\/api\/3\/workflow_steps\/8a4d5d53-0f00-49a9-bd99-d1444ec02fca",
-            "sourceStep": "\/api\/3\/workflow_steps\/9fe2e735-c7a9-4716-8bf8-930610721d18",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "5e4a770b-bff7-468b-a006-85b0450bc598"
-        },
-        {
-            "@type": "WorkflowRoute",
             "name": "Wait step -> wait for that much time",
             "targetStep": "\/api\/3\/workflow_steps\/d6724a53-3568-4655-8c3f-92c0c563e076",
             "sourceStep": "\/api\/3\/workflow_steps\/e930794a-99ea-420f-a551-5696db6e47f7",
             "label": "Wait Time > 0",
             "isExecuted": false,
             "uuid": "6d12b74c-3aad-4dd1-8fbe-18d5b713cfd8"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "alertIRI1 -> Format ALert List",
-            "targetStep": "\/api\/3\/workflow_steps\/33879d82-ba52-4860-b18e-87ba352a95c0",
-            "sourceStep": "\/api\/3\/workflow_steps\/d9a1118c-5a92-4f56-9400-9c90f0e33a3e",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "a930f5c4-403d-4423-b8b3-0c7bb036b500"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Replace String -> Add comments to Use Case module",
-            "targetStep": "\/api\/3\/workflow_steps\/344806ac-fa54-46a7-8d59-acada5ed82d9",
-            "sourceStep": "\/api\/3\/workflow_steps\/9ad26588-b055-4490-bf0b-bda7100f1abf",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "c074f2c2-cde3-4b82-b598-f37b4b2bc15f"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Find Created Alerts ID -> alertIRI1",
-            "targetStep": "\/api\/3\/workflow_steps\/d9a1118c-5a92-4f56-9400-9c90f0e33a3e",
-            "sourceStep": "\/api\/3\/workflow_steps\/8a4d5d53-0f00-49a9-bd99-d1444ec02fca",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "c6393dee-2549-4ba5-8018-ae2b86150a4d"
         },
         {
             "@type": "WorkflowRoute",
@@ -554,8 +550,45 @@
             "label": "Proceed",
             "isExecuted": false,
             "uuid": "f06c2e50-1a69-4a45-84cf-3bb7d4dec298"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Replace String -> Add Pre Create Message Ro Scenario",
+            "targetStep": "\/api\/3\/workflow_steps\/d11c7b04-e7d7-40cc-aaeb-301d70157569",
+            "sourceStep": "\/api\/3\/workflow_steps\/9ad26588-b055-4490-bf0b-bda7100f1abf",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "df988ec9-314f-4fcb-b430-c658705bd62b"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Add Pre Create Message to Scenario -> Wait For Next Step",
+            "targetStep": "\/api\/3\/workflow_steps\/e930794a-99ea-420f-a551-5696db6e47f7",
+            "sourceStep": "\/api\/3\/workflow_steps\/d11c7b04-e7d7-40cc-aaeb-301d70157569",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "58440ac6-04cb-4752-b30e-6dc23b02fdef"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Update created Alerts ID list -> Add Post Create Message to Scenario",
+            "targetStep": "\/api\/3\/workflow_steps\/8f35f010-98a1-4c69-8251-163f09bc4009",
+            "sourceStep": "\/api\/3\/workflow_steps\/c5a4517c-0da1-4fe3-af43-2a270e443ef2",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "5da99fbe-c4bc-4655-98f0-c547fe14b810"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Launch Step Playbook -> Find Created Records ID",
+            "targetStep": "\/api\/3\/workflow_steps\/8a4d5d53-0f00-49a9-bd99-d1444ec02fca",
+            "sourceStep": "\/api\/3\/workflow_steps\/9fe2e735-c7a9-4716-8bf8-930610721d18",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "9f7d8dac-4aaa-4016-9422-73b8baa9d0ce"
         }
     ],
+    "groups": [],
     "priority": null,
     "uuid": "27b9c187-cc01-48e5-90bf-deea72d558b6",
     "owners": [],

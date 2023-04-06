@@ -26,6 +26,7 @@
             "top": "165",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
             "uuid": "2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713"
         },
         {
@@ -35,6 +36,8 @@
             "arguments": {
                 "for_each": {
                     "item": "{{vars.alert_Steps}}",
+                    "__bulk": false,
+                    "parallel": true,
                     "condition": ""
                 },
                 "arguments": {
@@ -44,12 +47,14 @@
                 },
                 "apply_async": false,
                 "step_variables": [],
+                "pass_input_record": true,
                 "workflowReference": "\/api\/3\/workflows\/27b9c187-cc01-48e5-90bf-deea72d558b6"
             },
             "status": null,
             "top": "300",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
             "uuid": "32ef4b38-2fec-4933-abcc-f51e77938491"
         },
         {
@@ -105,19 +110,11 @@
             "top": "30",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
             "uuid": "6296aabe-9fc3-48ff-b077-6199bd340339"
         }
     ],
     "routes": [
-        {
-            "@type": "WorkflowRoute",
-            "name": "Start -> Configuration",
-            "targetStep": "\/api\/3\/workflow_steps\/2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713",
-            "sourceStep": "\/api\/3\/workflow_steps\/6296aabe-9fc3-48ff-b077-6199bd340339",
-            "label": null,
-            "isExecuted": false,
-            "uuid": "ddb16d2b-aac8-454c-b934-b85b3cccb799"
-        },
         {
             "@type": "WorkflowRoute",
             "name": "Configuration -> Create Alerts",
@@ -126,8 +123,18 @@
             "label": null,
             "isExecuted": false,
             "uuid": "20b052c7-acd6-459a-98e0-b6c3f65b515e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/2c8eb9b5-4b09-44f1-ab7d-c9b2a1301713",
+            "sourceStep": "\/api\/3\/workflow_steps\/6296aabe-9fc3-48ff-b077-6199bd340339",
+            "label": null,
+            "isExecuted": false,
+            "uuid": "ddb16d2b-aac8-454c-b934-b85b3cccb799"
         }
     ],
+    "groups": [],
     "priority": null,
     "uuid": "a10522ac-2622-40bd-ad79-4487d9a1d7d7",
     "owners": [],
