@@ -164,7 +164,7 @@
                 "checkboxFields": true,
                 "step_variables": {
                     "createdAlertId": "{{vars.result[0].createdAlertsID| ternary(vars.result[0].createdAlertsID, [])}}",
-                    "alertByExecutePlaybook": "{%if vars.alert_Steps.name in ['LogRhythm Alarms','FDC Alerts'] %}{{vars.steps.Launch_Step_Playbook | json_query('[*].[\"@id\"][]')}}{% elif '@id' in vars.steps.Launch_Step_Playbook %}{{vars.steps.Launch_Step_Playbook[\"@id\"]}} {%else%}{{vars.steps.Launch_Step_Playbook.recordIRI[\"@id\"]}}{%endif%}"
+                    "alertByExecutePlaybook": "{%if vars.alert_Steps.name in ['LogRhythm Alarms','FDC Alerts'] %}{{vars.steps.Launch_Step_Playbook | json_query('[*].[\"@id\"][]')}}{% elif '@id' in vars.steps.Launch_Step_Playbook %}{{vars.steps.Launch_Step_Playbook[\"@id\"]}}{% elif 'recordIRIs' in vars.steps.Launch_Step_Playbook %}{{vars.steps.Launch_Step_Playbook.recordIRIs}}{%else%}{{vars.steps.Launch_Step_Playbook.recordIRI[\"@id\"]}}{%endif%}"
                 }
             },
             "status": null,
