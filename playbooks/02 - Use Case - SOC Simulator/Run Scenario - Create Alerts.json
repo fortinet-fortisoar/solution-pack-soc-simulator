@@ -39,7 +39,7 @@
             "name": "Format Record List",
             "description": null,
             "arguments": {
-                "formatted_alert_list": "{{vars.createdAlertId + [vars.alertIRI]}}"
+                "formatted_alert_list": "{{(vars.createdAlertId + [vars.alertIRI]) | flatten(levels=1) | unique}}"
             },
             "status": null,
             "top": "1380",
