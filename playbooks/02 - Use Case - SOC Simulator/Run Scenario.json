@@ -141,6 +141,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "Simulation"
+        "Simulation",
+        "SystemWaitForCompletion"
     ]
 }
