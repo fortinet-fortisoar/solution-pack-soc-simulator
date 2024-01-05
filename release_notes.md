@@ -2,28 +2,21 @@
 
 ## Playbook Enhancements
 
-- Added a new playbook **Reset Scenario - Get Correlated Records** that fetches all the correlated records of the demo record created for the simulation
-
 - Following playbooks have been modified
 
   - **Run Selected Scenario** playbook modifications:
-
-    - The loop execution mode of the *Create Alert* step is updated from `Sequential` to `Parallel`
-
-    - A `Simulation` tag is added to the playbook
-
-    - The **Create Scenario** step is renamed to **Create Alerts** 
+    - A `SystemWaitForCompletion` tag is added to the playbook
 
   - **Run Scenario** playbook modifications:
-
-    - The loop execution mode of the *Create Alert* step is updated from `Sequential` to `Parallel`
+    - A `SystemWaitForCompletion` tag is added to the playbook
 
   - **Run Scenario - Create Alerts** playbook modifications:
+    - Updated the logic that displays the newly created demo record IRIs in scenario record's "Created Records ID" field. 
 
-    - Updated the playbook so it now adds post-create comments in scenario records after demo records creation
+  - **Reset Scenario** playbook modifications:
+    - A `SystemWaitForCompletion` tag is added to the playbook
+    - Updated the playbook so it excludes mitre records from deletion
 
-## Module Enhancements
 
-- `Created Alerts ID` field label has been updated to `Created Records ID` in the *Scenario* module
 
 
