@@ -81,3 +81,11 @@ You can reset a scenario by using any of the following methods.
 3. Click the button **Reset Scenario**.
 
     ![Delete Scenario Records from Scenario Record](res/delete-from-scenario-record.png)
+
+### Guidelines to Create Scenario Playbook
+
+- The Scenario playbooks nomenclature should be "Scenaio - <playbook_name>"
+- A `Scenario` tag should be given to the playbook
+- The playbooks should conclude with a 'Set Variable' step, where the variable named `recordIRIs` is assigned a value representing the list of all demo records created by the scenario playbook.
+
+![Scenario Playbook End Step](res/scenario_playbook_end_step.png)
