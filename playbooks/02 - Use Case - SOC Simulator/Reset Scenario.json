@@ -125,7 +125,7 @@
             "name": "Extract Related Records",
             "description": null,
             "arguments": {
-                "relatedRecordsIRIs": "{{vars.steps.Get_Demo_Record_Correlation | json_query(\"[].correlatedRecordIRIs\") | flatten(levels=2) | unique}}"
+                "relatedRecordsIRIs": "{{(vars.steps.Get_Demo_Record_Correlation | json_query(\"[].correlatedRecordIRIs\") | flatten(levels=2) | unique) | difference(vars.demoRecordIRIs)}}"
             },
             "status": null,
             "top": "840",
