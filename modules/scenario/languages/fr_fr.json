@@ -1,0 +1,17 @@
+{
+  "SCENARIO": {
+    "MODULE_DETAILS": {
+      "SINGULAR_NAME": "Scénario",
+      "PLURAL_NAME": "Scénarios"
+    },
+    "FIELDS": {
+      "ICON": "Icône",
+      "STEPS": "Étapes",
+      "CONFIGURATION": "Configuration",
+      "COMMENTS": "Commentaires",
+      "TITLE": "Titre",
+      "DESCRIPTION": "Description",
+      "CREATEDALERTSID": "ID des enregistrements créés"
+    }
+  }
+}

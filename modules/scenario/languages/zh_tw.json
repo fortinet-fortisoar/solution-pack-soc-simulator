@@ -1,0 +1,17 @@
+{
+  "SCENARIO": {
+    "MODULE_DETAILS": {
+      "SINGULAR_NAME": "시나리오",
+      "PLURAL_NAME": "시나리오"
+    },
+    "FIELDS": {
+      "ICON": "아이콘",
+      "STEPS": "단계",
+      "CONFIGURATION": "구성",
+      "COMMENTS": "댓글",
+      "TITLE": "제목",
+      "DESCRIPTION": "설명",
+      "CREATEDALERTSID": "생성된 레코드 ID"
+    }
+  }
+}

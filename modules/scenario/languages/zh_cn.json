@@ -1,0 +1,17 @@
+{
+  "SCENARIO": {
+    "MODULE_DETAILS": {
+      "SINGULAR_NAME": "场景",
+      "PLURAL_NAME": "场景"
+    },
+    "FIELDS": {
+      "ICON": "图标",
+      "STEPS": "步骤",
+      "CONFIGURATION": "配置",
+      "COMMENTS": "评论",
+      "TITLE": "标题",
+      "DESCRIPTION": "描述",
+      "CREATEDALERTSID": "已创建的记录 ID"
+    }
+  }
+}

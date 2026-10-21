@@ -17,6 +17,50 @@
     "writable": true,
     "attributes": [
         {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "icon",
+            "length": null,
+            "formType": "html",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": "<p><img src=\"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAApCAYAAACV8mGQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAABVhJREFUeAHVWV1S20gQ7pa9fvaeAOcEgRMEn4DlBMAFsBVeNiZVOFUJyUuQ2AuYnMBwgrAnWO8J1nuC9b5CMp3uli3PjH4sEWKcr8o20kgz8810f909IGwg+q+jXSDYI4JdQOrw3+2kBSf8NUUwN\/H5yVXR+wgbhP4g2iaECIh2KzzO5OhNHrmNIXX8+qKHBmKoC8Rb\/AWO4mE4TW\/Z7f1h1IEv0IE1g81sj7\/6\/n0EnPLXLZD5l6\/aTOA55e\/iFFvYXRBrypeQoXsY0V2lbV8HZhjgfvw2vPUb+r\/zwgfmkADPrNs6f\/7tykWghO7oc0U7XhfaxsCLvIb4QzhlPxqiwWcgO7kAz7\/\/6qPuNvZPoxFv6SFsIHg3hn+ch2+K2mXXqEF\/LdWRd7iFz7B3evGfJZlTDCCURlgDeDHHzthgPnlmtZrY4OPQfgeJwqbFEqTT+O3JNawB81hkjQ0qzzxJcCYJNDweRFBIrBXEcE+9tC\/E3QCeCmS2vTsSWEH9heOP3TAndpbXDSvebB6Uk24Bnj8hqeUuCeLzcLL8ux4xNrm\/rcvO05GSuFOCusRsPIiU+ENvEI3580\/vNPrMfnAItUGOGGn88VBEjMeMnAcD3LKuZrVJHZ9eHJDhuAb0G386Eh\/YsUc80KhWRwFN3Guzm\/dYHjHJPuzxeD6pfyLipBYpCdSsUvn5Gce6RfCrhGbjlpc93S3C4KDo0QJih0JsbiWd9L4xN7VI0Z1k0JYMIzqrTYiRZNpV+vJVy84Icp9XYnjkTogkXXIthILryqSSFRGTWwCn8btwh4mFTp9AY97RdpU+kcB9F\/FM41cBWCGvMsTcHq8kjapESvNDL9JzmaDJIxOLJf23miS5XKlQ80lO2JwvrVtt8dcyhRNiPF6OC3BGYkBNtAlVkEyyk74uxdmHl9P0+iscUQOWORg7cv9V9Gf8PlyZncTnL\/usolu2FajCDS4OtVYycAMN9r2v3HdgeHGDvUzyjTjjOXRll+Ry5U6J2bkJL2qW7EyMO2MzdMyCkEZan1XA5Xm47+2YoKM+gzSW3dNfwtyqmIkfLQgJSkmJb2TMzvODBbj2uc6YUlLjVILsWOKfVjlRFQ03AS8lRZ7ZqSOWmVQLh0U1ThWIf4qvihj4yrqcAs48H86gkJSajlNiLx2xcFIs07xb+\/Y9VbSKMq\/K14AeH7684Ih6w+R2uALuph+ulS7fhb8imU9l\/RQKhVbDFrQ0sOy2CKJoXHiG7IeLVIZNGMS\/uklsyocoHvvOMB1fj0\/oAJvLs4eqCIoGAN\/sREorIivztF0m85LLieLlNOlRQ1XBWSBDKkmFrAFELleYXR5E5u00SGXeC6wiRJIYZ06SxG+WqE0sQypjdsZUMjsfKvPkZRtGZV5jWXrg42QpSQzkBdnxVLAWMYcU27EklR1riGn8\/qT+AeMcSVrjyLxkG+MlIXAEhAkdSQzUBdGM5WHE\/J3qOIPMU6HvQo7M0z2fANljiYmzutlHyGXETBBslQ1ZKOlJKlTf7HyozAfgZdd2Kc+hgs0t7+CyiBiaXFFJUUAqmwp9D2TCOWmQjDORSZctXgGxUuSS8gPoY0DSIFvmUZLVVjmh9N2axDLBV1bUPtl5TKjMB5wcYzDTWFYDQozPMbpONVAAjxSvxEP+nVJjYvwzhAdCiQ2YGMrZfzExx\/z0hPYRxOFHQgtLPloue+YJz\/1+HDxSWOlsYdPRZGGY0jwQ8u8BZ9h8dmL+hw3GPPNZogkT9xKIa5O0um2TJpcb9f\/tFeAKwitpAg2yRVXmxiO\/cFWfutTzOwrxZyEnuaJk8y1Or3LU+hvcLd4lHy7tXQAAAABJRU5ErkJggg==\"><\/p>",
+            "tooltip": "Drag and drop a PNG, JPG or JPEG image (maximum dimensions: 81 x 81 px)",
+            "visibility": true,
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ icon }}",
+            "descriptions": {
+                "singular": "Icon"
+            }
+        },
+        {
             "@id": "\/api\/3\/attribute_metadatas\/74592051-a86c-42f0-befc-fb73ef7f29fa",
             "@type": "AttributeMetadata",
             "type": "object",

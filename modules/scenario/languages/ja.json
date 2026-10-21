@@ -1,0 +1,17 @@
+{
+  "SCENARIO": {
+    "MODULE_DETAILS": {
+      "SINGULAR_NAME": "シナリオ",
+      "PLURAL_NAME": "シナリオ"
+    },
+    "FIELDS": {
+      "ICON": "アイコン",
+      "STEPS": "ステップ",
+      "CONFIGURATION": "設定",
+      "COMMENTS": "コメント",
+      "TITLE": "タイトル",
+      "DESCRIPTION": "説明",
+      "CREATEDALERTSID": "作成されたレコードID"
+    }
+  }
+}

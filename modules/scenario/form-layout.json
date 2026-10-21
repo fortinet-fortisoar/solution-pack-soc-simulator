@@ -30,6 +30,12 @@
                                                             "readOnly": false
                                                         },
                                                         {
+                                                            "name": "icon",
+                                                            "highlightMode": true,
+                                                            "linky": true,
+                                                            "readOnly": false
+                                                        },
+                                                        {
                                                             "name": "steps",
                                                             "highlightMode": true,
                                                             "linky": true,

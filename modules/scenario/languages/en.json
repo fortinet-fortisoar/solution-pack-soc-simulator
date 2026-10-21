@@ -1,0 +1,17 @@
+{
+    "SCENARIO": {
+        "MODULE_DETAILS": {
+            "SINGULAR_NAME": "Scenario",
+            "PLURAL_NAME": "Scenario"
+        },
+        "FIELDS": {
+            "ICON": "Icon",
+            "STEPS": "Steps",
+            "CONFIGURATION": "Configuration",
+            "COMMENTS": "Comments",
+            "TITLE": "Title",
+            "DESCRIPTION": "Description",
+            "CREATEDALERTSID": "Created Records ID"
+        }
+    }
+}

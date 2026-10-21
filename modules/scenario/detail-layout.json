@@ -74,6 +74,13 @@
                                                                                                         "highlightMode": true,
                                                                                                         "linky": true,
                                                                                                         "readOnly": false
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "icon",
+                                                                                                        "highlightMode": true,
+                                                                                                        "linky": true,
+                                                                                                        "readOnly": false,
+                                                                                                        "viewRenderWidget": ""
                                                                                                     }
                                                                                                 ]
                                                                                             }

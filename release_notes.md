@@ -1,4 +1,11 @@
 # What's New
 
-- The execution of the playbook **Run Scenario** has been updated from parallel to sequential(synchronous).
-- The record deletion in playbook **Reset Scenario** has now been enhanced so it does not throw errors after a successful completion.
+| Compatible Version         |
+|----------------------------|
+| FortiSOAR v8.0.1 and later |
+
+- Added the **Scenario Simulator** widget, which lists the available scenarios and runs or resets a simulation from a record list page.
+
+- Added the `Icon` field to the Scenario record and to the detail, form, and list view templates.
+
+- The minimum compatible FortiSOAR version is now 8.0.1.

@@ -3,7 +3,7 @@
         "name": "fortisoar-soc-simulator",
         "label": "FortiSOAR SOC Simulator",
         "category": "information",
-        "description": "The FortiSOAR SOC Simulator connector is a special type of connector that is used to simulate a SOC environment. It creates various scenarios-based artifacts such as alerts, incidents, etc. in FortiSOAR\u2122",
+        "description": "The FortiSOAR SOC Simulator connector is a special type of connector that is used to simulate a SOC environment. It creates various scenarios-based artifacts such as alerts, cases, etc. in FortiSOAR\u2122",
         "publisher": null,
         "operation_roles": [],
         "configurations": [
